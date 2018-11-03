@@ -21,20 +21,22 @@ const args2string = (...args) => args
     .map(a => typeof a === 'string' ? a : JSON.stringify(a))
     .join(', ')
 
-const getDefaultLogLevel = () => {
-    if (process.env.NODE_ENV === 'test') return logLevels.DEBUG
-    if (process.env.NODE_ENV === 'development') return logLevels.INFO
-    return logLevels.ERROR
-}
-
 const getLogLevel = () => {
-    const defaultLogLevel = getDefaultLogLevel()
     const logLevel = (process.env.LOG_LEVEL || '').toUpperCase()
     const logLevelNum = parseInt(logLevel, 10)
 
     if (String(logLevelNum) === logLevel) return logLevelNum
     if (logLevels[logLevel] !== undefined) return logLevels[logLevel]
-    return defaultLogLevel
+
+    // apply defaults
+    if (process.env.NODE_ENV === 'test') return logLevels.DEBUG
+    if (process.env.NODE_ENV === 'development') return logLevels.INFO
+    return logLevels.ERROR
+}
+
+const log = (level, prefix) => (...args) => {
+    if (cache[level]) return
+    console.log(`[${prefix}] ${args2string(...args)}`)
 }
 
 export const init = () => {
@@ -44,22 +46,7 @@ export const init = () => {
     })
 }
 
-export const logInfo = (...args) => {
-    if (cache[logLevels.INFO]) return
-    console.log(`[info] ${args2string(...args)}`)
-}
-
-export const logVerbose = (...args) => {
-    if (cache[logLevels.VERBOSE]) return
-    console.log(`[verbose] ${args2string(...args)}`)
-}
-
-export const logDebug = (...args) => {
-    if (cache[logLevels.DEBUG]) return
-    console.log(`[debug] ${args2string(...args)}`)
-}
-
-export const logError = (...args) => {
-    if (cache[logLevels.ERROR]) return
-    console.log(`[error] ${args2string(...args)}`)
-}
+export const logInfo = log(logLevels.INFO, 'info')
+export const logVerbose = log(logLevels.VERBOSE, 'verbose')
+export const logDebug = log(logLevels.DEBUG, 'debug')
+export const logError = log(logLevels.ERROR, 'error')
