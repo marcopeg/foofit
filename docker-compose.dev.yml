@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+
+    postgres:
+        image: postgres:11
+        networks:
+            - development
+        ports:
+            - ${PG1_PORT-5432}:5432
+        environment:
+            POSTGRES_USER: ${PG1_USER-postgres}
+            POSTGRES_PASSWORD: ${PG1_PASSWORD-postgres}
+            POSTGRES_DB: ${PG1_DB-postgres}
+        volumes:
+            - ${HUMBLE_DATA}/pg:/var/lib/postgresql/data
+            - ${HUMBLE_BACKUP}:/backup
+        restart: always    
+
+networks:
+    development:
