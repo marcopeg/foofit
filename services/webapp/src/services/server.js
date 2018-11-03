@@ -1,9 +1,13 @@
+import { logInfo, logError } from 'services/logger'
 // import express from 'express'
 
+
 export const init = () => {
-    console.log('init server')
+    logInfo('init server', 'foo', 123, true, [1234], { a: 1, b: 'v' })
+    logInfo('buuu')
+    logInfo('hahahah')
 }
 
 export const start = () => {
-    console.log('start server')
+    logError('start server')
 }
