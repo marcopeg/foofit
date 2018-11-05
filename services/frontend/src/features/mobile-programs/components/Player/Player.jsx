@@ -49,6 +49,10 @@ class Player extends React.Component {
         }, 250)
     }
 
+    componentWillUnmount () {
+        clearInterval(this.interval)
+    }
+
     stop () {}
 
     pause () {}
