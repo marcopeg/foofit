@@ -25,5 +25,5 @@ const schema = new GraphQLSchema({
 export const graphQLHandler = (req, res) => expressGraphql({
     schema,
     graphiql: process.env.NODE_ENV === 'development',
-    context: { req, res },
+    context: { req, res, data: {} },
 })(req, res)
