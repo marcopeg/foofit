@@ -2,7 +2,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage from 'lib/MobilePage'
+import slugify from 'slugify'
+import MobilePage, { Padding, List, Text } from 'lib/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state, { match }) => {
@@ -17,6 +18,8 @@ const mapDispatch = (dispatch, { history }) => {
     return {
         loadPrograms: () => dispatch(updatePrograms()),
         goBack: () => history.push('/welcome'),
+        onDisclose: (program, item) =>
+            history.push(`/program/${program.id}/${slugify(program.title)}/${item.id}/${slugify(item.title)}`),
     }
 }
 
@@ -28,20 +31,24 @@ class ProgramsDetails extends React.PureComponent {
     renderBody () {
         if (this.props.isNotFound) {
             return (
-                <div>
-                    <p onClick={this.props.goBack}>program not found, click here to go to the list</p>
-                </div>
+                <Text onClick={this.props.goBack}>
+                    program not found, click here to go to the list
+                </Text>
             )
         }
 
         if (!this.props.program) {
             return (
-                <div>loading...</div>
+                <Text>loading...</Text>
             )
         }
 
         return (
-            <div>{this.props.program.title}</div>
+            <List
+                items={this.props.program.trainings}
+                subtitleProp={'duration'}
+                onDisclose={(item) => this.props.onDisclose(this.props.program, item)}
+            />
         )
     }
 
@@ -52,9 +59,9 @@ class ProgramsDetails extends React.PureComponent {
                     {this.props.program ? this.props.program.title : '...'}
                 </MobilePage.Header>
                 <MobilePage.Body>
-                    <div style={{ margin: '20px 10px' }}>
+                    <Padding>
                         {this.renderBody()}
-                    </div>
+                    </Padding>
                 </MobilePage.Body>
             </MobilePage>
         )
@@ -69,6 +76,7 @@ const programType = PropTypes.shape({
 ProgramsDetails.propTypes = {
     loadPrograms: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
+    onDisclose: PropTypes.func.isRequired,
     program: programType,
     isNotFound: PropTypes.bool.isRequired,
 }

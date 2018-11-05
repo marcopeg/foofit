@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeContext } from './MobilePage'
 import ListItem from './ListItem'
+import Title from './Title'
+import Text from './Text'
 
 const styles = {
     wrapper: {
@@ -38,7 +40,7 @@ const getItemStyle = (items, item, index) => {
     return styles.item
 }
 
-const List = ({ keyProp, titleProp, items, renderItem, onDisclose }) => (
+const List = ({ keyProp, titleProp, subtitleProp, items, renderItem, onDisclose }) => (
     <ThemeContext.Consumer>
         {theme => (
             <div style={styles.wrapper}>
@@ -58,9 +60,10 @@ const List = ({ keyProp, titleProp, items, renderItem, onDisclose }) => (
                         >
                             <ListItem
                                 isActive={item.isActive}
-                                onDisclose={() => onDisclose(item)}
+                                onDisclose={onDisclose ? () => onDisclose(item) : null}
                             >
-                                {item[titleProp]}
+                                {subtitleProp ? <Title>{item[titleProp]}</Title> : item[titleProp]}
+                                {subtitleProp ? <Text>{item[subtitleProp]}</Text> : null}
                             </ListItem>
                         </div>
                     )
@@ -73,6 +76,7 @@ const List = ({ keyProp, titleProp, items, renderItem, onDisclose }) => (
 List.propTypes = {
     keyProp: PropTypes.string,
     titleProp: PropTypes.string,
+    subtitleProp: PropTypes.string,
     items: PropTypes.array.isRequired,
     renderItem: PropTypes.func,
     onDisclose: PropTypes.func,
@@ -81,8 +85,9 @@ List.propTypes = {
 List.defaultProps = {
     keyProp: 'id',
     titleProp: 'title',
+    subtitleProp: null,
     renderItem: null,
-    onDisclose: () => {},
+    onDisclose: null,
 }
 
 List.Item = ListItem
