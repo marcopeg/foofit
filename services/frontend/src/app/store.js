@@ -13,7 +13,6 @@ import thunk from 'redux-thunk'
 
 import { routerMiddleware } from 'react-router-redux'
 import { ReduxEvents } from 'redux-events-middleware'
-import { createSSRContext } from 'create-react-app-ssr/lib/create-ssr-context'
 
 import {
     getReducers as getFeaturesReducers,
@@ -21,10 +20,10 @@ import {
 } from 'react-redux-feature/lib/decorate-store'
 
 import history from './history'
+import features from '../features'
 
-const createStore = (history, initialState = {}, features = []) => {
+const createStore = (history, initialState = {}) => {
     const events = new ReduxEvents()
-    const ssrContext = createSSRContext(initialState.ssr || {})
 
     const enhancers = []
     const middleware = [
@@ -34,8 +33,7 @@ const createStore = (history, initialState = {}, features = []) => {
     ]
 
     // redux dev tools (development & client only)
-    if (process.env.NODE_ENV === 'development' && !process.env.SSR) {
-    // if (!process.env.SSR) { // heavy development mode
+    if (process.env.NODE_ENV === 'development') {
         const { devToolsExtension } = window
 
         if (typeof devToolsExtension === 'function') {
@@ -48,24 +46,12 @@ const createStore = (history, initialState = {}, features = []) => {
         ...enhancers,
     )
 
-    // merge feature's static reducers with SSR helper
-    const initialReducers = {
-        ...getFeaturesReducers(features),
-        ...ssrContext.reducers,
-    }
-
+    const initialReducers = getFeaturesReducers(features)
     const combinedReducers = combineReducers(initialReducers)
-
-    // SSR - replace the ssr helper so that can be initialize
-    // SSR - on the client with the proper functionalities
-    const ssrInitialState = {
-        ...initialState,
-        ssr: null,
-    }
 
     let store = createReduxStore(
         combinedReducers,
-        ssrInitialState,
+        initialState,
         composedEnhancers,
     )
 
@@ -93,7 +79,6 @@ const createStore = (history, initialState = {}, features = []) => {
         history,
         isReady,
         events,
-        ssrContext,
     }
 }
 
