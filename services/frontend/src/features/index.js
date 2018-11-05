@@ -1,4 +1,6 @@
 export default [
     require('./settings'),
-    require('./client-exercises'),
+    require('./mobile'),
+    require('./mobile-programs'),
+    require('./desktop'),
 ]

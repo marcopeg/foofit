@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 import React from 'react'
-import { hydrate } from 'react-dom'
+import { render } from 'react-dom'
 import reactFastclick from 'react-fastclick'
 import history from 'app/history'
 import { store, isReady } from 'app/store'
@@ -9,7 +9,7 @@ reactFastclick()
 
 const renderApp = () => {
     const Root = require('./app/Root').default
-    hydrate(<Root store={store} history={history} />, document.querySelector('#root'))
+    render(<Root store={store} history={history} />, document.querySelector('#root'))
 }
 
 // Wait for the redux store to initialize correctly
