@@ -7,19 +7,19 @@ import MobilePage, { Padding, List, Text } from 'lib/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state, { match }) => {
-    const program = state.programs.items.find(i => i.id === match.params.id)
+    const program = state.programs.items.find(i => i.id === match.params.programId)
     return {
         program,
         isNotFound: Boolean(!program && state.programs.items.length),
     }
 }
 
-const mapDispatch = (dispatch, { history }) => {
+const mapDispatch = (dispatch, { history, match }) => {
     return {
         loadPrograms: () => dispatch(updatePrograms()),
         goBack: () => history.push('/welcome'),
-        onDisclose: (program, item) =>
-            history.push(`/program/${program.id}/${slugify(program.title)}/${item.id}/${slugify(item.title)}`),
+        onDisclose: (item) =>
+            history.push(`${match.url}/${item.id}/${slugify(item.title)}`),
     }
 }
 
@@ -47,7 +47,7 @@ class ProgramsDetails extends React.PureComponent {
             <List
                 items={this.props.program.trainings}
                 subtitleProp={'duration'}
-                onDisclose={(item) => this.props.onDisclose(this.props.program, item)}
+                onDisclose={(item) => this.props.onDisclose(item)}
             />
         )
     }

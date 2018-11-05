@@ -4,6 +4,7 @@ import { ThemeContext } from './MobilePage'
 import ListItem from './ListItem'
 import Title from './Title'
 import Text from './Text'
+import { borderRadius } from './variables'
 
 const styles = {
     wrapper: {
@@ -11,7 +12,7 @@ const styles = {
         borderBottom: '1px solid #ddd',
         borderLeft: '1px solid #ddd',
         borderRight: '1px solid #ddd',
-        borderRadius: 5,
+        borderRadius,
     },
     item: {
         borderBottom: '1px solid #ddd',

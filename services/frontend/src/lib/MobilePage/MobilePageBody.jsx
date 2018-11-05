@@ -41,13 +41,12 @@ const MobilePageBody = ({ children, ...props }) => (
             const content = typeof children === 'function'
                 ? (
                     <AutoSizer>
-                        {(dimensions) => {
-                            console.log('body is fn', dimensions)
-                            return React.createElement(children, {
+                        {(dimensions) =>
+                            React.createElement(children, {
                                 ...dimensions,
                                 theme,
                             })
-                        }}
+                        }
                     </AutoSizer>
                 )
                 : children

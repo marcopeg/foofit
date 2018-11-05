@@ -14,7 +14,7 @@ const styles = {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            borderBottom: '1px solid #666',
+            borderBottom: '1px solid #ddd',
             fontWeight: 'bold',
         },
     },

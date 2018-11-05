@@ -4,3 +4,5 @@ export const colors = {
     primary: '#444',
     primaryInverted: '#fff',
 }
+
+export const borderRadius = 4
