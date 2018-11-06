@@ -25,9 +25,9 @@ export default [
                 title: 'Week1 - Monday',
                 duration: 'about 28 minutes',
                 progression: [
-                    { id: 'burpees', value: 1 },
-                    { id: 'pushups', value: 1 },
-                    { id: 'pause', value: 1 },
+                    { id: 'burpees', value: 30 },
+                    { id: 'pushups', value: 30 },
+                    { id: 'pause', value: 30 },
                 ],
             },
             {

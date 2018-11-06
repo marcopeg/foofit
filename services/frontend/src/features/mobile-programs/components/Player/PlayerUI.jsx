@@ -16,8 +16,13 @@ const styles = {
     },
     header: {
         ...flexCentered,
-        height: 80,
+        justifyContent: 'space-between',
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
         fontSize: 30,
+        backgroundColor: 'rgba(29, 69, 109, 0.5)',
         borderBottom: '1px solid #fff',
     },
     exercise: {
@@ -54,7 +59,7 @@ const PlayerUI = ({
             height,
         }}>
             <div style={styles.header}>
-                <Duration unit="ms" value={elapsed} />
+                <Duration unit="ms" value={activeLapse} />
                 <Pause
                     isPlaying={isPlaying}
                     pause={pause}
@@ -63,7 +68,7 @@ const PlayerUI = ({
             </div>
             <div style={styles.exercise}>
                 <div style={{ textAlign: 'right' }}>
-                    active <Duration unit="ms" value={activeLapse} />
+                    active <Duration unit="ms" value={elapsed} />
                     <br />
                     current pause <Duration unit="ms" value={pauseLapse} />
                     <br />
