@@ -1,35 +1,7 @@
 /* eslint react/prefer-stateless-function: off */
 import React from 'react'
-import { flexCentered } from 'app/mixins'
 import PropTypes from 'prop-types'
-import Duration from './Duration'
-import Pause from './Pause'
-
-const styles = {
-    wrapper: {
-        display: 'flex',
-        flexDirection: 'column',
-        background: '#1e8eff',
-        color: '#fff',
-    },
-    header: {
-        ...flexCentered,
-        height: 80,
-        fontSize: 30,
-        borderBottom: '1px solid #fff',
-    },
-    exercise: {
-        ...flexCentered,
-        flex: 1,
-    },
-    controls: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: 80,
-        borderTop: '1px solid #fff',
-    },
-}
+import PlayerUI from './PlayerUI'
 
 class Player extends React.Component {
     constructor (props) {
@@ -38,6 +10,7 @@ class Player extends React.Component {
         this.state = {
             isPlaying: true,
             isPaused: false,
+            isFinished: false,
 
             // handle generic time
             startTime,
@@ -112,6 +85,10 @@ class Player extends React.Component {
                 } else {
                     console.log('finish training')
                     clearInterval(this.interval)
+                    this.setState({
+                        isPlaying: false,
+                        isFinished: true,
+                    })
                 }
             }
         }
@@ -143,53 +120,19 @@ class Player extends React.Component {
 
     render () {
         return (
-            <div style={{
-                ...styles.wrapper,
-                width: this.props.width,
-                height: this.props.height,
-            }}>
-                <div style={styles.header}>
-                    <Duration unit="ms" value={this.state.elapsed} />
-                    <Pause
-                        isPlaying={this.state.isPlaying}
-                        pause={this.pause}
-                        resume={this.resume}
-                    />
-                </div>
-                <div style={styles.exercise}>
-                    <div style={{ textAlign: 'right' }}>
-                        active <Duration unit="ms" value={this.state.activeLapse} />
-                        <br />
-                        current pause <Duration unit="ms" value={this.state.pauseLapse} />
-                        <br />
-                        total pause <Duration unit="ms" value={this.state.totalPauseLapse} />
-                        <hr />
-                        current exercise {this.state.exerciseIndex}/{this.props.exercises.length}
-                        <hr />
-                        exercise lapse <Duration unit="ms" value={this.state.exerciseLapse} />
-                        <br />
-                        exercise pause lapse <Duration unit="ms" value={this.state.exercisePauseLapse} />
-                    </div>
-                </div>
-                <div style={styles.controls}>
-                    <div>other</div>
-                </div>
-            </div>
+            <PlayerUI
+                {...this.props}
+                {...this.state}
+                pause={this.pause}
+                resume={this.resume}
+                stop={this.stop}
+            />
         )
     }
 }
 
-const exerciseShape = PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    duration: PropTypes.string.isRequired,
-})
-
 Player.propTypes = {
     tickUpdate: PropTypes.number,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    exercises: PropTypes.arrayOf(exerciseShape).isRequired,
 }
 
 Player.defaultProps = {

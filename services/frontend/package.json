@@ -10,6 +10,7 @@
     "history": "^4.7.2",
     "moment-duration-format": "^2.2.2",
     "moment-timezone": "^0.5.23",
+    "prop-type": "^0.0.1",
     "react": "^15.3.0 || ^16.0.0-alpha",
     "react-device-detect": "^1.6.1",
     "react-dom": "^15.3.0 || ^16.0.0-alpha",
