@@ -29,4 +29,10 @@ const AppMobile = () => (
     </Switch>
 )
 
+// Preload modules
+ProgramsList.preload()
+ProgramDetails.preload()
+TrainingDetails.preload()
+TrainingWatch.preload()
+
 export default AppMobile
