@@ -71,15 +71,16 @@ class Player extends React.Component {
         ].some(key => this.state[key] !== nextState[key])
     }
 
-    componentWillUpdate (nextProps, nextState) {
-        console.log('second', this.state.elapsed)
-    }
+    // componentWillUpdate (nextProps, nextState) {
+    //     console.log('second', this.state.elapsed)
+    // }
 
     componentWillUnmount () {
         clearInterval(this.interval)
     }
 
     getCurrentExercise = () => {
+        console.log('check exercise')
         return 0
     }
 
@@ -87,22 +88,21 @@ class Player extends React.Component {
         const now = new Date()
         const update = {
             elapsed: (now - this.state.startTime),
-            exerciseLapse: (now - this.state.exerciseStart),
             pauseLapse: this.state.isPaused ? (now - this.state.pauseStart) : 0,
         }
 
         // calculate current working time
         update.activeLapse = update.elapsed - this.state.totalPauseLapse - update.pauseLapse
-
-        // console.log(this.state.activeLapse, update.activeLapse, this.state.activeLapse !== update.activeLapse)
-        // if (update.activeLapse > this.state.activeLapse) {
-        //     update.exerciseIndex = this.getCurrentExercise()
-        // }
+        update.exercisePauseLapse = this.state.exerciseTotalPauseLapse + update.pauseLapse
+        update.exerciseLapse = (now - this.state.exerciseStart) - update.exercisePauseLapse
 
         // used to trigger UI update
         update.tick = Math.floor(update.elapsed / 1000)
 
-        // console.log(update.elapsed, update.exerciseLapse, '--', update.secondsElapsed, update.secondsExerciseLapse)
+        // console.log(this.state.activeLapse, update.activeLapse, this.state.activeLapse !== update.activeLapse)
+        if (update.tick > this.state.tick) {
+            update.exerciseIndex = this.getCurrentExercise()
+        }
 
         this.setState(update)
     }
@@ -153,7 +153,7 @@ class Player extends React.Component {
                         total pause <Duration unit="ms" value={this.state.totalPauseLapse} />
                         <hr />
                         current exercise {this.state.exerciseIndex}/{this.props.exercises.length}
-                        <br />
+                        <hr />
                         exercise lapse <Duration unit="ms" value={this.state.exerciseLapse} />
                         <br />
                         exercise pause lapse <Duration unit="ms" value={this.state.exercisePauseLapse} />
