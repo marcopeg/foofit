@@ -32,9 +32,6 @@ class ProgramsList extends React.PureComponent {
                     <div style={{ margin: '20px 10px' }}>
                         <List
                             items={this.props.items}
-                            // renderItem={({ title }) => (
-                            //     <List.Item>{title}</List.Item>
-                            // )}
                             onDisclose={this.props.onDisclose}
                         />
                     </div>
