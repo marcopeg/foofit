@@ -34,7 +34,7 @@ const styles = {
 class Player extends React.Component {
     constructor (props) {
         super(props)
-        const startTime = new Date()
+        const startTime = Date.now()
         this.state = {
             isPlaying: true,
             isPaused: false,
@@ -54,7 +54,6 @@ class Player extends React.Component {
             exerciseIndex: 0,
             exerciseStart: startTime,
             exerciseLapse: 0,
-            exercisePauseStart: null,
             exercisePauseLapse: 0,
             exerciseTotalPauseLapse: 0,
         }
@@ -79,13 +78,10 @@ class Player extends React.Component {
         clearInterval(this.interval)
     }
 
-    getCurrentExercise = () => {
-        console.log('check exercise')
-        return 0
-    }
+    getCurrentExercise = () => this.props.exercises[this.state.exerciseIndex]
 
     tick = () => {
-        const now = new Date()
+        const now = Date.now()
         const update = {
             elapsed: (now - this.state.startTime),
             pauseLapse: this.state.isPaused ? (now - this.state.pauseStart) : 0,
@@ -99,16 +95,31 @@ class Player extends React.Component {
         // used to trigger UI update
         update.tick = Math.floor(update.elapsed / 1000)
 
-        // console.log(this.state.activeLapse, update.activeLapse, this.state.activeLapse !== update.activeLapse)
-        if (update.tick > this.state.tick) {
-            update.exerciseIndex = this.getCurrentExercise()
+        // check for exercise switch or training session ending
+        if (this.state.tick !== update.tick) {
+            const exercise = this.getCurrentExercise()
+            const remaining = exercise.value * 1000 - this.state.exerciseLapse
+            const nextIndex = this.state.exerciseIndex + 1
+            if (remaining < 1000) {
+                if (nextIndex < this.props.exercises.length) {
+                    console.log('change! exercise', remaining, exercise)
+                    update.exerciseIndex = nextIndex
+                    update.exerciseStart = now
+                    update.exerciseLapse = 0
+                    update.exercisePauseLapse = 0
+                    update.exerciseTotalPauseLapse = 0
+                } else {
+                    console.log('finish training')
+                    clearInterval(this.interval)
+                }
+            }
         }
 
         this.setState(update)
     }
 
     pause = () => {
-        const now = new Date()
+        const now = Date.now()
         this.setState({
             isPlaying: false,
             isPaused: true,
