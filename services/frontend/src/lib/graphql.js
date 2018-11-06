@@ -5,13 +5,13 @@
 
 import { postJSON } from 'lib/request'
 
-export const runQuery = (query = null, variables = {}, options = {}) => async () => {
+export const runQuery = (query = null, variables = {}, options = {}) => async (dispatch, getState) => {
     if (!query) {
         throw new Error('[graphql] please provide a query')
     }
 
     const { debug, ...fetchSettingsOptions } = options
-    const endpoint = options.endpoint || 'http://localhost:8080/api'
+    const endpoint = options.endpoint || getState().app.graphqlEndpoint
     let result = null
 
     const fetchSettings = {

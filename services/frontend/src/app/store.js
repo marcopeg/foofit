@@ -19,6 +19,7 @@ import {
     decorateStore as decorateStoreWithFeatures,
 } from 'react-redux-feature/lib/decorate-store'
 
+import appReducer from './app.reducer'
 import history from './history'
 import features from '../features'
 
@@ -46,7 +47,10 @@ const createStore = (history, initialState = {}) => {
         ...enhancers,
     )
 
-    const initialReducers = getFeaturesReducers(features)
+    const initialReducers = {
+        app: appReducer,
+        ...getFeaturesReducers(features),
+    }
     const combinedReducers = combineReducers(initialReducers)
 
     let store = createReduxStore(
