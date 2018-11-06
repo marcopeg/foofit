@@ -85,7 +85,7 @@ class TrainingWatch extends React.PureComponent {
 
         return (
             <Player
-                autoplay
+                // autoplay
                 width={width}
                 height={height}
                 exercises={this.props.exercises}

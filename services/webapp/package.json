@@ -17,6 +17,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
+    "express-static": "^1.2.6",
     "graphql": "^14.0.2",
     "jsonwebtoken": "^8.3.0",
     "node-env-file": "^0.1.8",

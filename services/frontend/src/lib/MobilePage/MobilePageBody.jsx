@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
+import ContainerDimension from 'react-container-dimensions'
 import { ThemeContext } from './MobilePage'
 
 const getComputedStyle = (theme, { noScroll, withPadding }) => {
@@ -37,17 +37,16 @@ const getComputedStyle = (theme, { noScroll, withPadding }) => {
 const MobilePageBody = ({ children, ...props }) => (
     <ThemeContext.Consumer>
         {theme => {
-            // const height = getBodyHeight(theme)
             const content = typeof children === 'function'
                 ? (
-                    <AutoSizer>
+                    <ContainerDimension>
                         {(dimensions) =>
                             React.createElement(children, {
                                 ...dimensions,
                                 theme,
                             })
                         }
-                    </AutoSizer>
+                    </ContainerDimension>
                 )
                 : children
 

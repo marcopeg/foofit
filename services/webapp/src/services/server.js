@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
@@ -19,6 +20,10 @@ export const init = () => {
 
     app.use(compression())
     app.use(createAppRouter())
+
+    // serve static files
+    app.use(express.static(path.resolve(__dirname, '..', '..', 'dist-client')))
+    app.use('*', express.static(path.resolve(__dirname, '..', '..', 'dist-client')))
 }
 
 export const start = ({ port }) => {

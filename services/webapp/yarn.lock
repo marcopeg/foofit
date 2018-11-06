@@ -1568,6 +1568,12 @@ express-graphql@^0.7.1:
     http-errors "^1.7.1"
     raw-body "^2.3.3"
 
+express-static@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/express-static/-/express-static-1.2.6.tgz#567aab6ba808386936b8c17bb0a90f6f61d0db4f"
+  dependencies:
+    mime2 latest
+
 express@^4.16.4:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
@@ -2496,6 +2502,10 @@ mime-types@~2.1.18:
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.21.tgz#28995aa1ecb770742fe6ae7e58f9181c744b3f96"
   dependencies:
     mime-db "~1.37.0"
+
+mime2@latest:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/mime2/-/mime2-0.0.5.tgz#0ea0f2b6bfe1c7b21165c43c0137e0ff0e9a5a1d"
 
 mime@1.4.1:
   version "1.4.1"
