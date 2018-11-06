@@ -39,6 +39,14 @@ const mapDispatch = (dispatch, { history, match }) => {
     return {
         loadPrograms: () => dispatch(updatePrograms()),
         on404: () => history.push('/welcome'),
+        onStop: () => {
+            console.log('session stopped')
+            console.log(match.url)
+        },
+        onFinish: () => {
+            console.log('session completed')
+            history.goBack()
+        },
     }
 }
 
@@ -77,9 +85,12 @@ class TrainingWatch extends React.PureComponent {
 
         return (
             <Player
+                autoplay
                 width={width}
                 height={height}
                 exercises={this.props.exercises}
+                onStop={this.props.onStop}
+                onFinish={this.props.onFinish}
             />
         )
     }
@@ -109,6 +120,8 @@ const exerciseType = PropTypes.shape({
 TrainingWatch.propTypes = {
     loadPrograms: PropTypes.func.isRequired,
     on404: PropTypes.func.isRequired,
+    onStop: PropTypes.func.isRequired,
+    onFinish: PropTypes.func.isRequired,
     training: trainingType,
     exercises: PropTypes.arrayOf(exerciseType),
     isNotFound: PropTypes.bool.isRequired,

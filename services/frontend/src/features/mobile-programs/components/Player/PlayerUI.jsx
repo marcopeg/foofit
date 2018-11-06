@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { flexCentered } from 'app/mixins'
 import Starter from './Starter'
+import Finisher from './Finisher'
 import Duration from './Duration'
 import Pause from './Pause'
 
@@ -28,6 +29,7 @@ const styles = {
 const PlayerUI = ({
     width,
     height,
+    autoplay,
     exercises,
     exerciseIndex,
     isPlaying,
@@ -40,8 +42,10 @@ const PlayerUI = ({
     exerciseLapse,
     exercisePauseLapse,
     start,
+    stop,
     pause,
     resume,
+    finish,
 }) => (
     <div>
         <div style={{
@@ -73,9 +77,17 @@ const PlayerUI = ({
                 </div>
             </div>
         </div>
-        <Starter
-            isVisible={(!isPlaying && !isPaused && !isFinished)}
-            start={start}
+        {autoplay ? null : (
+            <Starter
+                isVisible={(!isPlaying && !isPaused && !isFinished)}
+                start={start}
+                width={width}
+                height={height}
+            />
+        )}
+        <Finisher
+            isVisible={isFinished}
+            finish={finish}
             width={width}
             height={height}
         />
@@ -91,6 +103,7 @@ const exerciseShape = PropTypes.shape({
 PlayerUI.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    autoplay: PropTypes.bool.isRequired,
     exerciseIndex: PropTypes.number.isRequired,
     exercises: PropTypes.arrayOf(exerciseShape).isRequired,
     isPlaying: PropTypes.bool.isRequired,
@@ -103,8 +116,10 @@ PlayerUI.propTypes = {
     exerciseLapse: PropTypes.number.isRequired,
     exercisePauseLapse: PropTypes.number.isRequired,
     start: PropTypes.func.isRequired,
+    stop: PropTypes.func.isRequired,
     pause: PropTypes.func.isRequired,
     resume: PropTypes.func.isRequired,
+    finish: PropTypes.func.isRequired,
 }
 
 export default PlayerUI

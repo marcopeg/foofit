@@ -3,12 +3,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { flexCentered } from 'app/mixins'
-import { FaPlay } from 'react-icons/fa'
+import { FaCheck } from 'react-icons/fa'
 
 const lines = [
-    'do not exercise while driving',
-    'you do this, then we go for a beer!',
-    'this is going to be awesome!',
+    'that\'s the stuff!',
+    'oh yeah, baby!',
+    'good job, and see you tomorrow!',
+    'and it\'s done!',
+    'you did a good job!',
+    'uh, now go and tell your girlfriend your abs need a treat ;-)',
 ]
 
 const styles = {
@@ -19,9 +22,9 @@ const styles = {
         top: 0,
         left: 0,
         color: '#fff',
-        backgroundColor: 'rgba(29, 69, 109, 0.85)',
+        backgroundColor: 'rgba(29, 69, 109, 0.9)',
         border: '1px solid black',
-        transform: 'translate3d(0, 0, 0)',
+        transform: 'translate3d(0, 100%, 0)',
         transition: 'transform 0.3s ease-in',
     },
     comment: {
@@ -46,9 +49,8 @@ const styles = {
         borderRadius: '50%',
         paddingTop: 30,
         paddingBottom: 30,
-        paddingLeft: 40,
-        paddingRight: 20,
-        // background: '#1e8eff',
+        paddingLeft: 30,
+        paddingRight: 30,
     },
 }
 
@@ -59,8 +61,8 @@ const getWrapperStyle = ({ width, height, isVisible }) => {
         height,
     }
 
-    if (!isVisible) {
-        style.transform = `translate3d(0, ${height}px, 0)`
+    if (isVisible) {
+        style.transform = 'translate3d(0, 0, 0)'
     }
 
     return style
@@ -80,7 +82,7 @@ const getPlayStyle = (isBig) => {
     return style
 }
 
-class Starter extends React.PureComponent {
+class Finisher extends React.PureComponent {
     constructor (props) {
         super(props)
         this.state = {
@@ -100,7 +102,7 @@ class Starter extends React.PureComponent {
     }
 
     render () {
-        const { start, ...props } = this.props
+        const { finish, ...props } = this.props
         return (
             <div style={getWrapperStyle(props)}>
                 <div style={styles.comment}>
@@ -108,19 +110,19 @@ class Starter extends React.PureComponent {
                 </div>
                 <div style={styles.divider} />
                 <div
-                    onClick={start}
+                    onClick={finish}
                     style={getPlayStyle(this.state.isBig)}
                 >
-                    <FaPlay size={80} />
+                    <FaCheck size={80} />
                 </div>
             </div>
         )
     }
 }
 
-Starter.propTypes = {
-    start: PropTypes.func.isRequired,
+Finisher.propTypes = {
+    finish: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
 }
 
-export default Starter
+export default Finisher

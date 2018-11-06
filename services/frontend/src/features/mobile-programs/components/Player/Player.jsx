@@ -32,16 +32,23 @@ class Player extends React.Component {
     }
 
     componentDidMount () {
-        // this.interval = setInterval(this.tick, this.props.tickUpdate)
+        if (this.props.autoplay) {
+            this.start()
+        }
     }
 
     shouldComponentUpdate (nextProps, nextState) {
-        return [
+        const updateProps = [
+            'width',
+            'height',
+        ].some(key => this.props[key] !== nextProps[key])
+        const updateState = [
             'tick',
             'isPlaying',
             'isPaused',
             'exerciseIndex',
         ].some(key => this.state[key] !== nextState[key])
+        return updateState || updateProps
     }
 
     componentWillUnmount () {
@@ -75,7 +82,6 @@ class Player extends React.Component {
             const nextIndex = this.state.exerciseIndex + 1
             if (remaining <= 1000) {
                 if (nextIndex < this.props.exercises.length) {
-                    console.log('change! exercise', remaining, exercise)
                     this.timer = setTimeout(() => this.setState({
                         exerciseIndex: nextIndex,
                         exerciseStart: now,
@@ -106,10 +112,11 @@ class Player extends React.Component {
         this.interval = setInterval(this.tick, this.props.tickUpdate)
     }
 
-    stop = () => {
-        clearInterval(this.interval)
-        this.setState({ isPlaying: true })
-    }
+    // stop = () => {
+    //     console.log('session aborted')
+    //     clearInterval(this.interval)
+    //     this.setState({ isPlaying: true })
+    // }
 
     pause = () => {
         const now = this.getTimeTick()
@@ -137,19 +144,24 @@ class Player extends React.Component {
                 {...this.props}
                 {...this.state}
                 start={this.start}
-                stop={this.stop}
                 pause={this.pause}
                 resume={this.resume}
+                stop={this.props.onStop}
+                finish={this.props.onFinish}
             />
         )
     }
 }
 
 Player.propTypes = {
+    autoplay: PropTypes.bool,
     tickUpdate: PropTypes.number,
+    onStop: PropTypes.func.isRequired,
+    onFinish: PropTypes.func.isRequired,
 }
 
 Player.defaultProps = {
+    autoplay: false,
     tickUpdate: 250,
 }
 
