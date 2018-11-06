@@ -8,6 +8,8 @@
     "@marcopeg/utils": "^1.9.1",
     "babel-polyfill": "^6.26.0",
     "history": "^4.7.2",
+    "moment-duration-format": "^2.2.2",
+    "moment-timezone": "^0.5.23",
     "react": "^15.3.0 || ^16.0.0-alpha",
     "react-device-detect": "^1.6.1",
     "react-dom": "^15.3.0 || ^16.0.0-alpha",

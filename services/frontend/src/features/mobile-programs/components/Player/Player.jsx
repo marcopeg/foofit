@@ -1,12 +1,9 @@
 /* eslint react/prefer-stateless-function: off */
 import React from 'react'
+import { flexCentered } from 'app/mixins'
 import PropTypes from 'prop-types'
-
-const centered = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
+import Duration from './Duration'
+import Pause from './Pause'
 
 const styles = {
     wrapper: {
@@ -16,13 +13,13 @@ const styles = {
         color: '#fff',
     },
     header: {
-        ...centered,
+        ...flexCentered,
         height: 80,
         fontSize: 30,
         borderBottom: '1px solid #fff',
     },
     exercise: {
-        ...centered,
+        ...flexCentered,
         flex: 1,
     },
     controls: {
@@ -39,28 +36,83 @@ class Player extends React.Component {
         super(props)
         this.state = {
             startTime: new Date(),
+            isPlaying: true,
+            isPaused: false,
+            pauseStart: null,
             elapsed: 0,
+            activeLapse: 0,
+            currentPauseLapse: 0,
+            totalPauseLapse: 0,
+            currentExerciseIndex: 0,
         }
     }
 
     componentDidMount () {
-        this.interval = setInterval(() => {
-            this.setState({ elapsed: new Date() - this.state.startTime })
-        }, 250)
+        this.interval = setInterval(this.tick, this.props.tickUpdate)
+    }
+
+    shouldComponentUpdate (nextProps, nextState) {
+        return [
+            'elapsed',
+            'isPaused',
+        ].some(key => this.state[key] !== nextState[key])
+    }
+
+    componentWillUpdate (nextProps, nextState) {
+        console.log('second', this.state.elapsed)
     }
 
     componentWillUnmount () {
         clearInterval(this.interval)
     }
 
-    stop () {}
+    getCurrentExercise = () => {
+        return 0
+    }
 
-    pause () {}
+    tick = () => {
+        const now = new Date()
+        const update = {
+            elapsed: Math.round((now - this.state.startTime) / 1000),
+        }
 
-    resume () {}
+        // calculate current paused time
+        if (this.state.isPaused) {
+            update.currentPauseLapse = Math.round((now - this.state.pauseStart) / 1000)
+        }
+
+        // calculate current working time
+        update.activeLapse = update.elapsed - this.state.totalPauseLapse - (update.currentPauseLapse || 0)
+
+        // console.log(this.state.activeLapse, update.activeLapse, this.state.activeLapse !== update.activeLapse)
+        if (update.activeLapse > this.state.activeLapse) {
+            update.currentExerciseIndex = this.getCurrentExercise()
+        }
+
+        this.setState(update)
+    }
+
+    pause = () => {
+        this.setState({
+            isPlaying: false,
+            isPaused: true,
+            pauseStart: new Date(),
+        })
+    }
+
+    resume = () => {
+        this.setState({
+            isPlaying: true,
+            isPaused: false,
+            pauseStart: null,
+            totalPauseLapse: this.state.totalPauseLapse + this.state.currentPauseLapse,
+            currentPauseLapse: 0,
+        })
+    }
+
+    stop = () => {}
 
     render () {
-        const elapsed = Math.round((this.state.elapsed) / 1000)
         return (
             <div style={{
                 ...styles.wrapper,
@@ -68,14 +120,26 @@ class Player extends React.Component {
                 height: this.props.height,
             }}>
                 <div style={styles.header}>
-                    {elapsed}
+                    <Duration value={this.state.elapsed} />
+                    <Pause
+                        isPlaying={this.state.isPlaying}
+                        pause={this.pause}
+                        resume={this.resume}
+                    />
                 </div>
                 <div style={styles.exercise}>
-                    exercise illustration
+                    <div style={{ textAlign: 'right' }}>
+                        active <Duration value={this.state.activeLapse} />
+                        <br />
+                        current pause <Duration value={this.state.currentPauseLapse} />
+                        <br />
+                        total pause <Duration value={this.state.totalPauseLapse} />
+                        <hr />
+                        current exercise {this.state.currentExerciseIndex}
+                    </div>
                 </div>
                 <div style={styles.controls}>
                     <div>other</div>
-                    <div>pause/resume</div>
                 </div>
             </div>
         )
@@ -89,9 +153,14 @@ const exerciseShape = PropTypes.shape({
 })
 
 Player.propTypes = {
+    tickUpdate: PropTypes.number,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     exercises: PropTypes.arrayOf(exerciseShape).isRequired,
+}
+
+Player.defaultProps = {
+    tickUpdate: 150,
 }
 
 export default Player
