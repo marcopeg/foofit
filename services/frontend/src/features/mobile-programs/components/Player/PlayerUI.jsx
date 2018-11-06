@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { flexCentered } from 'app/mixins'
+import Starter from './Starter'
 import Duration from './Duration'
 import Pause from './Pause'
 
 const styles = {
     wrapper: {
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         background: '#1e8eff',
@@ -21,13 +23,6 @@ const styles = {
         ...flexCentered,
         flex: 1,
     },
-    controls: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: 80,
-        borderTop: '1px solid #fff',
-    },
 }
 
 const PlayerUI = ({
@@ -36,46 +31,54 @@ const PlayerUI = ({
     exercises,
     exerciseIndex,
     isPlaying,
+    isPaused,
+    isFinished,
     elapsed,
     activeLapse,
     pauseLapse,
     totalPauseLapse,
     exerciseLapse,
     exercisePauseLapse,
+    start,
     pause,
     resume,
 }) => (
-    <div style={{
-        ...styles.wrapper,
-        width,
-        height,
-    }}>
-        <div style={styles.header}>
-            <Duration unit="ms" value={elapsed} />
-            <Pause
-                isPlaying={isPlaying}
-                pause={pause}
-                resume={resume}
-            />
-        </div>
-        <div style={styles.exercise}>
-            <div style={{ textAlign: 'right' }}>
-                active <Duration unit="ms" value={activeLapse} />
-                <br />
-                current pause <Duration unit="ms" value={pauseLapse} />
-                <br />
-                total pause <Duration unit="ms" value={totalPauseLapse} />
-                <hr />
-                current exercise {exerciseIndex}/{exercises.length}
-                <hr />
-                exercise lapse <Duration unit="ms" value={exerciseLapse} />
-                <br />
-                exercise pause lapse <Duration unit="ms" value={exercisePauseLapse} />
+    <div>
+        <div style={{
+            ...styles.wrapper,
+            width,
+            height,
+        }}>
+            <div style={styles.header}>
+                <Duration unit="ms" value={elapsed} />
+                <Pause
+                    isPlaying={isPlaying}
+                    pause={pause}
+                    resume={resume}
+                />
+            </div>
+            <div style={styles.exercise}>
+                <div style={{ textAlign: 'right' }}>
+                    active <Duration unit="ms" value={activeLapse} />
+                    <br />
+                    current pause <Duration unit="ms" value={pauseLapse} />
+                    <br />
+                    total pause <Duration unit="ms" value={totalPauseLapse} />
+                    <hr />
+                    current exercise {exerciseIndex}/{exercises.length}
+                    <hr />
+                    exercise lapse <Duration unit="ms" value={exerciseLapse} />
+                    <br />
+                    exercise pause lapse <Duration unit="ms" value={exercisePauseLapse} />
+                </div>
             </div>
         </div>
-        <div style={styles.controls}>
-            <div>other</div>
-        </div>
+        <Starter
+            isVisible={(!isPlaying && !isPaused && !isFinished)}
+            start={start}
+            width={width}
+            height={height}
+        />
     </div>
 )
 
@@ -99,6 +102,7 @@ PlayerUI.propTypes = {
     totalPauseLapse: PropTypes.number.isRequired,
     exerciseLapse: PropTypes.number.isRequired,
     exercisePauseLapse: PropTypes.number.isRequired,
+    start: PropTypes.func.isRequired,
     pause: PropTypes.func.isRequired,
     resume: PropTypes.func.isRequired,
 }

@@ -6,14 +6,13 @@ import PlayerUI from './PlayerUI'
 class Player extends React.Component {
     constructor (props) {
         super(props)
-        const startTime = this.getTimeTick()
         this.state = {
-            isPlaying: true,
+            isPlaying: false,
             isPaused: false,
             isFinished: false,
 
             // handle generic time
-            startTime,
+            startTime: null,
             elapsed: 0,
             activeLapse: 0,
             tick: 0,
@@ -25,7 +24,7 @@ class Player extends React.Component {
 
             // handle exercise stuff
             exerciseIndex: 0,
-            exerciseStart: startTime,
+            exerciseStart: null,
             exerciseLapse: 0,
             exercisePauseLapse: 0,
             exerciseTotalPauseLapse: 0,
@@ -33,13 +32,15 @@ class Player extends React.Component {
     }
 
     componentDidMount () {
-        this.interval = setInterval(this.tick, this.props.tickUpdate)
+        // this.interval = setInterval(this.tick, this.props.tickUpdate)
     }
 
     shouldComponentUpdate (nextProps, nextState) {
         return [
             'tick',
+            'isPlaying',
             'isPaused',
+            'exerciseIndex',
         ].some(key => this.state[key] !== nextState[key])
     }
 
@@ -83,7 +84,6 @@ class Player extends React.Component {
                         exerciseTotalPauseLapse: 0,
                     }))
                 } else {
-                    console.log('finish training')
                     clearInterval(this.interval)
                     this.setState({
                         isPlaying: false,
@@ -94,6 +94,21 @@ class Player extends React.Component {
         }
 
         this.setState(update)
+    }
+
+    start = () => {
+        const startTime = this.getTimeTick()
+        this.setState({
+            startTime,
+            exerciseStart: startTime,
+            isPlaying: true,
+        })
+        this.interval = setInterval(this.tick, this.props.tickUpdate)
+    }
+
+    stop = () => {
+        clearInterval(this.interval)
+        this.setState({ isPlaying: true })
     }
 
     pause = () => {
@@ -116,16 +131,15 @@ class Player extends React.Component {
         })
     }
 
-    stop = () => {}
-
     render () {
         return (
             <PlayerUI
                 {...this.props}
                 {...this.state}
+                start={this.start}
+                stop={this.stop}
                 pause={this.pause}
                 resume={this.resume}
-                stop={this.stop}
             />
         )
     }
