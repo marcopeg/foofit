@@ -34,7 +34,7 @@ const styles = {
 class Player extends React.Component {
     constructor (props) {
         super(props)
-        const startTime = Date.now()
+        const startTime = this.getTimeTick()
         this.state = {
             isPlaying: true,
             isPaused: false,
@@ -70,18 +70,17 @@ class Player extends React.Component {
         ].some(key => this.state[key] !== nextState[key])
     }
 
-    // componentWillUpdate (nextProps, nextState) {
-    //     console.log('second', this.state.elapsed)
-    // }
-
     componentWillUnmount () {
         clearInterval(this.interval)
+        clearTimeout(this.timer)
     }
+
+    getTimeTick = () => Math.floor(Date.now() / 1000) * 1000
 
     getCurrentExercise = () => this.props.exercises[this.state.exerciseIndex]
 
     tick = () => {
-        const now = Date.now()
+        const now = this.getTimeTick()
         const update = {
             elapsed: (now - this.state.startTime),
             pauseLapse: this.state.isPaused ? (now - this.state.pauseStart) : 0,
@@ -100,14 +99,16 @@ class Player extends React.Component {
             const exercise = this.getCurrentExercise()
             const remaining = exercise.value * 1000 - this.state.exerciseLapse
             const nextIndex = this.state.exerciseIndex + 1
-            if (remaining < 1000) {
+            if (remaining <= 1000) {
                 if (nextIndex < this.props.exercises.length) {
                     console.log('change! exercise', remaining, exercise)
-                    update.exerciseIndex = nextIndex
-                    update.exerciseStart = now
-                    update.exerciseLapse = 0
-                    update.exercisePauseLapse = 0
-                    update.exerciseTotalPauseLapse = 0
+                    this.timer = setTimeout(() => this.setState({
+                        exerciseIndex: nextIndex,
+                        exerciseStart: now,
+                        exerciseLapse: 0,
+                        exercisePauseLapse: 0,
+                        exerciseTotalPauseLapse: 0,
+                    }))
                 } else {
                     console.log('finish training')
                     clearInterval(this.interval)
@@ -119,7 +120,7 @@ class Player extends React.Component {
     }
 
     pause = () => {
-        const now = Date.now()
+        const now = this.getTimeTick()
         this.setState({
             isPlaying: false,
             isPaused: true,
