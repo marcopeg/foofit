@@ -34,16 +34,29 @@ const styles = {
 class Player extends React.Component {
     constructor (props) {
         super(props)
+        const startTime = new Date()
         this.state = {
-            startTime: new Date(),
             isPlaying: true,
             isPaused: false,
-            pauseStart: null,
+
+            // handle generic time
+            startTime,
             elapsed: 0,
             activeLapse: 0,
-            currentPauseLapse: 0,
+            tick: 0,
+
+            // handle generic pause
+            pauseStart: null,
+            pauseLapse: 0,
             totalPauseLapse: 0,
-            currentExerciseIndex: 0,
+
+            // handle exercise stuff
+            exerciseIndex: 0,
+            exerciseStart: startTime,
+            exerciseLapse: 0,
+            exercisePauseStart: null,
+            exercisePauseLapse: 0,
+            exerciseTotalPauseLapse: 0,
         }
     }
 
@@ -53,7 +66,7 @@ class Player extends React.Component {
 
     shouldComponentUpdate (nextProps, nextState) {
         return [
-            'elapsed',
+            'tick',
             'isPaused',
         ].some(key => this.state[key] !== nextState[key])
     }
@@ -73,30 +86,33 @@ class Player extends React.Component {
     tick = () => {
         const now = new Date()
         const update = {
-            elapsed: Math.round((now - this.state.startTime) / 1000),
-        }
-
-        // calculate current paused time
-        if (this.state.isPaused) {
-            update.currentPauseLapse = Math.round((now - this.state.pauseStart) / 1000)
+            elapsed: (now - this.state.startTime),
+            exerciseLapse: (now - this.state.exerciseStart),
+            pauseLapse: this.state.isPaused ? (now - this.state.pauseStart) : 0,
         }
 
         // calculate current working time
-        update.activeLapse = update.elapsed - this.state.totalPauseLapse - (update.currentPauseLapse || 0)
+        update.activeLapse = update.elapsed - this.state.totalPauseLapse - update.pauseLapse
 
         // console.log(this.state.activeLapse, update.activeLapse, this.state.activeLapse !== update.activeLapse)
-        if (update.activeLapse > this.state.activeLapse) {
-            update.currentExerciseIndex = this.getCurrentExercise()
-        }
+        // if (update.activeLapse > this.state.activeLapse) {
+        //     update.exerciseIndex = this.getCurrentExercise()
+        // }
+
+        // used to trigger UI update
+        update.tick = Math.floor(update.elapsed / 1000)
+
+        // console.log(update.elapsed, update.exerciseLapse, '--', update.secondsElapsed, update.secondsExerciseLapse)
 
         this.setState(update)
     }
 
     pause = () => {
+        const now = new Date()
         this.setState({
             isPlaying: false,
             isPaused: true,
-            pauseStart: new Date(),
+            pauseStart: now,
         })
     }
 
@@ -105,8 +121,9 @@ class Player extends React.Component {
             isPlaying: true,
             isPaused: false,
             pauseStart: null,
-            totalPauseLapse: this.state.totalPauseLapse + this.state.currentPauseLapse,
-            currentPauseLapse: 0,
+            pauseLapse: 0,
+            totalPauseLapse: this.state.totalPauseLapse + this.state.pauseLapse,
+            exerciseTotalPauseLapse: this.state.exerciseTotalPauseLapse + this.state.pauseLapse,
         })
     }
 
@@ -120,7 +137,7 @@ class Player extends React.Component {
                 height: this.props.height,
             }}>
                 <div style={styles.header}>
-                    <Duration value={this.state.elapsed} />
+                    <Duration unit="ms" value={this.state.elapsed} />
                     <Pause
                         isPlaying={this.state.isPlaying}
                         pause={this.pause}
@@ -129,13 +146,17 @@ class Player extends React.Component {
                 </div>
                 <div style={styles.exercise}>
                     <div style={{ textAlign: 'right' }}>
-                        active <Duration value={this.state.activeLapse} />
+                        active <Duration unit="ms" value={this.state.activeLapse} />
                         <br />
-                        current pause <Duration value={this.state.currentPauseLapse} />
+                        current pause <Duration unit="ms" value={this.state.pauseLapse} />
                         <br />
-                        total pause <Duration value={this.state.totalPauseLapse} />
+                        total pause <Duration unit="ms" value={this.state.totalPauseLapse} />
                         <hr />
-                        current exercise {this.state.currentExerciseIndex}
+                        current exercise {this.state.exerciseIndex}/{this.props.exercises.length}
+                        <br />
+                        exercise lapse <Duration unit="ms" value={this.state.exerciseLapse} />
+                        <br />
+                        exercise pause lapse <Duration unit="ms" value={this.state.exercisePauseLapse} />
                     </div>
                 </div>
                 <div style={styles.controls}>
@@ -160,7 +181,7 @@ Player.propTypes = {
 }
 
 Player.defaultProps = {
-    tickUpdate: 150,
+    tickUpdate: 250,
 }
 
 export default Player
