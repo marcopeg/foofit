@@ -5,8 +5,15 @@ import { connect } from 'react-redux'
 import Loader from 'react-loader-spinner'
 import { flexCentered } from 'app/mixins'
 
+const cleanUrl = url => {
+    const s1 = url.replace(/([^:])(\/\/+)/g, '$1/')
+    return s1.indexOf('//') === 0
+        ? s1.substr(1)
+        : s1
+}
+
 const mapState = ({ app }, { src }) => ({
-    src: `${app.backend}${src}`.replace(/\/\/+/g, '/'),
+    src: cleanUrl(`${app.backend}${src}`),
 })
 
 class RemoteImage extends React.Component {

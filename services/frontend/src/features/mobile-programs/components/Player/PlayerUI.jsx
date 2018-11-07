@@ -7,8 +7,9 @@ import Duration from './Duration'
 import Pause from './Pause'
 import Stop from './Stop'
 import ExerciseCountdown from './ExerciseCountdown'
-import ExerciseDisplay from './ExerciseDisplay'
+import ExerciseImg from './ExerciseImg'
 import Number from './Number'
+import PreviewNext from './PreviewNext'
 
 const styles = {
     wrapper: {
@@ -102,9 +103,8 @@ const PlayerUI = ({
                         children={<Duration unit="ms" value={remaining} />}
                     />
                 </div>
-                <ExerciseDisplay
+                <ExerciseImg
                     {...exercises[exerciseIndex]}
-                    elapsed={exerciseLapse}
                     width={width}
                     height={displayHeight}
                 />
@@ -112,7 +112,12 @@ const PlayerUI = ({
                     ...styles.list,
                     height: listHeight,
                 }}>
-                    list of exercises
+                    <PreviewNext
+                        width={width}
+                        height={listHeight}
+                        exercises={exercises}
+                        exerciseIndex={exerciseIndex}
+                    />
                 </div>
                 <div style={styles.footer}>
                     <Stop
