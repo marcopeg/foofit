@@ -95,6 +95,6 @@ export const start = async (conn, Model) => {
         where: {},
         truncate: true,
     })
-    await Model.bulkCreate(require('./snap-programs.fixture').default)
+    await Model.bulkCreate(require('./snap-programs.model.fixture').default)
 }
 

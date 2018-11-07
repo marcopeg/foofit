@@ -1,6 +1,7 @@
 import * as config from '@marcopeg/utils/lib/config'
 import * as envService from 'services/env'
 import * as loggerService from 'services/logger'
+import * as hashService from 'services/hash'
 import * as postgresService from 'services/postgres'
 import * as serverService from 'services/server'
 import models from 'models'
@@ -10,6 +11,9 @@ const boot = async () => {
     await loggerService.init()
 
     await Promise.all([
+        hashService.init({
+            rounds: Number(config.get('BCRYPT_ROUNDS')),
+        }),
         postgresService.init({
             host: config.get('PG_HOST'),
             port: config.get('PG_PORT'),
