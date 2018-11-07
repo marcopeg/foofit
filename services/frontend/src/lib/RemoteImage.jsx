@@ -76,16 +76,26 @@ class RemoteImage extends React.Component {
         </div>
     )
 
+    renderLoader = () => (
+        <div style={{
+            ...flexCentered,
+            width: this.props.width,
+            height: this.props.height,
+            overflow: 'hidden',
+            ...this.props.style,
+        }}>
+            <Loader
+                type={this.props.spinnerType}
+                color={this.props.spinnerColor}
+                width={this.props.width * 0.3}
+                height={this.props.height * 0.3}
+            />
+        </div>
+    )
+
     renderBody = () => {
         if (this.state.isLoading) {
-            return (
-                <Loader
-                    type="ThreeDots"
-                    color="#fff"
-                    width={100}
-                    height={30}
-                />
-            )
+            return this.renderLoader()
         }
 
         if (this.state.hasError) {
@@ -109,6 +119,8 @@ RemoteImage.propTypes = {
     style: PropTypes.object,
     imgStyle: PropTypes.object,
     altStyle: PropTypes.object,
+    spinnerColor: PropTypes.string,
+    spinnerType: PropTypes.oneOf([ 'ThreeDots', 'TailSpin' ]),
 }
 
 RemoteImage.defaultProps = {
@@ -117,6 +129,8 @@ RemoteImage.defaultProps = {
     altStyle: {
         textTransform: 'uppercase',
     },
+    spinnerColor: 'inherith',
+    spinnerType: 'ThreeDots',
 }
 
 export default connect(mapState)(RemoteImage)

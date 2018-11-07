@@ -21,6 +21,7 @@ const ExerciseDisplay = ({ id, title, value, elapsed, width, height, ...props })
                     fontWeight: 'bold',
                     textTransform: 'uppercase',
                 }}
+                spinnerColor={'#1e8eff'}
             />
             {/* <Duration unit={'ms'} value={remainingMs} /> */}
         </div>
