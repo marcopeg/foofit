@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner'
 import { flexCentered } from 'app/mixins'
 
 const mapState = ({ app }, { src }) => ({
-    src: `${app.backend}${src}`.replace(/([^:]\/)\/+/g, "$1"),
+    src: `${app.backend}${src}`.replace(/\/\/+/g, '/'),
 })
 
 class RemoteImage extends React.Component {
