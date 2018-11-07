@@ -3,6 +3,7 @@
     "lint": "./node_modules/.bin/eslint src",
     "start": "./node_modules/.bin/parcel index.html --port 3000 --out-dir build-client-dev",
     "build": "rm -rf ./build-client && ./node_modules/.bin/parcel build index.html --out-dir build-client",
+    "cleanup": "rm -rf node_modules && rm -rf .cache && rm -rf build-client",
     "release:clean": "rm -rf ../webapp/build-client",
     "release:copy": "cp -r ./build-client ../webapp/build-client",
     "release:sub": "sed -i -e 's/REDUX_INITIAL_STATE={}/REDUX_INITIAL_STATE={app:{graphqlEndpoint:\"\\/api\"}}/g' ../webapp/build-client/index.html && rm ../webapp/build-client/index.html-e",

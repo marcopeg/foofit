@@ -5,15 +5,42 @@ services:
         image: postgres:11
         networks:
             - production
-        ports:
-            - ${PG1_PORT}:5432
         environment:
-            POSTGRES_USER: ${PG1_USER}
-            POSTGRES_PASSWORD: ${PG1_PASSWORD}
-            POSTGRES_DB: ${PG1_DB}
+            POSTGRES_USER: ${PG_USERNAME}
+            POSTGRES_PASSWORD: ${PG_PASSWORD}
+            POSTGRES_DB: ${PG_DATABASE}
         volumes:
             - ${HUMBLE_DATA}/pg:/var/lib/postgresql/data
             - ${HUMBLE_BACKUP}:/backup
+        restart: always
+
+    webapp:
+        image: node:10.13
+        depends_on:
+            - postgres
+        networks:
+            - production
+        ports:
+            - ${SERVER_PORT}:${SERVER_PORT}
+        environment:
+            NODE_ENV: production
+            LOG_LEVEL: error
+            SERVER_PORT: ${SERVER_PORT}
+            PG_HOST: postgres
+            PG_PORT: 5432
+            PG_DATABASE: ${PG_DATABASE}
+            PG_USERNAME: ${PG_USERNAME}
+            PG_PASSWORD: ${PG_PASSWORD}
+            PG_MAX_CONN_ATTEMPTS: ${PG_MAX_CONN_ATTEMPTS}
+            PG_CONN_ATTEMPTS_DELAY: ${PG_CONN_ATTEMPTS_DELAY}
+        volumes:
+            - ./services/webapp/build-client:/usr/src/app/build-client
+            - ./services/webapp/build-server:/usr/src/app/build-server
+            - ./services/webapp/package.json:/usr/src/app/package.json
+            - ./services/webapp/yarn.lock:/usr/src/app/yarn.lock
+            - ./services/webapp/index.js:/usr/src/app/index.js
+        working_dir: /usr/src/app
+        entrypoint: [ "yarn", "start:docker" ]
         restart: always
 
 networks:

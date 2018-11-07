@@ -11,6 +11,8 @@ const boot = async () => {
 
     await Promise.all([
         postgresService.init({
+            host: config.get('PG_HOST'),
+            port: config.get('PG_PORT'),
             database: config.get('PG_DATABASE'),
             username: config.get('PG_USERNAME'),
             password: config.get('PG_PASSWORD'),
