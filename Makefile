@@ -1,4 +1,8 @@
 
+backend:
+	HUMBLE_ENV=dev humble up -d postgres
+	HUMBLE_ENV=dev humble up webapp
+
 dev:
 	echo "start dev"
 
@@ -6,9 +10,13 @@ dev:
 # Production Functions
 #
 
-build:
-	(cd services/webapp && yarn && yarn build && yarn cleanup)
-	(cd services/frontend && yarn && yarn release && yarn cleanup)
+cleanup:
+	(cd services/webapp && yarn cleanup)
+	(cd services/frontend && yarn cleanup)
 
-boot:
+build:
+	(cd services/webapp && yarn && yarn build)
+	(cd services/frontend && yarn && yarn release)
+
+boot: cleanup build cleanup
 	HUMBLE_ENV=prod humble up

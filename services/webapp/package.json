@@ -7,9 +7,10 @@
     "lint": "./node_modules/.bin/eslint src",
     "build": "./node_modules/.bin/babel src --out-dir ./build-server",
     "cleanup": "rm -rf node_modules",
-    "start": "node index",
-    "start:dev": "nodemon index-dev",
-    "start:docker": "yarn install && node index"
+    "start": "NODE_ENV=development nodemon index-dev",
+    "start:prod": "node index",
+    "start:docker": "yarn install && yarn start:prod",
+    "start:docker:dev": "yarn install && yarn start"
   },
   "dependencies": {
     "@babel/cli": "^7.1.2",
