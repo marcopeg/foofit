@@ -20,25 +20,24 @@ const styles = {
     },
     countdown: {
         ...flexCentered,
+        height: 110,
         fontSize: 80,
         letterSpacing: 10,
-        paddingTop: 20,
-        paddingBottom: 20,
     },
     numbers: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: 20,
+        height: 70,
+        backgroundColor: 'rgba(29, 69, 109, 0.5)',
         paddingLeft: 20,
         paddingRight: 20,
     },
     footer: {
         ...flexCentered,
         justifyContent: 'space-between',
-        paddingTop: 10,
-        paddingBottom: 10,
+        height: 60,
         paddingLeft: 20,
         paddingRight: 20,
         fontSize: 20,
@@ -47,7 +46,8 @@ const styles = {
     },
     list: {
         ...flexCentered,
-        flex: 1,
+        overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
     },
 }
 
@@ -72,69 +72,80 @@ const PlayerUI = ({
     pause,
     resume,
     finish,
-}) => (
-    <div>
-        <div style={{
-            ...styles.wrapper,
-            width,
-            height,
-        }}>
-            <div style={styles.countdown}>
-                <ExerciseCountdown
+}) => {
+    const displayHeight = height * 0.3
+    const listHeight = height - displayHeight - styles.countdown.height - styles.numbers.height - styles.footer.height
+    return (
+        <div>
+            <div style={{
+                ...styles.wrapper,
+                width,
+                height,
+            }}>
+                <div style={styles.countdown}>
+                    <ExerciseCountdown
+                        {...exercises[exerciseIndex]}
+                        elapsed={exerciseLapse}
+                    />
+                </div>
+                <div style={styles.numbers}>
+                    <Number
+                        label={'elapsed'}
+                        children={<Duration unit="ms" value={activeLapse} />}
+                    />
+                    <Number
+                        label={'interval'}
+                        children={`${exerciseIndex + 1}/${exercises.length}`}
+                    />
+                    <Number
+                        label={'remaining'}
+                        children={<Duration unit="ms" value={remaining} />}
+                    />
+                </div>
+                <ExerciseDisplay
                     {...exercises[exerciseIndex]}
                     elapsed={exerciseLapse}
+                    width={width}
+                    height={displayHeight}
                 />
+                <div style={{
+                    ...styles.list,
+                    height: listHeight,
+                }}>
+                    list of exercises
+                </div>
+                <div style={styles.footer}>
+                    <Stop
+                        stop={stop}
+                    />
+                    <Number
+                        label={'workout'}
+                        children={<Duration unit="ms" value={elapsed} />}
+                    />
+                    <Pause
+                        isPlaying={isPlaying}
+                        pause={pause}
+                        resume={resume}
+                    />
+                </div>
             </div>
-            <div style={styles.numbers}>
-                <Number
-                    label={'elapsed'}
-                    children={<Duration unit="ms" value={activeLapse} />}
+            {autoplay ? null : (
+                <Starter
+                    isVisible={(!isPlaying && !isPaused && !isFinished)}
+                    start={start}
+                    width={width}
+                    height={height}
                 />
-                <Number
-                    label={'interval'}
-                    children={`${exerciseIndex + 1}/${exercises.length}`}
-                />
-                <Number
-                    label={'remaining'}
-                    children={<Duration unit="ms" value={remaining} />}
-                />
-            </div>
-            <ExerciseDisplay
-                {...exercises[exerciseIndex]}
-                elapsed={exerciseLapse}
-                width={width}
-                height={height * 0.3}
-            />
-            <div style={styles.list}>
-                list of exercises
-            </div>
-            <div style={styles.footer}>
-                <Stop
-                    stop={stop}
-                />
-                <Pause
-                    isPlaying={isPlaying}
-                    pause={pause}
-                    resume={resume}
-                />
-            </div>
-        </div>
-        {autoplay ? null : (
-            <Starter
-                isVisible={(!isPlaying && !isPaused && !isFinished)}
-                start={start}
+            )}
+            <Finisher
+                isVisible={isFinished}
+                finish={finish}
                 width={width}
                 height={height}
             />
-        )}
-        <Finisher
-            isVisible={isFinished}
-            finish={finish}
-            width={width}
-            height={height}
-        />
-    </div>
-)
+        </div>
+    )
+}
 
 const exerciseShape = PropTypes.shape({
     id: PropTypes.string.isRequired,
