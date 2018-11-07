@@ -11,7 +11,7 @@
 
 require("@babel/polyfill");
 
-require("./dist/boot").default().catch(function (err) {
+require("./build-server/boot").default().catch(function (err) {
   console.log('*** BOOT: Fatal Error');
   console.log(err);
 });

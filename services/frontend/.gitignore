@@ -1,4 +1,4 @@
 .cache
-dist-dev
-dist-client
 node_modules
+build-client
+build-client-dev

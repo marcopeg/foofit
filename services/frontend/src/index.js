@@ -1,10 +1,22 @@
 import 'babel-polyfill'
+import config from '@marcopeg/utils/lib/config'
+import logger from '@marcopeg/utils/lib/logger'
 import React from 'react'
 import { render } from 'react-dom'
 import reactFastclick from 'react-fastclick'
 import history from 'app/history'
 import { store, isReady } from 'app/store'
 
+// import ParcelJS dumb env variables into the config utility
+config.init({
+    NODE_ENV: process.env.NODE_ENV,
+    LOG_LEVEL: process.env.LOG_LEVEL,
+}, process.env.LOG_LEVEL === 'debug')
+
+// logging utility form @marcopeg
+logger.init()
+
+// do we really need this?
 reactFastclick()
 
 const renderApp = () => {
@@ -17,7 +29,7 @@ isReady
     .then(renderApp)
     .catch((err) => {
         document.body.innerHTML = err ? err.message : 'unknown error'
-        console.error(err) // eslint-disable-line
+        logger.logError(err) // eslint-disable-line
     })
 
 // HMR

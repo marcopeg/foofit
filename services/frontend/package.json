@@ -1,15 +1,15 @@
 {
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
-    "start": "./node_modules/.bin/parcel index.html --port 3000 --out-dir dist-dev",
-    "build": "rm -rf ./dist-client && ./node_modules/.bin/parcel build index.html --out-dir dist-client",
-    "release:clean": "rm -rf ../webapp/dist-client",
-    "release:copy": "cp -r ./dist-client ../webapp/dist-client",
-    "release:sub": "sed -i -e 's/REDUX_INITIAL_STATE={}/REDUX_INITIAL_STATE={app:{graphqlEndpoint:\"\\/api\"}}/g' ../webapp/dist-client/index.html && rm ../webapp/dist-client/index.html-e",
+    "start": "./node_modules/.bin/parcel index.html --port 3000 --out-dir build-client-dev",
+    "build": "rm -rf ./build-client && ./node_modules/.bin/parcel build index.html --out-dir build-client",
+    "release:clean": "rm -rf ../webapp/build-client",
+    "release:copy": "cp -r ./build-client ../webapp/build-client",
+    "release:sub": "sed -i -e 's/REDUX_INITIAL_STATE={}/REDUX_INITIAL_STATE={app:{graphqlEndpoint:\"\\/api\"}}/g' ../webapp/build-client/index.html && rm ../webapp/build-client/index.html-e",
     "release": "yarn release:clean && yarn build && yarn release:copy && yarn release:sub"
   },
   "dependencies": {
-    "@marcopeg/utils": "^1.9.1",
+    "@marcopeg/utils": "1.12.0",
     "babel-polyfill": "^6.26.0",
     "features": "^0.1.0",
     "history": "^4.7.2",
