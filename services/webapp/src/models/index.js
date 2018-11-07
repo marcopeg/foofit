@@ -4,6 +4,7 @@
 
 export default [
     require('./account.model'),
-    require('./excercise.model'),
+    require('./list.model'),
+    require('./exercise.model'),
     require('./snap-programs.model'),
 ]
