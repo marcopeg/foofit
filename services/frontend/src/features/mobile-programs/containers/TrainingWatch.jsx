@@ -41,7 +41,7 @@ const mapDispatch = (dispatch, { history, match }) => {
         on404: () => history.push('/welcome'),
         onStop: () => {
             console.log('session stopped')
-            console.log(match.url)
+            history.goBack()
         },
         onFinish: () => {
             console.log('session completed')

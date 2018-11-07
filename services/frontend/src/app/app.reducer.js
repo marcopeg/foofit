@@ -6,9 +6,7 @@
  */
 
 export const initialState = {
-    version: '0.0.0',
-    nodeEnv: 'development',
-    graphqlEndpoint: 'http://localhost:8080/api',
+    backend: 'http://localhost:8080/',
 }
 
 export const reducer = (state = initialState, action) => state

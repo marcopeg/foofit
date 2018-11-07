@@ -6,7 +6,7 @@
     "cleanup": "rm -rf node_modules && rm -rf .cache && rm -rf build-client",
     "release:clean": "rm -rf ../webapp/build-client",
     "release:copy": "cp -r ./build-client ../webapp/build-client",
-    "release:sub": "sed -i -e 's/REDUX_INITIAL_STATE={}/REDUX_INITIAL_STATE={app:{graphqlEndpoint:\"\\/api\"}}/g' ../webapp/build-client/index.html && rm ../webapp/build-client/index.html-e",
+    "release:sub": "sed -i -e 's/REDUX_INITIAL_STATE={}/REDUX_INITIAL_STATE={app:{backend:\"\\/\"}}/g' ../webapp/build-client/index.html && rm ../webapp/build-client/index.html-e",
     "release": "yarn release:clean && yarn build && yarn release:copy && yarn release:sub"
   },
   "dependencies": {

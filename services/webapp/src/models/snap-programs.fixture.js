@@ -25,9 +25,9 @@ export default [
                 title: 'Week1 - Monday',
                 duration: 'about 28 minutes',
                 progression: [
-                    { id: 'burpees', value: 30 },
-                    { id: 'pushups', value: 30 },
-                    { id: 'pause', value: 30 },
+                    { id: 'burpees', value: 15 },
+                    { id: 'plank', value: 15 },
+                    { id: 'rest', value: 15 },
                 ],
             },
             {
@@ -36,15 +36,15 @@ export default [
                 duration: 'about 28 minutes',
                 progression: [
                     { id: 'burpees', value: 20 },
-                    { id: 'pushups', value: 20 },
-                    { id: 'pause', value: 50 },
+                    { id: 'plank', value: 20 },
+                    { id: 'rest', value: 50 },
                 ],
             },
         ],
         exercises: [
             {
-                id: 'pause',
-                title: 'pause',
+                id: 'rest',
+                title: 'Rest',
                 type: 'duration',
             },
             {
@@ -53,8 +53,8 @@ export default [
                 type: 'duration',
             },
             {
-                id: 'pushups',
-                title: 'Pushups',
+                id: 'plank',
+                title: 'Plank',
                 type: 'duration',
             },
         ],

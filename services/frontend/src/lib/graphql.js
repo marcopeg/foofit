@@ -11,7 +11,7 @@ export const runQuery = (query = null, variables = {}, options = {}) => async (d
     }
 
     const { debug, ...fetchSettingsOptions } = options
-    const endpoint = options.endpoint || getState().app.graphqlEndpoint
+    const endpoint = options.endpoint || `${getState().app.backend}api`
     let result = null
 
     const fetchSettings = {

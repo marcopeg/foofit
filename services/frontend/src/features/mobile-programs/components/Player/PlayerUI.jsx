@@ -5,6 +5,10 @@ import Starter from './Starter'
 import Finisher from './Finisher'
 import Duration from './Duration'
 import Pause from './Pause'
+import Stop from './Stop'
+import ExerciseCountdown from './ExerciseCountdown'
+import ExerciseDisplay from './ExerciseDisplay'
+import Number from './Number'
 
 const styles = {
     wrapper: {
@@ -14,18 +18,34 @@ const styles = {
         background: '#1e8eff',
         color: '#fff',
     },
-    header: {
+    countdown: {
+        ...flexCentered,
+        fontSize: 80,
+        letterSpacing: 10,
+        paddingTop: 20,
+        paddingBottom: 20,
+    },
+    numbers: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    footer: {
         ...flexCentered,
         justifyContent: 'space-between',
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 20,
         paddingRight: 20,
-        fontSize: 30,
+        fontSize: 20,
         backgroundColor: 'rgba(29, 69, 109, 0.5)',
         borderBottom: '1px solid #fff',
     },
-    exercise: {
+    list: {
         ...flexCentered,
         flex: 1,
     },
@@ -41,6 +61,7 @@ const PlayerUI = ({
     isPaused,
     isFinished,
     elapsed,
+    remaining,
     activeLapse,
     pauseLapse,
     totalPauseLapse,
@@ -58,28 +79,44 @@ const PlayerUI = ({
             width,
             height,
         }}>
-            <div style={styles.header}>
-                <Duration unit="ms" value={activeLapse} />
+            <div style={styles.countdown}>
+                <ExerciseCountdown
+                    {...exercises[exerciseIndex]}
+                    elapsed={exerciseLapse}
+                />
+            </div>
+            <div style={styles.numbers}>
+                <Number
+                    label={'elapsed'}
+                    children={<Duration unit="ms" value={activeLapse} />}
+                />
+                <Number
+                    label={'interval'}
+                    children={`${exerciseIndex + 1}/${exercises.length}`}
+                />
+                <Number
+                    label={'remaining'}
+                    children={<Duration unit="ms" value={remaining} />}
+                />
+            </div>
+            <ExerciseDisplay
+                {...exercises[exerciseIndex]}
+                elapsed={exerciseLapse}
+                width={width}
+                height={height * 0.3}
+            />
+            <div style={styles.list}>
+                list of exercises
+            </div>
+            <div style={styles.footer}>
+                <Stop
+                    stop={stop}
+                />
                 <Pause
                     isPlaying={isPlaying}
                     pause={pause}
                     resume={resume}
                 />
-            </div>
-            <div style={styles.exercise}>
-                <div style={{ textAlign: 'right' }}>
-                    active <Duration unit="ms" value={elapsed} />
-                    <br />
-                    current pause <Duration unit="ms" value={pauseLapse} />
-                    <br />
-                    total pause <Duration unit="ms" value={totalPauseLapse} />
-                    <hr />
-                    current exercise {exerciseIndex}/{exercises.length}
-                    <hr />
-                    exercise lapse <Duration unit="ms" value={exerciseLapse} />
-                    <br />
-                    exercise pause lapse <Duration unit="ms" value={exercisePauseLapse} />
-                </div>
             </div>
         </div>
         {autoplay ? null : (
@@ -115,6 +152,7 @@ PlayerUI.propTypes = {
     isPaused: PropTypes.bool.isRequired,
     isFinished: PropTypes.bool.isRequired,
     elapsed: PropTypes.number.isRequired,
+    remaining: PropTypes.number.isRequired,
     activeLapse: PropTypes.number.isRequired,
     pauseLapse: PropTypes.number.isRequired,
     totalPauseLapse: PropTypes.number.isRequired,

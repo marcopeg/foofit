@@ -6,6 +6,11 @@ import PlayerUI from './PlayerUI'
 class Player extends React.Component {
     constructor (props) {
         super(props)
+
+        const duration = this.props.exercises.reduce((acc, curr) =>
+            acc + (curr.type === 'duration' ? curr.value : 0)
+        , 0)
+
         this.state = {
             isPlaying: false,
             isPaused: false,
@@ -14,6 +19,7 @@ class Player extends React.Component {
             // handle generic time
             startTime: null,
             elapsed: 0,
+            duration: duration * 1000,
             activeLapse: 0,
             tick: 0,
 
@@ -52,6 +58,10 @@ class Player extends React.Component {
     }
 
     componentWillUnmount () {
+        this.clearTimers()
+    }
+
+    clearTimers = () => {
         clearInterval(this.interval)
         clearTimeout(this.timer)
     }
@@ -90,7 +100,7 @@ class Player extends React.Component {
                         exerciseTotalPauseLapse: 0,
                     }))
                 } else {
-                    clearInterval(this.interval)
+                    this.clearTimers()
                     this.setState({
                         isPlaying: false,
                         isFinished: true,
@@ -112,11 +122,15 @@ class Player extends React.Component {
         this.interval = setInterval(this.tick, this.props.tickUpdate)
     }
 
-    // stop = () => {
-    //     console.log('session aborted')
-    //     clearInterval(this.interval)
-    //     this.setState({ isPlaying: true })
-    // }
+    stop = () => {
+        this.clearTimers()
+        this.props.onStop()
+    }
+
+    finish = () => {
+        this.clearTimers()
+        this.props.onFinish()
+    }
 
     pause = () => {
         const now = this.getTimeTick()
@@ -143,11 +157,12 @@ class Player extends React.Component {
             <PlayerUI
                 {...this.props}
                 {...this.state}
+                remaining={this.state.duration - this.state.activeLapse}
                 start={this.start}
                 pause={this.pause}
                 resume={this.resume}
-                stop={this.props.onStop}
-                finish={this.props.onFinish}
+                stop={this.stop}
+                finish={this.finish}
             />
         )
     }
@@ -161,7 +176,7 @@ Player.propTypes = {
 }
 
 Player.defaultProps = {
-    autoplay: false,
+    autoplay: true,
     tickUpdate: 250,
 }
 

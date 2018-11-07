@@ -22,6 +22,7 @@ export const init = () => {
     app.use(createAppRouter())
 
     // serve static files
+    app.use(express.static(path.resolve(__dirname, '..', '..', 'public')))
     app.use(express.static(path.resolve(__dirname, '..', '..', 'build-client')))
     app.use('*', express.static(path.resolve(__dirname, '..', '..', 'build-client')))
 }
