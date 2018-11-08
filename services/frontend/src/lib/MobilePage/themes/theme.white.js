@@ -1,8 +1,8 @@
 
 export const colors = {
-    primary: '#3F51B5',
-    darkPrimary: '#303F9F',
-    lightPrimary: '#C5CAE9',
+    primary: '#2196F3',
+    darkPrimary: '#1976D2',
+    lightPrimary: '#BBDEFB',
     text: '#FFFFFF',
     textPrimary: '#212121',
     textSecondary: '#757575',
@@ -16,6 +16,12 @@ export default {
     wrapper: {
         backgroundColor: colors.text,
         color: colors.textPrimary,
+    },
+    header: {
+        wrapper: {
+            backgroundColor: colors.primary,
+            color: colors.text,
+        },
     },
     button: {
         wrapper: {

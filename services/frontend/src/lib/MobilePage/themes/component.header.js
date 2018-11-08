@@ -10,7 +10,9 @@ export default {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottom: '1px solid #ddd',
+        borderBottomWidth: 1,
+        borderBottomStyle: 'solid',
+        borderBottomColor: 'transparent',
         fontWeight: 'bold',
     },
 }
