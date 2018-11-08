@@ -1,55 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { getThemeStyle } from '../themes'
 import { ThemeContext } from '../MobilePage'
 import ListItem from './ListItem'
 import Title from './Title'
 import Text from './Text'
-import { borderRadius } from '../variables'
 
-const styles = {
-    wrapper: {
-        borderTop: '1px solid #ddd',
-        borderBottom: '1px solid #ddd',
-        borderLeft: '1px solid #ddd',
-        borderRight: '1px solid #ddd',
-        borderRadius,
-    },
-    item: {
-        borderBottom: '1px solid #ddd',
-    },
-    firstItem: {},
-    lastItem: {
-        borderBottom: 'none',
-    },
-}
-
-const getItemStyle = (items, item, index) => {
+const getItemStyle = (theme, items, item, index) => {
     if (index === 0) {
         return {
-            ...styles.item,
-            ...styles.firstItem,
+            ...getThemeStyle(theme, 'list').item,
+            ...getThemeStyle(theme, 'list').firstItem,
         }
     }
 
     if (index === items.length - 1) {
         return {
-            ...styles.item,
-            ...styles.lastItem,
+            ...getThemeStyle(theme, 'list').item,
+            ...getThemeStyle(theme, 'list').lastItem,
         }
     }
 
-    return styles.item
+    return getThemeStyle(theme, 'list').item
 }
 
 const List = ({ keyProp, titleProp, subtitleProp, items, renderItem, onDisclose }) => (
     <ThemeContext.Consumer>
         {theme => (
-            <div style={styles.wrapper}>
+            <div style={getThemeStyle(theme.name, 'list').wrapper}>
                 {items.map((item, index) => (
                     renderItem ? (
                         <div
                             key={item[keyProp]}
-                            style={getItemStyle(items, item, index)}
+                            style={getItemStyle(theme.name, items, item, index)}
                             onDisclose={() => onDisclose(item)}
                         >
                             renderItem(item)
@@ -57,7 +40,7 @@ const List = ({ keyProp, titleProp, subtitleProp, items, renderItem, onDisclose 
                     ) : (
                         <div
                             key={item[keyProp]}
-                            style={getItemStyle(items, item, index)}
+                            style={getItemStyle(theme.name, items, item, index)}
                         >
                             <ListItem
                                 isActive={item.isActive}

@@ -27,19 +27,28 @@ export default {
         },
         wrapper__primary__active: {
             backgroundColor: colors.primary,
+            color: colors.text,
         },
         wrapper__secondary: {
-            borderColor: colors.lightPrimary,
-            color: colors.lightPrimary,
+            borderColor: colors.text,
+            color: colors.text,
         },
         wrapper__secondary__active: {
             backgroundColor: colors.lightPrimary,
         },
         wrapper__link: {
-            color: colors.lightPrimary,
+            color: colors.text,
         },
         wrapper__link__active: {
             backgroundColor: colors.lightPrimary,
+        },
+    },
+    list: {
+        wrapper: {
+            borderColor: colors.lightPrimary,
+        },
+        item: {
+            borderBottomColor: colors.lightPrimary,
         },
     },
 }

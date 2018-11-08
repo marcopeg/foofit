@@ -9,9 +9,7 @@ export const defaults = {
     text__small: 12,
     text__normal: 16,
     text__big: 20,
-    borderRadius: 0,
-    black: '#000',
-    white: '#fff',
+    borderRadius: 5,
 }
 
 export const variables = {

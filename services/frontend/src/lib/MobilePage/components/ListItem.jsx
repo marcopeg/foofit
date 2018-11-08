@@ -1,38 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FaAngleRight } from 'react-icons/fa'
+import { getThemeStyle } from '../themes'
 import { ThemeContext } from '../MobilePage'
-
-const styles = {
-    wrapper: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingTop: 20,
-        paddingBottom: 20,
-        paddingLeft: 10,
-        paddingRight: 10,
-    },
-    body: {
-        flex: 1,
-    },
-    handler: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-}
 
 const ListItem = ({ children, onDisclose }) => (
     <ThemeContext.Consumer>
         {theme => (
             <div
-                style={styles.wrapper}
+                style={getThemeStyle(theme.name, 'listItem').wrapper}
                 onClick={onDisclose}
             >
-                <div style={styles.body}>{children}</div>
+                <div style={getThemeStyle(theme.name, 'listItem').body}>{children}</div>
                 {onDisclose ? (
-                    <div style={styles.handler}>
+                    <div style={getThemeStyle(theme.name, 'listItem').handler}>
                         <FaAngleRight />
                     </div>
                 ) : null}

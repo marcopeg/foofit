@@ -8,6 +8,8 @@ import title from './component.title'
 import text from './component.text'
 import space from './component.space'
 import button from './component.button'
+import list from './component.list'
+import listItem from './component.list-item'
 
 // teme variations
 import white from './theme.white'
@@ -26,6 +28,8 @@ const styles = {
         text,
         space,
         button,
+        list,
+        listItem,
     },
     white,
     c1,
