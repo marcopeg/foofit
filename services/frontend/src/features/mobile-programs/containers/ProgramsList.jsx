@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import slugify from 'slugify'
-import MobilePage, { List } from 'lib/MobilePage'
+import MobilePage, { List, Button, Space } from 'lib/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state) => ({
@@ -28,13 +28,18 @@ class ProgramsList extends React.PureComponent {
                 <MobilePage.Header>
                     Programs
                 </MobilePage.Header>
-                <MobilePage.Body>
-                    <div style={{ margin: '20px 10px' }}>
-                        <List
-                            items={this.props.items}
-                            onDisclose={this.props.onDisclose}
-                        />
-                    </div>
+                <MobilePage.Body withPadding>
+                    <Button block>button primary</Button>
+                    <Space />
+                    <Button block type="secondary">button primary</Button>
+                    <Space />
+                    <Button block type="link">button link</Button>
+                    <Space />
+                    <List
+                        items={this.props.items}
+                        onDisclose={this.props.onDisclose}
+                        subtitleProp={'desc'}
+                    />
                 </MobilePage.Body>
             </MobilePage>
         )

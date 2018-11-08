@@ -36,7 +36,7 @@ MobilePage.propTypes = {
 }
 
 MobilePage.defaultProps = {
-    theme: 'default',
+    theme: 'white',
     withHeader: false,
     withFooter: false,
     footerOnTop: false,

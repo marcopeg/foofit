@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ContainerDimension from 'react-container-dimensions'
-import { getThemeStyle, getThemeVar } from './themes'
+import { getThemeStyle } from './themes'
+import { getThemeVar } from './themes/variables'
 import { ThemeContext } from './MobilePage'
 
 const getComputedStyle = (theme, { noScroll, withPadding }) => {

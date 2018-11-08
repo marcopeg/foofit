@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getThemeStyle } from './themes'
-import { ThemeContext } from './MobilePage'
+import { getThemeStyle } from '../themes'
+import { ThemeContext } from '../MobilePage'
 
 const Space = ({ type }) => (
     <ThemeContext.Consumer>

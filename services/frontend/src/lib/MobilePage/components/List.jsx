@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeContext } from './MobilePage'
+import { ThemeContext } from '../MobilePage'
 import ListItem from './ListItem'
 import Title from './Title'
 import Text from './Text'
-import { borderRadius } from './variables'
+import { borderRadius } from '../variables'
 
 const styles = {
     wrapper: {

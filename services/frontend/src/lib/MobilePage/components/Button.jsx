@@ -2,8 +2,8 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getThemeStyle } from './themes'
-import { ThemeContext } from './MobilePage'
+import { getThemeStyle } from '../themes'
+import { ThemeContext } from '../MobilePage'
 
 const getStyle = (theme, type, size, block, active) => {
     const button = getThemeStyle(theme, 'button')

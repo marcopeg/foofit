@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FaAngleRight } from 'react-icons/fa'
-import { ThemeContext } from './MobilePage'
+import { ThemeContext } from '../MobilePage'
 
 const styles = {
     wrapper: {

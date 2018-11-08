@@ -1,0 +1,45 @@
+
+export const colors = {
+    primary: '#9C27B0',
+    darkPrimary: '#7B1FA2',
+    lightPrimary: '#E1BEE7',
+    text: '#FFFFFF',
+    textPrimary: '#212121',
+    textSecondary: '#757575',
+    accent: '#009688',
+}
+
+export const variables = {}
+
+export default {
+    wrapper: {
+        backgroundColor: colors.primary,
+        color: colors.text,
+    },
+    button: {
+        wrapper: {
+            transition: 'all 0.2s ease',
+        },
+        wrapper__primary: {
+            backgroundColor: colors.lightPrimary,
+            borderColor: colors.lightPrimary,
+            color: colors.primary,
+        },
+        wrapper__primary__active: {
+            backgroundColor: colors.primary,
+        },
+        wrapper__secondary: {
+            borderColor: colors.lightPrimary,
+            color: colors.lightPrimary,
+        },
+        wrapper__secondary__active: {
+            backgroundColor: colors.lightPrimary,
+        },
+        wrapper__link: {
+            color: colors.lightPrimary,
+        },
+        wrapper__link__active: {
+            backgroundColor: colors.lightPrimary,
+        },
+    },
+}
