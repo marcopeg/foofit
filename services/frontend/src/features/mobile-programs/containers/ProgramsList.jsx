@@ -24,17 +24,11 @@ class ProgramsList extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage theme={'c1'}>
+            <MobilePage>
                 <MobilePage.Header>
                     Programs
                 </MobilePage.Header>
                 <MobilePage.Body withPadding>
-                    <Button block>button primary</Button>
-                    <Space />
-                    <Button block type="secondary">button primary</Button>
-                    <Space />
-                    <Button block type="link">button link</Button>
-                    <Space />
                     <List
                         items={this.props.items}
                         onDisclose={this.props.onDisclose}

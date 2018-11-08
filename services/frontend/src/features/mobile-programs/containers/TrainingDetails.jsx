@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Padding, List, Text, Button } from 'lib/MobilePage'
+import MobilePage, { List, Text, Button } from 'lib/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state, { match }) => {
@@ -76,14 +76,12 @@ class TrainingDetails extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage theme={'c1'}>
+            <MobilePage>
                 <MobilePage.Header>
                     {this.props.training ? this.props.training.title : '...'}
                 </MobilePage.Header>
-                <MobilePage.Body>
-                    <Padding>
-                        {this.renderBody()}
-                    </Padding>
+                <MobilePage.Body withPadding>
+                    {this.renderBody()}
                 </MobilePage.Body>
             </MobilePage>
         )

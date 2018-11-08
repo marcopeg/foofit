@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import slugify from 'slugify'
-import MobilePage, { Padding, List, Text } from 'lib/MobilePage'
+import MobilePage, { List, Text } from 'lib/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state, { match }) => {
@@ -54,14 +54,12 @@ class ProgramsDetails extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage theme={'c1'}>
+            <MobilePage>
                 <MobilePage.Header>
                     {this.props.program ? this.props.program.title : '...'}
                 </MobilePage.Header>
-                <MobilePage.Body>
-                    <Padding>
-                        {this.renderBody()}
-                    </Padding>
+                <MobilePage.Body withPadding>
+                    {this.renderBody()}
                 </MobilePage.Body>
             </MobilePage>
         )
