@@ -54,7 +54,7 @@ class ProgramsDetails extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage>
+            <MobilePage theme={'c1'}>
                 <MobilePage.Header>
                     {this.props.program ? this.props.program.title : '...'}
                 </MobilePage.Header>

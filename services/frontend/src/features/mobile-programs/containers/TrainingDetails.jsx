@@ -76,7 +76,7 @@ class TrainingDetails extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage>
+            <MobilePage theme={'c1'}>
                 <MobilePage.Header>
                     {this.props.training ? this.props.training.title : '...'}
                 </MobilePage.Header>

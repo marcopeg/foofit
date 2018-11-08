@@ -24,7 +24,7 @@ class ProgramsList extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage>
+            <MobilePage theme={'c1'}>
                 <MobilePage.Header>
                     Programs
                 </MobilePage.Header>

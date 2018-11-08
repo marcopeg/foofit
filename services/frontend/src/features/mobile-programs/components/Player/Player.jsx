@@ -176,7 +176,7 @@ Player.propTypes = {
 }
 
 Player.defaultProps = {
-    autoplay: true,
+    autoplay: false,
     tickUpdate: 250,
 }
 

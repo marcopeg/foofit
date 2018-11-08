@@ -12,6 +12,7 @@
   "dependencies": {
     "@marcopeg/utils": "1.12.0",
     "babel-polyfill": "^6.26.0",
+    "extend": "^3.0.2",
     "features": "^0.1.0",
     "history": "^4.7.2",
     "moment-duration-format": "^2.2.2",

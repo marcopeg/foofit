@@ -17,10 +17,10 @@ const getComputedStyle = (theme, { noScroll, withPadding }) => {
 
     // apply padding
     if (withPadding) {
-        style.paddingLeft = getThemeVar(theme, 'bodyPaddingH')
-        style.paddingRight = getThemeVar(theme, 'bodyPaddingH')
-        style.paddingTop = getThemeVar(theme, 'bodyPaddingV')
-        style.paddingBottom = getThemeVar(theme, 'bodyPaddingV')
+        style.paddingLeft = getThemeVar(theme, 'HSpace')
+        style.paddingRight = getThemeVar(theme, 'HSpace')
+        style.paddingTop = getThemeVar(theme, 'VSpace')
+        style.paddingBottom = getThemeVar(theme, 'VSpace')
     }
 
     // header & footer spacing

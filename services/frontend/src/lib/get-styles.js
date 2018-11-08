@@ -2,6 +2,8 @@
  * Pick a property from a theme with memoization
  *
  */
+import extend from 'extend'
+
 const getStylesFactory = styles => {
     const getStyles = (theme, prop) => {
         const cacheName = `${theme}${prop}`
@@ -13,11 +15,10 @@ const getStylesFactory = styles => {
             ? (styles.___[prop] || {})
             : {}
 
+        const themedStyle = (styles[theme][prop] || {})
+
         try {
-            getStyles[cacheName] = {
-                ...baseStyle,
-                ...(styles[theme][prop] || {}),
-            }
+            getStyles[cacheName] = extend(true, {}, baseStyle, themedStyle)
         } catch (e) {
             getStyles[cacheName] = {}
         }
