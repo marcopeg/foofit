@@ -3,15 +3,7 @@ import PropTypes from 'prop-types'
 import MobilePageHeader from './MobilePageHeader'
 import MobilePageFooter from './MobilePageFooter'
 import MobilePageBody from './MobilePageBody'
-import { colors } from './variables'
-
-const styles = {
-    wrapper: {
-        width: '100%',
-        height: '100%',
-        background: colors.white,
-    },
-}
+import { getThemeStyle, availableThemes } from './themes'
 
 export const ThemeContext = React.createContext('default')
 
@@ -29,7 +21,7 @@ const MobilePage = ({ children, theme, withHeader, withFooter, footerOnTop }) =>
             footerOnTop,
         }}
     >
-        <div style={styles.wrapper}>
+        <div style={getThemeStyle(theme, 'wrapper')}>
             {children}
         </div>
     </ThemeContext.Provider>
@@ -37,7 +29,7 @@ const MobilePage = ({ children, theme, withHeader, withFooter, footerOnTop }) =>
 
 MobilePage.propTypes = {
     children: PropTypes.any.isRequired, // eslint-disable-line
-    theme: PropTypes.oneOf(['default']),
+    theme: PropTypes.oneOf(availableThemes),
     withHeader: PropTypes.bool,
     withFooter: PropTypes.bool,
     footerOnTop: PropTypes.bool,

@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ContainerDimension from 'react-container-dimensions'
+import { getThemeStyle, getThemeVar } from './themes'
 import { ThemeContext } from './MobilePage'
 
 const getComputedStyle = (theme, { noScroll, withPadding }) => {
-    const headerHeight = 60 // @TODO: get it from variables
-    const footerHeight = 60 // @TODO: get it from variables
-    const style = {}
+    const headerHeight = getThemeVar(theme, 'headerHeight')
+    const footerHeight = getThemeVar(theme, 'footerHeight')
+    const style = { ...getThemeStyle(theme.name, 'body') }
 
     // scrolling
     if (!noScroll) {
@@ -16,8 +17,10 @@ const getComputedStyle = (theme, { noScroll, withPadding }) => {
 
     // apply padding
     if (withPadding) {
-        style.paddingLeft = 10
-        style.paddingRight = 10
+        style.paddingLeft = getThemeVar(theme, 'bodyPaddingH')
+        style.paddingRight = getThemeVar(theme, 'bodyPaddingH')
+        style.paddingTop = getThemeVar(theme, 'bodyPaddingV')
+        style.paddingBottom = getThemeVar(theme, 'bodyPaddingV')
     }
 
     // header & footer spacing

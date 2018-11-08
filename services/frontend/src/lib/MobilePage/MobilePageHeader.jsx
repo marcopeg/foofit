@@ -1,30 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { getThemeStyle } from './themes'
 import { ThemeContext } from './MobilePage'
-
-const styles = {
-    default: {
-        wrapper: {
-            display: 'flex',
-            height: 60,
-            backgroundColor: '#fff',
-        },
-        inner: {
-            flex: 1,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderBottom: '1px solid #ddd',
-            fontWeight: 'bold',
-        },
-    },
-}
 
 const MobilePageHeader = ({ children }) => (
     <ThemeContext.Consumer>
         {theme => (
-            <div style={styles[theme.name].wrapper}>
-                <div style={styles[theme.name].inner}>
+            <div style={getThemeStyle(theme.name, 'header').wrapper}>
+                <div style={getThemeStyle(theme.name, 'header').inner}>
                     {children}
                 </div>
             </div>
