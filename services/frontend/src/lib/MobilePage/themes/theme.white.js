@@ -23,6 +23,9 @@ export default {
             color: colors.text,
         },
     },
+    divider: {
+        borderColor: colors.divider,
+    },
     button: {
         wrapper: {
             transition: 'all 0.2s ease',

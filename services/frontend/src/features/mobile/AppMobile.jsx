@@ -1,7 +1,11 @@
 import loadable from 'lib/custom-loadable'
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import './AppMobile.css'
+
+const Home = loadable({
+    loader: () => import('features/mobile-public/containers/Home'),
+})
 
 const ProgramsList = loadable({
     loader: () => import('features/mobile-programs/containers/ProgramsList'),
@@ -21,7 +25,7 @@ const TrainingWatch = loadable({
 
 const AppMobile = () => (
     <Switch>
-        <Route exact path="/" component={() => <Redirect to="/welcome"/>} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/welcome" component={ProgramsList} />
         <Route path="/program/:programId/:programSlug/:trainingId/:trainingSlug/play" component={TrainingWatch} />
         <Route path="/program/:programId/:programSlug/:trainingId/:trainingSlug" component={TrainingDetails} />

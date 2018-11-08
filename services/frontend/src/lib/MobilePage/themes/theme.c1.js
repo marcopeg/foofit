@@ -7,6 +7,7 @@ export const colors = {
     textPrimary: '#212121',
     textSecondary: '#757575',
     accent: '#009688',
+    divider: '#E1BEE7',
 }
 
 export const variables = {}
@@ -15,6 +16,9 @@ export default {
     wrapper: {
         backgroundColor: colors.primary,
         color: colors.text,
+    },
+    divider: {
+        borderColor: colors.divider,
     },
     button: {
         wrapper: {

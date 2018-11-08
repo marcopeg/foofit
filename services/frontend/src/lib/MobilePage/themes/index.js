@@ -7,6 +7,7 @@ import header from './component.header'
 import title from './component.title'
 import text from './component.text'
 import space from './component.space'
+import divider from './component.divider'
 import button from './component.button'
 import list from './component.list'
 import listItem from './component.list-item'
@@ -27,6 +28,7 @@ const styles = {
         title,
         text,
         space,
+        divider,
         button,
         list,
         listItem,
