@@ -1,3 +1,4 @@
+import './theme.white.css'
 
 export const colors = {
     primary: '#2196F3',

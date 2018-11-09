@@ -49,3 +49,11 @@ table {
 button {
 	outline: none;
 }
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+*:focus {
+    outline: none;
+}

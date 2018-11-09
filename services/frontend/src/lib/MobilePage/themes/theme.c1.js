@@ -1,3 +1,4 @@
+import './theme.c1.css'
 
 export const colors = {
     primary: '#9C27B0',

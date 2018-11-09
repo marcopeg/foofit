@@ -9,6 +9,7 @@ import text from './component.text'
 import space from './component.space'
 import divider from './component.divider'
 import button from './component.button'
+import input from './component.input'
 import list from './component.list'
 import listItem from './component.list-item'
 
@@ -30,6 +31,7 @@ const styles = {
         space,
         divider,
         button,
+        input,
         list,
         listItem,
     },

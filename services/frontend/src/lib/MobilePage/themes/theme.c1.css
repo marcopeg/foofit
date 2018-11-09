@@ -1,0 +1,18 @@
+.mbp-theme-c1__input {
+    color: #E1BEE7;
+    border: 0px solid transparent;
+    border-bottom: 1px solid #E1BEE7;
+}
+.mbp-theme-c1__input:focus {
+    border-color: #FFF;
+    color: #FFF;
+}
+.mbp-theme-c1__input::placeholder {
+    color: #E1BEE7;
+}
+.mbp-theme-c1__input:focus::placeholder {
+    color: #FFF;
+}
+.mbp-theme-c1__input--centered::placeholder {
+    text-align: center;
+}

@@ -7,6 +7,10 @@ const Home = loadable({
     loader: () => import('features/mobile-public/containers/Home'),
 })
 
+const Signup = loadable({
+    loader: () => import('features/mobile-public/containers/Signup'),
+})
+
 const ProgramsList = loadable({
     loader: () => import('features/mobile-programs/containers/ProgramsList'),
 })
@@ -26,6 +30,7 @@ const TrainingWatch = loadable({
 const AppMobile = () => (
     <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/welcome" component={ProgramsList} />
         <Route path="/program/:programId/:programSlug/:trainingId/:trainingSlug/play" component={TrainingWatch} />
         <Route path="/program/:programId/:programSlug/:trainingId/:trainingSlug" component={TrainingDetails} />
