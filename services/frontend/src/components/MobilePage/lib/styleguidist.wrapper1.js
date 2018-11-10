@@ -41,6 +41,8 @@ class MobilePageComponentWrapper extends React.Component {
         super(props)
         this.state = {
             theme: window.__MobilePageGlobalTheme || 'white',
+            width: '100%',
+            height: '650px',
         }
     }
 
@@ -60,7 +62,19 @@ class MobilePageComponentWrapper extends React.Component {
         return (
             <div>
                 <div style={wrapperStyle}>
-                    <div>{' '}</div>
+                    <div>
+                        <input
+                            value={this.state.width}
+                            onChange={(e) => this.setState({ width: e.target.value })}
+                            style={inputStyle}
+                        />
+                        {' x '}
+                        <input
+                            value={this.state.height}
+                            onChange={(e) => this.setState({ height: e.target.value })}
+                            style={inputStyle}
+                        />
+                    </div>
                     <div>
                         {'theme: '}
                         <select
@@ -76,11 +90,7 @@ class MobilePageComponentWrapper extends React.Component {
                     </div>
                 </div>
                 <div style={{ border: '5px solid #ddd' }}>
-                    <MobilePage theme={this.state.theme}>
-                        <MobilePage.Body withPadding>
-                            {this.props.children}
-                        </MobilePage.Body>
-                    </MobilePage>
+                    {this.props.children(this.state.theme, this.state.width, this.state.height)}
                 </div>
             </div>
         )

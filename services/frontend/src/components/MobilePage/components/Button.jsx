@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { getThemeStyle } from '../themes'
 import { ThemeContext } from '../MobilePage'
 
+// eslint-disable-next-line
 const getStyle = (theme, type, size, block, active, style) => {
     const button = getThemeStyle(theme, 'button')
     return {
