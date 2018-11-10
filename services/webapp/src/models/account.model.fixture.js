@@ -1,14 +1,12 @@
 export default [
     {
-        id: 1,
-        uname: 'user1',
-        passw: 'user1',
+        email: 'user1@foof.it',
+        passw: 'qqqqqq',
         status: 0,
     },
     {
-        id: 2,
-        uname: 'user2',
-        passw: 'user2',
+        email: 'user2@foof.it',
+        passw: 'qqqqqq',
         status: 1,
     },
 ]

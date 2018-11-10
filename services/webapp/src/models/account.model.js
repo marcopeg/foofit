@@ -9,10 +9,13 @@ const fields = {
         primaryKey: true,
         autoIncrement: true,
     },
-    uname: {
+    email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+            isEmail: true,
+        },
     },
     passw: {
         type: Sequelize.STRING,
@@ -23,7 +26,6 @@ const fields = {
     // -1: deleted
     status: {
         type: Sequelize.SMALLINT,
-        allowNull: false,
         defaultValue: 0,
     },
 }
@@ -46,16 +48,22 @@ const options = {
     },
 }
 
+const findLogin = (conn, Model) => async (email, passw) => Model.findOne({
+    where: {
+        email,
+        passw: await encode(passw),
+        status: 1,
+    },
+})
+
 export const init = (conn) => {
     const Model = conn.define(name, fields, options)
+    Model.findLogin = findLogin(conn, Model)
     return Model.sync()
 }
 
 export const start = async (conn, Model) => {
-    await Model.destroy({
-        where: {},
-        truncate: true,
-    })
+    await conn.handler.query('TRUNCATE rel_accounts RESTART IDENTITY CASCADE;')
     for (const item of require('./account.model.fixture').default) {
         await Model.create(item)
     }

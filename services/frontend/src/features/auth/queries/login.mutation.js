@@ -1,11 +1,11 @@
 export default `
-query signup (
+mutation login (
     $email: String!
     $passw: String!
 ) {
-    signup (
+    login (
         email: $email
-        signup: $signup
+        passw: $passw
     ) {
         id
     }

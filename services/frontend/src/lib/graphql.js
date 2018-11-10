@@ -41,7 +41,7 @@ export const runQuery = (query = null, variables = {}, options = {}) => async (d
     }
 
     if (result.errors) {
-        const error = new Error(result.errors[0])
+        const error = new Error(result.errors[0].message)
         error.graphQLErrors = result.errors
         error.graphQLResponse = result
         throw error
