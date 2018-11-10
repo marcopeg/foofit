@@ -15,6 +15,9 @@ const MobilePageHeader = ({ children }) => (
     </ThemeContext.Consumer>
 )
 
+// necessary to detect the presence inside the MobilePage wrapper
+MobilePageHeader.displayName = 'MobilePageHeader'
+
 MobilePageHeader.propTypes = {
     children: PropTypes.any, // eslint-disable-line
 }

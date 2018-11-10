@@ -15,6 +15,9 @@ const MobilePageFooter = ({ children }) => (
     </ThemeContext.Consumer>
 )
 
+// necessary to detect the presence inside the MobilePage wrapper
+MobilePageFooter.displayName = 'MobilePageFooter'
+
 MobilePageFooter.propTypes = {
     children: PropTypes.any, // eslint-disable-line
 }

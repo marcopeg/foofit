@@ -68,6 +68,9 @@ const MobilePageBody = ({ children, ...props }) => (
     </ThemeContext.Consumer>
 )
 
+// necessary to detect the presence inside the MobilePage wrapper
+MobilePageBody.displayName = 'MobilePageBody'
+
 MobilePageBody.propTypes = {
     children: PropTypes.any.isRequired, // eslint-disable-line
     noScroll: PropTypes.bool,

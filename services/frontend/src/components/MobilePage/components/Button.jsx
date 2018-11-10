@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { getThemeStyle } from '../themes'
 import { ThemeContext } from '../MobilePage'
 
-const getStyle = (theme, type, size, block, active) => {
+const getStyle = (theme, type, size, block, active, style) => {
     const button = getThemeStyle(theme, 'button')
     return {
         ...button.wrapper,
@@ -13,6 +13,7 @@ const getStyle = (theme, type, size, block, active) => {
         ...(active ? (button[`wrapper__${type}__active`] || {}) : {}),
         ...button[`wrapper__${size}`],
         ...(block ? button.wrapper__block : {}),
+        ...style,
     }
 }
 
@@ -37,14 +38,14 @@ class Button extends React.PureComponent {
     }
 
     render () {
-        const { children, type, block, size, ...props } = this.props
+        const { children, type, block, size, style, ...props } = this.props
         // <div style={getThemeStyle(theme.name, 'space')[type]} />
         return (
             <ThemeContext.Consumer>
                 {theme => (
                     <button
                         {...props}
-                        style={getStyle(theme.name, type, size, block, this.state.isClicked)}
+                        style={getStyle(theme.name, type, size, block, this.state.isClicked, style)}
                         onClick={this.onClick}
                     >
                         {children}
@@ -61,6 +62,7 @@ Button.propTypes = {
     size: PropTypes.oneOf([ 'small', 'normal', 'big' ]),
     block: PropTypes.bool,
     onClick: PropTypes.func,
+    style: PropTypes.object,
 }
 
 Button.defaultProps = {
@@ -68,6 +70,7 @@ Button.defaultProps = {
     size: 'normal',
     block: false,
     onClick: null,
+    style: {},
 }
 
 export default Button

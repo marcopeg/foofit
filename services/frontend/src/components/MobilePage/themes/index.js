@@ -2,8 +2,9 @@
 import getStyles from '../lib/get-styles'
 
 // basic components definitions
+import wrapper from '../MobilePage.style'
 import header from '../MobilePageHeader.style'
-import wrapper from '../components/Wrapper.style'
+import footer from '../MobilePageFooter.style'
 import title from '../components/Title.style'
 import text from '../components/Text.style'
 import space from '../components/Space.style'
@@ -28,6 +29,7 @@ const styles = {
     ___: {
         wrapper,
         header,
+        footer,
         title,
         text,
         space,

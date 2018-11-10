@@ -4,6 +4,7 @@ import { flexCentered } from '../lib/mixins'
 export default {
     wrapper: {
         ...flexCentered,
+        display: 'inline-flex',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'transparent',

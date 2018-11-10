@@ -28,6 +28,12 @@ export default {
             color: colors.textPrimary,
         },
     },
+    footer: {
+        wrapper: {
+            backgroundColor: colors.lightText,
+            color: colors.textPrimary,
+        },
+    },
     divider: {
         color: colors.divider,
         backgroundColor: colors.divider,
