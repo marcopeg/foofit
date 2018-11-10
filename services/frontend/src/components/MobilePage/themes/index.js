@@ -13,6 +13,7 @@ import button from '../components/Button.style'
 import input from '../components/Input.style'
 import list from '../components/List.style'
 import listItem from '../components/ListItem.style'
+import loading from '../components/Loading.style'
 
 // teme variations
 import white from './theme.white'
@@ -38,6 +39,7 @@ const styles = {
         input,
         list,
         listItem,
+        loading,
     },
     white,
     dark,

@@ -62,4 +62,9 @@ export default {
             borderBottomColor: colors.divider,
         },
     },
+    loading: {
+        spinner: {
+            color: colors.divider,
+        },
+    },
 }

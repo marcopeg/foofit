@@ -56,4 +56,9 @@ export default {
             borderBottomColor: colors.lightPrimary,
         },
     },
+    loading: {
+        spinner: {
+            color: colors.lightPrimary,
+        },
+    },
 }

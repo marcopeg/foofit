@@ -3,8 +3,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Input, Button, Divider, Text, mixins } from 'features/mobile/MobilePage'
+import MobilePage, { Input, Button, Loading, Text, mixins } from 'features/mobile/MobilePage'
 import { FaAngleRight } from 'react-icons/fa'
+import { signup } from '../signup.service'
 
 const styles = {
     wrapper: {
@@ -22,20 +23,28 @@ const styles = {
 const mapState = () => ({})
 
 const mapDispatch = (dispatch, { history }) => ({
-    verifyEmail: () => console.log('verify email'),
-    confirmSignup: () => console.log('confirm signup'),
+    signup: (email, passw) => dispatch(signup(email, passw)),
 })
 
 class Signup extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            value: this.props.initialValue,
+            isLoading: false,
+            email: '',
+            passw: '',
         }
     }
-    onInputChange = (evt) => this.setState({
-        value: evt.target.value,
+    onInputChange = field => evt => this.setState({
+        [field]: evt.target.value,
     })
+
+    onSubmit = async () => {
+        this.setState({ isLoading: true })
+        const res = await this.props.signup(this.state.email, this.state.passw)
+        this.setState({ isLoading: false })
+        console.log(res)
+    }
 
     render () {
         return (
@@ -43,24 +52,46 @@ class Signup extends React.Component {
                 <MobilePage.Body withPadding flex>
                     <div style={styles.wrapper}>
                         <div style={styles.copy}>
-                            <Text>{'JOIN THE COMMUNITY'}</Text>
-                            <Divider width={'30%'} style={{ marginTop: 25, marginBottom: 25 }} />
+                            <Text style={{ marginBottom: 50 }}>{'JOIN THE COMMUNITY'}</Text>
                             <Input
                                 block
-                                centered
                                 placeholder={'your@email.com'}
-                                value={this.state.value}
-                                onChange={this.onInputChange}
+                                value={this.state.email}
+                                onChange={this.onInputChange('email')}
+                                style={{ marginBottom: 25 }}
                             />
-                            {this.state.value ? (
-                                <div style={{ marginTop: 15 }}>
+                            <Input
+                                block
+                                type={'password'}
+                                placeholder={'password'}
+                                value={this.state.passw}
+                                onChange={this.onInputChange('passw')}
+                                style={{
+                                    marginBottom: 25,
+                                    opacity: this.state.email ? 1 : 0,
+                                    transition: 'opacity 0.5s ease',
+                                }}
+                            />
+                            <div style={{
+                                marginTop: 15,
+                                opacity: (this.state.email && this.state.passw) ? 1 : 0,
+                                transition: 'opacity 0.5s ease',
+                                textAlign: 'right',
+                            }}>
+                                {this.state.isLoading ? (
+                                    <Loading />
+                                ) : (
                                     <Button
-                                        block
-                                        type={'link'}
-                                        children={<FaAngleRight />}
+                                        onClick={this.onSubmit}
+                                        children={(
+                                            <div style={{ ...mixins.flexCentered }}>
+                                                {'next'}
+                                                <FaAngleRight />
+                                            </div>
+                                        )}
                                     />
-                                </div>
-                            ) : null}
+                                )}
+                            </div>
                         </div>
                     </div>
                 </MobilePage.Body>
@@ -70,13 +101,7 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-    initialValue: PropTypes.string,
-    verifyEmail: PropTypes.func.isRequired,
-    confirmSignup: PropTypes.func.isRequired,
-}
-
-Signup.defaultProps = {
-    initialValue: '',
+    signup: PropTypes.func.isRequired,
 }
 
 export default connect(mapState, mapDispatch)(Signup)
