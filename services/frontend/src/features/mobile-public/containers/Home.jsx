@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Button, Space, Divider, Title, Text, mixins } from 'lib/MobilePage'
+import MobilePage, { Button, Space, Divider, Title, Text, mixins } from 'features/mobile/MobilePage'
 
 const styles = {
     wrapper: {
@@ -18,12 +18,12 @@ const styles = {
 const mapState = () => ({})
 
 const mapDispatch = (dispatch, { history }) => ({
-    login: () => history.push('/login'),
+    login: () => history.push('/welcome'),
     signup: () => history.push('/signup'),
 })
 
 const Home = ({ login, signup }) => (
-    <MobilePage theme="c1">
+    <MobilePage>
         <MobilePage.Body withPadding flex>
             <div style={styles.wrapper}>
                 <div style={styles.copy}>

@@ -9,4 +9,4 @@ export { default as Text } from './components/Text'
 export { default as Button } from './components/Button'
 export { default as Input } from './components/Input'
 export { default as List } from './components/List'
-export const mixins = require('./themes/mixins')
+export const mixins = require('./lib/mixins')

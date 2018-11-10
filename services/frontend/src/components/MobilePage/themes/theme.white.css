@@ -1,0 +1,29 @@
+.mbp-theme-white {
+    --color-primary: #2196F3;
+    --color-darkPrimary: #0073cc;
+    --color-lightPrimary: #4fb2ff;
+    --color-text: #FFFFFF;
+    --color-textPrimary: #212121;
+    --color-textSecondary: #757575;
+    --color-accent: #03A9F4;
+    --color-divider: #BDBDBD;
+}
+
+.mbp-theme-white__input {
+    background-color: var(--color-text);
+    color: var(--color-divider);
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--color-divider);
+}
+.mbp-theme-white__input:focus {
+    border-color: var(--color-lightPrimary);
+}
+.mbp-theme-white__input::placeholder {
+    color: var(--color-divider);
+}
+.mbp-theme-white__input:focus::placeholder {
+    color: var(--color-textPrimary);
+}
+.mbp-theme-white__input--centered::placeholder {
+    text-align: center;
+}

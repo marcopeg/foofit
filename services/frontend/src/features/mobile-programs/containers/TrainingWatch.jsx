@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Text } from 'lib/MobilePage'
+import MobilePage, { Text } from 'features/mobile/MobilePage'
 import { updatePrograms } from '../programs.service'
 import Player from '../components/Player'
 

@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import slugify from 'slugify'
-import MobilePage, { List, Button, Space } from 'lib/MobilePage'
+import MobilePage, { List } from 'features/mobile/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state) => ({

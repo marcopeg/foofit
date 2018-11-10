@@ -1,10 +1,9 @@
-import { getThemeVar } from './variables'
-import { flexCentered } from './mixins'
+import { getThemeVar } from '../themes/variables'
+import { flexCentered } from '../lib/mixins'
 
 export default {
     input: {
         ...flexCentered,
-        backgroundColor: 'transparent',
     },
     'input--block': {
         width: '100%',

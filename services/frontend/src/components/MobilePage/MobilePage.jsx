@@ -21,7 +21,10 @@ const MobilePage = ({ children, theme, withHeader, withFooter, footerOnTop }) =>
             footerOnTop,
         }}
     >
-        <div style={getThemeStyle(theme, 'wrapper')}>
+        <div
+            className={`mbp-theme-${theme}`}
+            style={getThemeStyle(theme, 'wrapper')}
+        >
             {children}
         </div>
     </ThemeContext.Provider>

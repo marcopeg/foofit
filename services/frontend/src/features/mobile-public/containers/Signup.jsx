@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Input, Button, Divider, Text, mixins } from 'lib/MobilePage'
+import MobilePage, { Input, Button, Divider, Text, mixins } from 'features/mobile/MobilePage'
 import { FaAngleRight } from 'react-icons/fa'
 
 const styles = {
@@ -39,7 +39,7 @@ class Signup extends React.Component {
 
     render () {
         return (
-            <MobilePage theme="c1">
+            <MobilePage>
                 <MobilePage.Body withPadding flex>
                     <div style={styles.wrapper}>
                         <div style={styles.copy}>

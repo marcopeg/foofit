@@ -1,4 +1,4 @@
-import { getThemeVar } from './variables'
+import { getThemeVar } from '../themes/variables'
 
 export default {
     fontWeight: 'bold',

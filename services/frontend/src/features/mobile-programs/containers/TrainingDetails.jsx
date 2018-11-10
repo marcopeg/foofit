@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { List, Text, Button } from 'lib/MobilePage'
+import MobilePage, { List, Text, Button } from 'features/mobile/MobilePage'
 import { updatePrograms } from '../programs.service'
 
 const mapState = (state, { match }) => {

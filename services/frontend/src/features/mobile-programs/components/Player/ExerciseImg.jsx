@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import RemoteImage from 'lib/RemoteImage'
+import RemoteImage from 'components/RemoteImage'
 
 const ExerciseImg = ({ id, title, value, width, height, ...props }) => (
     <RemoteImage

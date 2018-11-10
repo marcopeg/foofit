@@ -1,14 +1,18 @@
-import './theme.white.css'
+// https://coolors.co/d8a720-52557f-37b291-e25434-bf1e36
+import './theme.dark.css'
 
 export const colors = {
-    primary: '#2196F3',
-    darkPrimary: '#1976D2',
-    lightPrimary: '#BBDEFB',
-    text: '#FFFFFF',
-    textPrimary: '#212121',
-    textSecondary: '#757575',
+    primary: '#E25434',
+    darkPrimary: '#B9452B',
+    lightPrimary: '#E77358',
+    text: '#141414',
+    textPrimary: '#EEE',
+    textSecondary: '#FFF',
     accent: '#03A9F4',
-    divider: '#BDBDBD',
+    divider: '#666666',
+
+    // additional colors
+    lightText: '#333',
 }
 
 export const variables = {}
@@ -20,12 +24,13 @@ export default {
     },
     header: {
         wrapper: {
-            backgroundColor: colors.primary,
-            color: colors.text,
+            backgroundColor: colors.lightText,
+            color: colors.textPrimary,
         },
     },
     divider: {
-        borderColor: colors.divider,
+        color: colors.divider,
+        backgroundColor: colors.divider,
     },
     button: {
         wrapper: {

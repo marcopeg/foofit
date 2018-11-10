@@ -1,5 +1,5 @@
-import { getThemeVar } from './variables'
-import { flexCentered } from './mixins'
+import { getThemeVar } from '../themes/variables'
+import { flexCentered } from '../lib/mixins'
 
 export default {
     wrapper: {
