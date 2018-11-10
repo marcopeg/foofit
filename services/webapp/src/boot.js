@@ -2,6 +2,7 @@ import * as config from '@marcopeg/utils/lib/config'
 import * as envService from 'services/env'
 import * as loggerService from 'services/logger'
 import * as hashService from 'services/hash'
+import * as jwtService from 'services/jwt'
 import * as postgresService from 'services/postgres'
 import * as serverService from 'services/server'
 import models from 'models'
@@ -14,6 +15,10 @@ const boot = async () => {
         hashService.init({
             rounds: Number(config.get('BCRYPT_ROUNDS')),
         }),
+        jwtService.init({
+            secret: String(config.get('JWT_SECRET')),
+            duration: String(config.get('JWT_DURATION')),
+        }),
         postgresService.init({
             host: config.get('PG_HOST'),
             port: config.get('PG_PORT'),
@@ -21,7 +26,9 @@ const boot = async () => {
             username: config.get('PG_USERNAME'),
             password: config.get('PG_PASSWORD'),
         }),
-        serverService.init(),
+        serverService.init({
+            loginDuration: String(config.get('LOGIN_DURATION')),
+        }),
     ])
 
     await postgresService.start({
