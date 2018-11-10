@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { getThemeStyle } from '../themes'
 import { ThemeContext } from '../MobilePage'
 
-const getStyle = (theme, size, block, override) => ({
+const getStyle = (theme, size, block, centered, override) => ({
     ...getThemeStyle(theme, 'input').input,
     ...getThemeStyle(theme, 'input')[`input--${size}`],
     ...(block ? getThemeStyle(theme, 'input')['input--block'] : {}),
-    ...(block ? getThemeStyle(theme, 'input')['input--centered'] : {}),
+    ...(centered ? getThemeStyle(theme, 'input')['input--centered'] : {}),
     ...override,
 })
 

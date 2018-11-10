@@ -10,6 +10,7 @@ export default {
         borderColor: 'transparent',
         borderRadius: getThemeVar('___', 'borderRadius'),
         backgroundColor: 'transparent',
+        outline: 'none',
     },
     wrapper__block: {
         width: '100%',

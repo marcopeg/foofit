@@ -38,13 +38,13 @@ class Button extends React.PureComponent {
     }
 
     render () {
-        const { children, type, block, size, style, ...props } = this.props
-        // <div style={getThemeStyle(theme.name, 'space')[type]} />
+        const { children, type, block, size, className, style, ...props } = this.props
         return (
             <ThemeContext.Consumer>
                 {theme => (
                     <button
                         {...props}
+                        className={`mbp-cmp-button ${className}`}
                         style={getStyle(theme.name, type, size, block, this.state.isClicked, style)}
                         onClick={this.onClick}
                     >
@@ -62,6 +62,7 @@ Button.propTypes = {
     size: PropTypes.oneOf([ 'small', 'normal', 'big' ]),
     block: PropTypes.bool,
     onClick: PropTypes.func,
+    className: PropTypes.string,
     style: PropTypes.object,
 }
 
@@ -70,6 +71,7 @@ Button.defaultProps = {
     size: 'normal',
     block: false,
     onClick: null,
+    className: '',
     style: {},
 }
 

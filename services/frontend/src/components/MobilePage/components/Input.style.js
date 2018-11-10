@@ -4,9 +4,11 @@ import { flexCentered } from '../lib/mixins'
 export default {
     input: {
         ...flexCentered,
+        outline: 'none',
     },
     'input--block': {
         width: '100%',
+        boxSizing: 'border-box',
     },
     'input--centered': {
         textAlign: 'center',
