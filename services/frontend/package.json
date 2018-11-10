@@ -7,7 +7,9 @@
     "release:clean": "rm -rf ../webapp/build-client",
     "release:copy": "cp -r ./build-client ../webapp/build-client",
     "release:sub": "sed -i -e 's/REDUX_INITIAL_STATE={}/REDUX_INITIAL_STATE={app:{backend:\"\\/\"}}/g' ../webapp/build-client/index.html && rm ../webapp/build-client/index.html-e",
-    "release": "yarn release:clean && yarn build && yarn release:copy && yarn release:sub"
+    "release": "yarn release:clean && yarn build && yarn release:copy && yarn release:sub",
+    "styleguide": "./node_modules/.bin/styleguidist server",
+    "styleguide:build": "./node_modules/.bin/styleguidist build"
   },
   "dependencies": {
     "@marcopeg/utils": "1.12.0",
@@ -54,6 +56,9 @@
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
     "graphql-tag": "^2.10.0",
     "parcel-bundler": "^1.10.3",
-    "react-hot-loader": "^4.3.12"
+    "react-hot-loader": "^4.3.12",
+    "react-scripts": "^2.1.1",
+    "react-styleguidist": "^8.0.3",
+    "webpack": "^4.25.1"
   }
 }

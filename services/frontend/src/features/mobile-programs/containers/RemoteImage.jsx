@@ -1,8 +1,20 @@
 /* eslint react/prefer-stateless-function: off */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Loader from 'react-loader-spinner'
 import { flexCentered } from 'app/mixins'
+
+const cleanUrl = url => {
+    const s1 = url.replace(/([^:])(\/\/+)/g, '$1/')
+    return s1.indexOf('//') === 0
+        ? s1.substr(1)
+        : s1
+}
+
+const mapState = ({ app }, { src }) => ({
+    src: cleanUrl(`${app.backend}${src}`),
+})
 
 class RemoteImage extends React.Component {
     constructor (props) {
@@ -36,7 +48,6 @@ class RemoteImage extends React.Component {
         image.onerror = () => {
             this.setState({ isLoading: false, hasError: true })
         }
-
         image.crossOrigin = 'Anonymous'
         image.src = this.props.src
     }
@@ -129,4 +140,4 @@ RemoteImage.defaultProps = {
     spinnerType: 'ThreeDots',
 }
 
-export default RemoteImage
+export default connect(mapState)(RemoteImage)
