@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import MobilePage, { Input, Button, Loading, Text, mixins } from 'features/mobile/MobilePage'
 import { FaAngleRight } from 'react-icons/fa'
-import { signup } from 'features/auth/auth.service'
+import { login } from 'features/auth/auth.service'
 
 const styles = {
     wrapper: {
@@ -23,11 +23,11 @@ const styles = {
 const mapState = () => ({})
 
 const mapDispatch = (dispatch, { history }) => ({
-    signup: (email, passw) => dispatch(signup(email, passw)),
+    login: (email, passw) => dispatch(login(email, passw)),
     confirm: () => history.push('/welcome'),
 })
 
-class Signup extends React.Component {
+class Login extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -42,7 +42,7 @@ class Signup extends React.Component {
 
     onSubmit = async () => {
         this.setState({ isLoading: true })
-        const res = await this.props.signup(this.state.email, this.state.passw)
+        const res = await this.props.login(this.state.email, this.state.passw)
         this.setState({ isLoading: false })
         if (res.success) {
             this.props.confirm()
@@ -57,7 +57,7 @@ class Signup extends React.Component {
                 <MobilePage.Body withPadding flex>
                     <div style={styles.wrapper}>
                         <div style={styles.copy}>
-                            <Text style={{ marginBottom: 50 }}>{'.: Signup'}</Text>
+                            <Text style={{ marginBottom: 50 }}>{'.: Login'}</Text>
                             <Input
                                 block
                                 placeholder={'your@email.com'}
@@ -105,9 +105,9 @@ class Signup extends React.Component {
     }
 }
 
-Signup.propTypes = {
-    signup: PropTypes.func.isRequired,
+Login.propTypes = {
+    login: PropTypes.func.isRequired,
     confirm: PropTypes.func.isRequired,
 }
 
-export default connect(mapState, mapDispatch)(Signup)
+export default connect(mapState, mapDispatch)(Login)

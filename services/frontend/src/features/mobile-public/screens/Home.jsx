@@ -18,7 +18,7 @@ const styles = {
 const mapState = () => ({})
 
 const mapDispatch = (dispatch, { history }) => ({
-    login: () => history.push('/welcome'),
+    login: () => history.push('/login'),
     signup: () => history.push('/signup'),
 })
 
