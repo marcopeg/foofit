@@ -4,27 +4,27 @@ import { Switch, Route } from 'react-router-dom'
 import './AppMobile.css'
 
 const Home = loadable({
-    loader: () => import('features/mobile-public/containers/Home'),
+    loader: () => import('features/mobile-public/screens/Home'),
 })
 
 const Signup = loadable({
-    loader: () => import('features/mobile-public/containers/Signup'),
+    loader: () => import('features/mobile-public/screens/Signup'),
 })
 
 const ProgramsList = loadable({
-    loader: () => import('features/mobile-programs/containers/ProgramsList'),
+    loader: () => import('features/mobile-programs/screens/ProgramsList'),
 })
 
 const ProgramDetails = loadable({
-    loader: () => import('features/mobile-programs/containers/ProgramDetails'),
+    loader: () => import('features/mobile-programs/screens/ProgramDetails'),
 })
 
 const TrainingDetails = loadable({
-    loader: () => import('features/mobile-programs/containers/TrainingDetails'),
+    loader: () => import('features/mobile-programs/screens/TrainingDetails'),
 })
 
 const TrainingWatch = loadable({
-    loader: () => import('features/mobile-programs/containers/TrainingWatch'),
+    loader: () => import('features/mobile-programs/screens/TrainingWatch'),
 })
 
 const AppMobile = () => (
