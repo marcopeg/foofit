@@ -6,6 +6,7 @@ import * as jwtService from 'services/jwt'
 import * as postgresService from 'services/postgres'
 import * as serverService from 'services/server'
 import models from 'models'
+import features from 'features'
 
 const boot = async () => {
     await envService.init()
@@ -31,15 +32,30 @@ const boot = async () => {
         }),
     ])
 
+    // run features "init" hook
+    for (const feature of features) {
+        if (feature.init) await feature.init()
+    }
+
     await postgresService.start({
         maxAttempts: Number(config.get('PG_MAX_CONN_ATTEMPTS')),
         attemptDelay: Number(config.get('PG_CONN_ATTEMPTS_DELAY')),
         models,
     })
 
+    // run features "start" hook
+    for (const feature of features) {
+        if (feature.start) await feature.start()
+    }
+
     await serverService.start({
         port: config.get('SERVER_PORT'),
     })
+
+    // run features "started" hook
+    for (const feature of features) {
+        if (feature.started) await feature.started()
+    }
 }
 
 export default boot

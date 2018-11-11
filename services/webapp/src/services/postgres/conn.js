@@ -48,3 +48,14 @@ export const getModel = (modelName, connectionName = null) => {
 
     return model
 }
+
+export const registerModel = async (model, connectionName = 'default') => {
+    try {
+        const conn = handlers[connectionName]
+        const instance = await model.init(conn.handler)
+        pushModel(conn, instance)
+        await model.start(conn, getModel(model.name, conn.name))
+    } catch (err) {
+        throw new Error(`[postgres] register "${model.name}" model failed in "${connectionName}" - ${err.message}`)
+    }
+}

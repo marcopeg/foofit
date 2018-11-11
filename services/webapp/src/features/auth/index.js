@@ -1,9 +1,13 @@
 
 import jwtService from 'services/jwt'
-import { getModel } from 'services/postgres'
+import { getModel, registerModel } from 'services/postgres'
 
 const COOKIE_NAME = 'auth::login'
 const sequelizeError = err => err.detail ? new Error(err.detail) : err
+
+export const start = () => Promise.all([
+    registerModel(require('./models/account.model')),
+])
 
 export const signup = async (req, res, email, passw) => {
     try {
