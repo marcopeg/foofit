@@ -4,13 +4,28 @@ import signupMutation from './queries/signup.mutation'
 import loginMutation from './queries/login.mutation'
 import { setLogin } from './auth.reducer'
 
+// removes all the current session informations
+const cleanSession = () => (dispatch) => {
+    dispatch({ type: '@reset' })
+    localStorage.removeItem('auth::session')
+}
+
+const persistSession = session => (dispatch) => {
+    dispatch(cleanSession())
+    dispatch(setLogin(session))
+    localStorage.setItem('auth::session', session)
+}
+
 export const signup = (email, passw) => async (dispatch) => {
     try {
         const res = await dispatch(runQuery(signupMutation, { email, passw }))
-        dispatch(setLogin(res.signup))
+        const session = res.signup
+
+        dispatch(persistSession(session))
+
         return {
             success: 'true',
-            user: res.signup,
+            session,
         }
     } catch (err) {
         return {
@@ -25,8 +40,7 @@ export const login = (email, passw) => async (dispatch) => {
         const res = await dispatch(runQuery(loginMutation, { email, passw }))
         const session = res.login
 
-        localStorage.setItem('auth::session', session)
-        dispatch(setLogin(session))
+        dispatch(persistSession(session))
 
         return {
             success: 'true',
@@ -40,7 +54,4 @@ export const login = (email, passw) => async (dispatch) => {
     }
 }
 
-export const logout = () => (dispatch) => {
-    localStorage.removeItem('auth::session')
-    dispatch({ type: '@reset' })
-}
+export const logout = () => (dispatch) => dispatch(cleanSession())

@@ -3,6 +3,7 @@ import express from 'express'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import uuid from 'uuid/v1'
 import millisecond from 'millisecond'
 import { logInfo } from 'services/logger'
 import { createAppRouter } from 'routes/index'
@@ -22,6 +23,7 @@ export const init = ({ loginDuration }) => {
         app.use(cors({
             origin: (o, cb) => cb(null, true),
             credentials: true,
+            exposedHeaders: 'x-device-id',
         }))
     }
 
@@ -49,6 +51,13 @@ export const init = ({ loginDuration }) => {
         // Retrieve cookoe
         req.getAppCookie = name => req.cookies[getName(name)]
 
+        next()
+    })
+
+    // DEVICE ID
+    app.use((req, res, next) => {
+        req.xDeviceID = req.get('x-device-id') || uuid()
+        res.set('x-device-id', req.xDeviceID)
         next()
     })
 

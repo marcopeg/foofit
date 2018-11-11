@@ -1,7 +1,18 @@
+import localStorage from './local-storage'
 
 export const wrappedFetch = async (url, config = {}) => {
+    const deviceId = localStorage.getItem('device::id')
+    const headers = {
+        ...(config.headers || {}),
+        ...(deviceId ? { 'x-device-id': deviceId } : {}),
+    }
+
     try {
-        return fetch(url, config)
+        const res = await fetch(url, { ...config, headers })
+        const deviceIdHeader = res.headers.get('x-device-id')
+        if (deviceId !== deviceIdHeader) localStorage.setItem('device::id', deviceIdHeader)
+
+        return res
     } catch (err) {
         throw err
     }
