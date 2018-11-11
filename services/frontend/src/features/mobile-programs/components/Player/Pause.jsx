@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FaPlay, FaPause } from 'react-icons/fa'
+import { Icon } from 'components/MobilePage'
 import { flexCentered } from 'app/mixins'
 
 const styles = {
@@ -13,8 +13,8 @@ const styles = {
 
 const Pause = ({ isPlaying, pause, resume }) => {
     const icon = isPlaying
-        ? <FaPause />
-        : <FaPlay />
+        ? <Icon name={'Pause'} />
+        : <Icon name={'Play'} />
 
     const action = isPlaying
         ? pause

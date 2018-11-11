@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Duration from './Duration'
+import Duration from 'components/Duration'
 
 const ExerciseCountdown = ({ value, elapsed }) => {
     const remainingMs = value * 1000 - elapsed

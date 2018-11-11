@@ -1,4 +1,8 @@
-import React from 'react'
+/**
+ * Moment is fucking heavy, can we implement this function manually?
+ */
+
+// import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment-timezone'
 import momentDuration from 'moment-duration-format'

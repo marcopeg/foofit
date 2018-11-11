@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { flexCentered } from 'app/mixins'
-import { FaCheck } from 'react-icons/fa'
+import { Icon } from 'components/MobilePage'
 
 const lines = [
     'that\'s the stuff!',
@@ -113,7 +113,7 @@ class Finisher extends React.PureComponent {
                     onClick={finish}
                     style={getPlayStyle(this.state.isBig)}
                 >
-                    <FaCheck size={80} />
+                    <Icon name={'Check'} size={80} />
                 </div>
             </div>
         )

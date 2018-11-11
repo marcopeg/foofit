@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FaTimes } from 'react-icons/fa'
+import { Icon } from 'components/MobilePage'
 import { flexCentered } from 'app/mixins'
 
 const styles = {
@@ -15,7 +15,7 @@ const Stop = ({ stop }) => (
     <div
         onClick={stop}
         style={styles.wrapper}
-        children={<FaTimes />}
+        children={<Icon name={'Stop'} />}
     />
 )
 

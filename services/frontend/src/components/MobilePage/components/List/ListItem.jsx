@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FaAngleRight } from 'react-icons/fa'
+import { Icon } from 'components/MobilePage'
 import { getThemeStyle } from '../../themes'
 import { ThemeContext } from '../../MobilePage'
 
@@ -14,7 +14,7 @@ const ListItem = ({ children, onDisclose }) => (
                 <div style={getThemeStyle(theme.name, 'listItem').body}>{children}</div>
                 {onDisclose ? (
                     <div style={getThemeStyle(theme.name, 'listItem').handler}>
-                        <FaAngleRight />
+                        <Icon name="AngleRight" />
                     </div>
                 ) : null}
             </div>

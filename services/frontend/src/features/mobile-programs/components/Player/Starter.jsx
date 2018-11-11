@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { flexCentered } from 'app/mixins'
-import { FaPlay } from 'react-icons/fa'
+import { Icon } from 'components/MobilePage'
 
 const lines = [
     'do not exercise while driving',
@@ -111,7 +111,7 @@ class Starter extends React.PureComponent {
                     onClick={start}
                     style={getPlayStyle(this.state.isBig)}
                 >
-                    <FaPlay size={80} />
+                    <Icon name={'Play'} size={80} />
                 </div>
             </div>
         )

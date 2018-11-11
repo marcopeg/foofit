@@ -10,4 +10,5 @@ export { default as Button } from './components/Button'
 export { default as Input } from './components/Input'
 export { default as List } from './components/List'
 export { default as Loading } from './components/Loading'
+export { default as Icon } from './components/Icon'
 export const mixins = require('./lib/mixins')

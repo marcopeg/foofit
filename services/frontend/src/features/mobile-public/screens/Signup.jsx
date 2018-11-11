@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import MobilePage, { Input, Button, Loading, Text, mixins } from 'features/mobile/MobilePage'
-import { FaAngleRight } from 'react-icons/fa'
+import { Icon } from 'components/MobilePage'
 import { signup } from 'features/auth/auth.service'
 
 const styles = {
@@ -91,7 +91,7 @@ class Signup extends React.Component {
                                         children={(
                                             <div style={{ ...mixins.flexCentered }}>
                                                 {'next'}
-                                                <FaAngleRight />
+                                                <Icon name={'AngleRight'} />
                                             </div>
                                         )}
                                     />
