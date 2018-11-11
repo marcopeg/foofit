@@ -48,5 +48,5 @@ export default {
             })) },
         },
     })),
-    resolve: (params, args, { data }) => getPrograms(data.sessionId, args.lastUpdate),
+    resolve: (params, args, { data }) => getPrograms(data.session.id, args.lastUpdate),
 }

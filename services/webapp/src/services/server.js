@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import compression from 'compression'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import millisecond from 'millisecond'
 import { logInfo } from 'services/logger'
@@ -26,6 +27,7 @@ export const init = ({ loginDuration }) => {
 
     // COOKIES
     // allow routes and controllers to set a cookie
+    app.use(cookieParser())
     app.use((req, res, next) => {
         const options = {
             httpOnly: true,
@@ -33,13 +35,19 @@ export const init = ({ loginDuration }) => {
             maxAge: millisecond(loginDuration),
         }
 
+        // @TODO: prefix from env variable
+        const getName = name => `foofit::${name}`
+
         // Set cookie
         res.setAppCookie = (name, content) => {
-            res.cookie(name, content, options)
+            res.cookie(getName(name), content, options)
         }
 
         // Delete cookie
-        res.deleteAppCookie = name => res.clearCookie(name)
+        res.deleteAppCookie = name => res.clearCookie(getName(name))
+
+        // Retrieve cookoe
+        req.getAppCookie = name => req.cookies[getName(name)]
 
         next()
     })

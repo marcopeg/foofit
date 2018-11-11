@@ -1,4 +1,5 @@
 import { GraphQLObjectType, GraphQLID } from 'graphql'
+import { getSession } from 'features/auth'
 import getProgramsList from './get-programs-list'
 
 export default {
@@ -9,11 +10,8 @@ export default {
             getProgramsList,
         },
     }),
-    resolve: (params, arg, { data }) => {
-        data.sessionId = 1
-
-        return {
-            id: data.sessionId,
-        }
+    resolve: async (params, arg, { req, data }) => {
+        data.session = await getSession(req)
+        return data.session
     },
 }

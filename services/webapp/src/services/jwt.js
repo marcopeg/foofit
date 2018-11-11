@@ -35,3 +35,5 @@ export const verify = (token, customSecret = secret) =>
             }
         })
     })
+
+export default { sign, verify }

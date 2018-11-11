@@ -2491,10 +2491,6 @@ millisecond@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/millisecond/-/millisecond-0.1.2.tgz#6cc5ad386241cab8e78aff964f87028eec92dac5"
 
-milliseconds@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/milliseconds/-/milliseconds-1.0.3.tgz#1ff437c4f734b138ef7c2cedba4d8880c7f5c2d8"
-
 "mime-db@>= 1.36.0 < 2", mime-db@~1.37.0:
   version "1.37.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.37.0.tgz#0b6a0ce6fdbe9576e25f1f2d2fde8830dc0ad0d8"

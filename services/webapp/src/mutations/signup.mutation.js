@@ -23,5 +23,5 @@ export default {
             id: { type: new GraphQLNonNull(GraphQLID) },
         },
     }),
-    resolve: (params, args) => signup(args.email, args.passw),
+    resolve: (params, args, { req, res }) => signup(req, res, args.email, args.passw),
 }
