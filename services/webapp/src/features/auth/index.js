@@ -31,3 +31,9 @@ export const login = async (req, res, email, passw) => {
         throw sequelizeError(err)
     }
 }
+
+export const logout = (req, res) => {
+    res.deleteAppCookie('auth::login')
+    return 'ok'
+}
+

@@ -12,27 +12,35 @@ export const init = ({ loginDuration }) => {
     logInfo('init server')
     const isDev = [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1
 
-    // setup cors
+    // CORS
+    // this is a development only setup that allow to run the
+    // frontend from a different server (ParcelJS or WebpackDevSever)
     if (isDev) {
-        logInfo('[server] CORS are enabled in development')
+        logInfo('[server] CORS are enabled in development for ANY ORIGIN!')
+        logInfo('[server] -- be careful not to deploy this to production!')
         app.use(cors({
-            origin: 'http://localhost:3000',
+            origin: (o, cb) => cb(null, true),
             credentials: true,
         }))
     }
 
+    // COOKIES
     // allow routes and controllers to set a cookie
     app.use((req, res, next) => {
-        const maxAge = millisecond(loginDuration)
-        const secure = !isDev
-
-        res.setAppCookie = (name, content) => {
-            res.cookie(name, content, {
-                httpOnly: true,
-                secure,
-                maxAge,
-            })
+        const options = {
+            httpOnly: true,
+            secure: !isDev,
+            maxAge: millisecond(loginDuration),
         }
+
+        // Set cookie
+        res.setAppCookie = (name, content) => {
+            res.cookie(name, content, options)
+        }
+
+        // Delete cookie
+        res.deleteAppCookie = name => res.clearCookie(name)
+
         next()
     })
 
