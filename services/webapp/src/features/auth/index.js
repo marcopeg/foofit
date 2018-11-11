@@ -1,4 +1,3 @@
-
 import jwtService from 'services/jwt'
 import { getModel, registerModel } from 'services/postgres'
 
@@ -37,8 +36,12 @@ export const logout = (req, res) => {
     return 'ok'
 }
 
-export const getSession = async (req) => {
-    const jwt = req.getAppCookie(COOKIE_NAME)
-    const data = await jwtService.verify(jwt)
-    return data.payload
+export const getSession = async (req, res) => {
+    try {
+        const jwt = req.getAppCookie(COOKIE_NAME)
+        const data = await jwtService.verify(jwt)
+        return data.payload
+    } catch (err) {
+        throw new Error('403')
+    }
 }

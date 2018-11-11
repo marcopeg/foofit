@@ -35,3 +35,7 @@ export const login = (email, passw) => async (dispatch) => {
         }
     }
 }
+
+export const logout = () => (dispatch) => {
+    dispatch({ type: '@reset' })
+}

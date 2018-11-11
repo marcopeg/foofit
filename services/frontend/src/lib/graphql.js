@@ -44,6 +44,18 @@ export const runQuery = (query = null, variables = {}, options = {}) => async (d
         const error = new Error(result.errors[0].message)
         error.graphQLErrors = result.errors
         error.graphQLResponse = result
+
+        // detect an authorization problem and dispatch an action
+        // that should kick out the user
+        if (result.errors.find(err => err.message === '403')) {
+            dispatch({ type: '@graphql::403', payload: {
+                code: 403,
+                message: 'access denied',
+                type: 'graphql',
+                data: result,
+            } })
+        }
+
         throw error
     }
 

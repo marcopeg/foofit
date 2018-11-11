@@ -3,6 +3,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import './AppMobile.css'
 
+import ErrorScreen from 'features/mobile-public/screens/ErrorScreen'
 import Home from 'features/mobile-public/screens/Home'
 import Signup from 'features/mobile-public/screens/Signup'
 import Login from 'features/mobile-public/screens/Login'
@@ -38,6 +39,7 @@ import TrainingWatch from 'features/mobile-programs/screens/TrainingWatch'
 const AppMobile = () => (
     <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/error" component={ErrorScreen} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/welcome" component={ProgramsList} />
