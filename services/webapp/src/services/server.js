@@ -24,7 +24,7 @@ export const init = ({ loginDuration }) => {
     // allow routes and controllers to set a cookie
     app.use((req, res, next) => {
         const maxAge = millisecond(loginDuration)
-        const secure = isDev
+        const secure = !isDev
 
         res.setAppCookie = (name, content) => {
             res.cookie(name, content, {
@@ -46,6 +46,6 @@ export const init = ({ loginDuration }) => {
 }
 
 export const start = ({ port }) => {
-    logInfo('start server')
+    logInfo('[server] start server')
     app.listen(port, () => logInfo(`[server] express is running on ${port}`))
 }

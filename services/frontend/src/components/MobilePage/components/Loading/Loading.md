@@ -1,6 +1,6 @@
 ```js
-const MobilePageComponentWrapper = require('../lib/styleguidist.wrapper').default
-const { flexCentered } = require('../lib/mixins')
+const MobilePageComponentWrapper = require('../../lib/styleguidist.wrapper').default
+const { flexCentered } = require('../../lib/mixins')
 const gridStyle = {
     display: 'flex',
     justifyContent: 'flex-start',

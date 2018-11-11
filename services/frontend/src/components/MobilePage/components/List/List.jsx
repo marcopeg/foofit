@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getThemeStyle } from '../themes'
-import { ThemeContext } from '../MobilePage'
+import { getThemeStyle } from '../../themes'
+import { ThemeContext } from '../../MobilePage'
 import ListItem from './ListItem'
-import Title from './Title'
-import Text from './Text'
+import Title from '../Title'
+import Text from '../Text'
 
 const getItemStyle = (theme, items, item, index) => {
     if (index === 0) {

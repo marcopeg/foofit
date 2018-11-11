@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactSpinner from 'react-loader-spinner'
-import { getThemeStyle } from '../themes'
-import { ThemeContext } from '../MobilePage'
+import { getThemeStyle } from '../../themes'
+import { ThemeContext } from '../../MobilePage'
 
 const Loading = ({ children, type, size, block, style, ...props }) => (
     <ThemeContext.Consumer>

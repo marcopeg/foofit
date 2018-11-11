@@ -1,5 +1,5 @@
 ```js
-const MobilePageComponentWrapper = require('../lib/styleguidist.wrapper').default
+const MobilePageComponentWrapper = require('../../lib/styleguidist.wrapper').default
 const mr = { marginRight: 10 }
 const mb = { marginBottom: 10 }
 ;<MobilePageComponentWrapper>
