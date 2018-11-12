@@ -2,12 +2,11 @@ import {
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLString,
-    GraphQLBoolean,
 } from 'graphql'
 
 import { validateToken } from 'services/test'
 
-// import getProgramsList from './get-programs-list'
+import dbReset from './db-reset'
 
 export default {
     args: {
@@ -18,8 +17,7 @@ export default {
     type: new GraphQLObjectType({
         name: 'TestMutation',
         fields: {
-            enabled: { type: GraphQLBoolean },
-            // getProgramsList,
+            dbReset,
         },
     }),
     resolve: async (params, args) => validateToken(args.token),

@@ -64,17 +64,19 @@ const options = {
     ],
 }
 
+export const populate = (conn, Model) => async () => {
+    for (const item of require('./exercise.model.fixture').default) {
+        await Model.create(item)
+    }
+}
+
 export const init = (conn) => {
     const Model = conn.define(name, fields, options)
+    Model.populate = populate(conn, Model)
     return Model.sync()
 }
 
 export const start = async (conn, Model) => {
-    await Model.destroy({
-        where: {},
-        truncate: true,
-    })
-    for (const item of require('./exercise.model.fixture').default) {
-        await Model.create(item)
-    }
+    await conn.handler.query(`TRUNCATE ${options.tableName} RESTART IDENTITY CASCADE;`)
+    await Model.populate()
 }

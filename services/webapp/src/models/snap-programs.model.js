@@ -84,17 +84,21 @@ const getListByProfileId = (conn, Model) => async (profileId, lastUpdate = null)
     }))
 }
 
+export const populate = (conn, Model) => async () => {
+    for (const item of require('./snap-programs.model.fixture').default) {
+        await Model.create(item)
+    }
+}
+
 export const init = (conn) => {
     const Model = conn.define(name, fields, options)
     Model.getListByProfileId = getListByProfileId(conn, Model)
+    Model.populate = populate(conn, Model)
     return Model.sync()
 }
 
 export const start = async (conn, Model) => {
-    await Model.destroy({
-        where: {},
-        truncate: true,
-    })
-    await Model.bulkCreate(require('./snap-programs.model.fixture').default)
+    await conn.handler.query(`TRUNCATE ${options.tableName} RESTART IDENTITY CASCADE;`)
+    await Model.populate()
 }
 

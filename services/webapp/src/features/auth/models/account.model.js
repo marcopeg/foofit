@@ -56,15 +56,20 @@ const findLogin = (conn, Model) => async (email, passw) => Model.findOne({
     },
 })
 
+export const populate = (conn, Model) => async () => {
+    for (const item of require('./account.model.fixture').default) {
+        await Model.create(item)
+    }
+}
+
 export const init = (conn) => {
     const Model = conn.define(name, fields, options)
+    Model.populate = populate(conn, Model)
     Model.findLogin = findLogin(conn, Model)
     return Model.sync()
 }
 
 export const start = async (conn, Model) => {
-    await conn.handler.query('TRUNCATE rel_accounts RESTART IDENTITY CASCADE;')
-    for (const item of require('./account.model.fixture').default) {
-        await Model.create(item)
-    }
+    await conn.handler.query(`TRUNCATE ${options.tableName} RESTART IDENTITY CASCADE;`)
+    await Model.populate()
 }

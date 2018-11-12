@@ -59,3 +59,20 @@ export const registerModel = async (model, connectionName = 'default') => {
         throw new Error(`[postgres] register "${model.name}" model failed in "${connectionName}" - ${err.message}`)
     }
 }
+
+export const getHandlerNames = () => Object.keys(handlers)
+
+export const resetModels = async (connectionName = 'default') => {
+    try {
+        const conn = handlers[connectionName]
+        const models = Object.keys(conn.models).map(name => conn.models[name])
+        const modelsToPopulate = models.filter(model => model.populate)
+
+        // sync and populate the models
+        await Promise.all(models.map(model => conn.handler.query(`TRUNCATE ${model.tableName} RESTART IDENTITY CASCADE;`)))
+        await Promise.all(models.map(model => model.sync()))
+        await Promise.all(modelsToPopulate.map(model => model.populate()))
+    } catch (err) {
+        throw new Error(`[postgres] resetModels "${connectionName}" failed - ${err.message}`)
+    }
+}
