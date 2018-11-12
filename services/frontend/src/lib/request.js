@@ -1,3 +1,9 @@
+/**
+ * Exposes a simple way to run server requests and keeps automatically
+ * track of a "device-id" information that is persisted in local storage.
+ *
+ */
+
 import localStorage from './local-storage'
 
 export const wrappedFetch = async (url, config = {}) => {

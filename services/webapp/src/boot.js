@@ -5,6 +5,7 @@ import * as hashService from 'services/hash'
 import * as jwtService from 'services/jwt'
 import * as postgresService from 'services/postgres'
 import * as serverService from 'services/server'
+import * as testService from 'services/test'
 import models from 'models'
 import features from 'features'
 
@@ -29,6 +30,10 @@ const boot = async () => {
         }),
         serverService.init({
             loginDuration: String(config.get('LOGIN_DURATION')),
+        }),
+        testService.init({
+            isEnabled: [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1,
+            token: config.get('GRAPHQL_TEST_TOKEN'),
         }),
     ])
 
