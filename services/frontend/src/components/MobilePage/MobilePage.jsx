@@ -7,14 +7,22 @@ import { getThemeStyle, availableThemes } from './themes'
 
 export const ThemeContext = React.createContext('default')
 
+const getWrapperStyle = (theme, width, height) => ({
+    ...getThemeStyle(theme, 'wrapper'),
+    ...(width ? { width } : {}),
+    ...(height ? { height } : {}),
+})
+
 const hasComponent = (children, cmp) =>
     React.Children.toArray(children)
         .find(i => i.type.displayName === cmp.name) !== undefined
 
-const MobilePage = ({ children, theme, withHeader, withFooter, footerOnTop }) => (
+const MobilePage = ({ children, theme, width, height, withHeader, withFooter, footerOnTop }) => (
     <ThemeContext.Provider
         value={{
             name: theme,
+            width,
+            height,
             hasHeader: withHeader || hasComponent(children, MobilePageHeader),
             hasFooter: withFooter || hasComponent(children, MobilePageFooter),
             hasBody: hasComponent(children, MobilePageBody),
@@ -23,7 +31,7 @@ const MobilePage = ({ children, theme, withHeader, withFooter, footerOnTop }) =>
     >
         <div
             className={`mbp-theme-${theme}`}
-            style={getThemeStyle(theme, 'wrapper')}
+            style={getWrapperStyle(theme, width, height)}
         >
             {children}
         </div>
@@ -33,6 +41,14 @@ const MobilePage = ({ children, theme, withHeader, withFooter, footerOnTop }) =>
 MobilePage.propTypes = {
     children: PropTypes.any.isRequired, // eslint-disable-line
     theme: PropTypes.oneOf(availableThemes),
+    width: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
+    height: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
     withHeader: PropTypes.bool,
     withFooter: PropTypes.bool,
     footerOnTop: PropTypes.bool,
@@ -40,6 +56,8 @@ MobilePage.propTypes = {
 
 MobilePage.defaultProps = {
     theme: 'white',
+    width: null,
+    height: null,
     withHeader: false,
     withFooter: false,
     footerOnTop: false,

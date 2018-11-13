@@ -4,6 +4,7 @@ import getStyles from '../lib/get-styles'
 // basic components definitions
 import wrapper from '../MobilePage.style'
 import header from '../MobilePageHeader.style'
+import body from '../MobilePageBody.style'
 import footer from '../MobilePageFooter.style'
 import title from '../components/Title/Title.style'
 import text from '../components/Text/Text.style'
@@ -31,6 +32,7 @@ const styles = {
         wrapper,
         header,
         footer,
+        body,
         title,
         text,
         space,
@@ -47,3 +49,4 @@ const styles = {
 }
 
 export const getThemeStyle = getStyles(styles)
+export { getThemeVar } from './variables'

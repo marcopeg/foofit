@@ -24,6 +24,7 @@ const mapDispatch = (dispatch, { history }) => ({
 
 const Home = ({ login, signup }) => (
     <MobilePage>
+        <MobilePage.Header>Header</MobilePage.Header>
         <MobilePage.Body withPadding flex>
             <div style={styles.wrapper}>
                 <div style={styles.copy}>
@@ -50,6 +51,7 @@ const Home = ({ login, signup }) => (
                 />
             </div>
         </MobilePage.Body>
+        <MobilePage.Footer>footer</MobilePage.Footer>
     </MobilePage>
 )
 

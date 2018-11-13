@@ -18,6 +18,11 @@ export default {
         backgroundColor: colors.primary,
         color: colors.text,
     },
+    footer: {
+        wrapper: {
+            backgroundColor: '#666',
+        },
+    },
     divider: {
         borderColor: colors.divider,
     },

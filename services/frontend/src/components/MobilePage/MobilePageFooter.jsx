@@ -1,12 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getThemeStyle } from './themes'
+import { getThemeStyle, getThemeVar } from './themes'
 import { ThemeContext } from './MobilePage'
+
+const getWrapperStyle = theme => ({
+    ...getThemeStyle(theme.name, 'footer').wrapper,
+    height: getThemeVar(theme.name, 'footerHeight'),
+})
 
 const MobilePageFooter = ({ children }) => (
     <ThemeContext.Consumer>
         {theme => (
-            <div style={getThemeStyle(theme.name, 'footer').wrapper}>
+            <div style={getWrapperStyle(theme)}>
                 <div style={getThemeStyle(theme.name, 'footer').inner}>
                     {children}
                 </div>

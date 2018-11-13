@@ -15,7 +15,9 @@ export const colors = {
     lightText: '#333',
 }
 
-export const variables = {}
+export const variables = {
+    headerHeight: 90,
+}
 
 export default {
     wrapper: {

@@ -1,4 +1,5 @@
 import { variables as white } from './theme.white'
+import { variables as dark } from './theme.dark'
 import { variables as c1 } from './theme.c1'
 
 export const defaults = {
@@ -15,6 +16,7 @@ export const defaults = {
 export const variables = {
     ___: defaults,
     white,
+    dark,
     c1,
 }
 
