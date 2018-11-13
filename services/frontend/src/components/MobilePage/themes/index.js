@@ -2,19 +2,19 @@
 import getStyles from '../lib/get-styles'
 
 // basic components definitions
-import wrapper from '../MobilePage.style'
-import header from '../components/PageHeader/PageHeader.style'
-import footer from '../components/PageFooter/PageFooter.style'
-import body from '../components/PageBody/PageBody.style'
+import MobilePage from '../MobilePage.style'
+import PageHeader from '../components/PageHeader/PageHeader.style'
+import PageFooter from '../components/PageFooter/PageFooter.style'
+import PageBody from '../components/PageBody/PageBody.style'
 import title from '../components/Title/Title.style'
 import text from '../components/Text/Text.style'
 import space from '../components/Space/Space.style'
-import divider from '../components/Divider/Divider.style'
-import button from '../components/Button/Button.style'
-import input from '../components/Input/Input.style'
-import list from '../components/List/List.style'
-import listItem from '../components/List/ListItem.style'
-import loading from '../components/Loading/Loading.style'
+import Divider from '../components/Divider/Divider.style'
+import Button from '../components/Button/Button.style'
+import Input from '../components/Input/Input.style'
+import List from '../components/List/List.style'
+import ListItem from '../components/List/ListItem.style'
+import Loading from '../components/Loading/Loading.style'
 
 // teme variations
 import white from './theme.white'
@@ -29,19 +29,19 @@ export const availableThemes = [
 
 const styles = {
     ___: {
-        wrapper,
-        header,
-        footer,
-        body,
+        MobilePage,
+        PageHeader,
+        PageFooter,
+        PageBody,
         title,
         text,
         space,
-        divider,
-        button,
-        input,
-        list,
-        listItem,
-        loading,
+        Divider,
+        Button,
+        Input,
+        List,
+        ListItem,
+        Loading,
     },
     white,
     dark,

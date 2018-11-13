@@ -8,7 +8,7 @@ import { getThemeStyle, availableThemes } from './themes'
 export const ThemeContext = React.createContext('default')
 
 const getWrapperStyle = (theme, width, height) => ({
-    ...getThemeStyle(theme, 'wrapper'),
+    ...getThemeStyle(theme, 'MobilePage').wrapper,
     ...(width ? { width } : {}),
     ...(height ? { height } : {}),
 })

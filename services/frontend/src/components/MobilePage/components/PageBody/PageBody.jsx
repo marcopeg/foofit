@@ -7,7 +7,7 @@ import { ThemeContext } from '../../MobilePage'
 const getWrapperStyle = (theme, { noScroll, flex }) => {
     const headerHeight = getThemeVar(theme.name, 'headerHeight')
     const footerHeight = getThemeVar(theme.name, 'footerHeight')
-    const style = { ...getThemeStyle(theme.name, 'body').wrapper }
+    const style = { ...getThemeStyle(theme.name, 'PageBody').wrapper }
 
     // flexbox body
     if (flex) {
@@ -36,7 +36,7 @@ const getWrapperStyle = (theme, { noScroll, flex }) => {
 }
 
 const getInnerStyle = (theme, { withPadding, flex }) => {
-    const style = { ...getThemeStyle(theme.name, 'body').inner }
+    const style = { ...getThemeStyle(theme.name, 'PageBody').inner }
 
     // apply padding
     if (withPadding) {
@@ -58,24 +58,22 @@ const MobilePageBody = ({ children, ...props }) => {
     return (
         <ThemeContext.Consumer>
             {theme => {
-                const paddedChildren = (
-                    <div style={getInnerStyle(theme, props)}>
-                        {children}
-                    </div>
-                )
-
                 const content = typeof children === 'function'
                     ? (
                         <ContainerDimension>
                             {(dimensions) =>
-                                React.createElement(paddedChildren, {
+                                React.createElement(children, {
                                     ...dimensions,
                                     theme,
                                 })
                             }
                         </ContainerDimension>
                     )
-                    : paddedChildren
+                    : (
+                        <div style={getInnerStyle(theme, props)}>
+                            {children}
+                        </div>
+                    )
 
                 return (
                     <div style={getWrapperStyle(theme, props)}>

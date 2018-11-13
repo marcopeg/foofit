@@ -4,7 +4,7 @@ import { getThemeStyle, getThemeVar } from '../../themes'
 import { ThemeContext } from '../../MobilePage'
 
 const getWrapperStyle = theme => ({
-    ...getThemeStyle(theme.name, 'footer').wrapper,
+    ...getThemeStyle(theme.name, 'PageFooter').wrapper,
     height: getThemeVar(theme.name, 'footerHeight'),
 })
 
@@ -12,7 +12,7 @@ const PageFooter = ({ children }) => (
     <ThemeContext.Consumer>
         {theme => (
             <div style={getWrapperStyle(theme)}>
-                <div style={getThemeStyle(theme.name, 'footer').inner}>
+                <div style={getThemeStyle(theme.name, 'PageFooter').inner}>
                     {children}
                 </div>
             </div>

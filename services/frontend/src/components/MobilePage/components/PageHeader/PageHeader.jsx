@@ -4,7 +4,7 @@ import { getThemeStyle, getThemeVar } from '../../themes'
 import { ThemeContext } from '../../MobilePage'
 
 const getWrapperStyle = theme => ({
-    ...getThemeStyle(theme.name, 'header').wrapper,
+    ...getThemeStyle(theme.name, 'PageHeader').wrapper,
     height: getThemeVar(theme.name, 'headerHeight'),
 })
 
@@ -12,7 +12,7 @@ const PageHeader = ({ children }) => (
     <ThemeContext.Consumer>
         {theme => (
             <div style={getWrapperStyle(theme)}>
-                <div style={getThemeStyle(theme.name, 'header').inner}>
+                <div style={getThemeStyle(theme.name, 'PageHeader').inner}>
                     {children}
                 </div>
             </div>

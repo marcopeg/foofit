@@ -12,31 +12,31 @@ export default {
         backgroundColor: 'transparent',
         outline: 'none',
     },
-    wrapper__block: {
+    'wrapper--block': {
         width: '100%',
     },
-    wrapper__small: {
+    'wrapper--small': {
         fontSize: getThemeVar('___', 'text__small'),
         paddingTop: getThemeVar('___', 'VSpace') / 2,
         paddingBottom: getThemeVar('___', 'VSpace') / 2,
         paddingLeft: getThemeVar('___', 'HSpace') / 2,
         paddingRight: getThemeVar('___', 'HSpace') / 2,
     },
-    wrapper__normal: {
+    'wrapper--normal': {
         fontSize: getThemeVar('___', 'text__normal'),
         paddingTop: getThemeVar('___', 'VSpace'),
         paddingBottom: getThemeVar('___', 'VSpace'),
         paddingLeft: getThemeVar('___', 'HSpace'),
         paddingRight: getThemeVar('___', 'HSpace'),
     },
-    wrapper__big: {
+    'wrapper--big': {
         fontSize: getThemeVar('___', 'text__big'),
         paddingTop: getThemeVar('___', 'VSpace') * 2,
         paddingBottom: getThemeVar('___', 'VSpace') * 2,
         paddingLeft: getThemeVar('___', 'HSpace') * 2,
         paddingRight: getThemeVar('___', 'HSpace') * 2,
     },
-    wrapper__link: {
+    'wrapper--link': {
         borderColor: 'transparent',
     },
 }

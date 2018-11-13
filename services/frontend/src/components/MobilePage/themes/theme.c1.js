@@ -14,46 +14,48 @@ export const colors = {
 export const variables = {}
 
 export default {
-    wrapper: {
-        backgroundColor: colors.primary,
-        color: colors.text,
+    MobilePage: {
+        wrapper: {
+            backgroundColor: colors.primary,
+            color: colors.text,
+        },
     },
-    footer: {
+    PageFooter: {
         wrapper: {
             backgroundColor: '#666',
         },
     },
-    divider: {
+    Divider: {
         borderColor: colors.divider,
     },
-    button: {
+    Button: {
         wrapper: {
             transition: 'all 0.2s ease',
         },
-        wrapper__primary: {
+        'wrapper--primary': {
             backgroundColor: colors.lightPrimary,
             borderColor: colors.lightPrimary,
             color: colors.primary,
         },
-        wrapper__primary__active: {
+        'wrapper--primary--active': {
             backgroundColor: colors.primary,
             color: colors.text,
         },
-        wrapper__secondary: {
+        'wrapper--secondary': {
             borderColor: colors.text,
             color: colors.text,
         },
-        wrapper__secondary__active: {
+        'wrapper--secondary--active': {
             backgroundColor: colors.lightPrimary,
         },
-        wrapper__link: {
+        'wrapper--link': {
             color: colors.text,
         },
-        wrapper__link__active: {
+        'wrapper--link--active': {
             backgroundColor: colors.lightPrimary,
         },
     },
-    list: {
+    List: {
         wrapper: {
             borderColor: colors.lightPrimary,
         },
@@ -61,7 +63,7 @@ export default {
             borderBottomColor: colors.lightPrimary,
         },
     },
-    loading: {
+    Loading: {
         spinner: {
             color: colors.lightPrimary,
         },

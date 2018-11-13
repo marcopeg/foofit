@@ -9,25 +9,25 @@ import Text from '../Text'
 const getItemStyle = (theme, items, item, index) => {
     if (index === 0) {
         return {
-            ...getThemeStyle(theme, 'list').item,
-            ...getThemeStyle(theme, 'list').firstItem,
+            ...getThemeStyle(theme, 'List').item,
+            ...getThemeStyle(theme, 'List').firstItem,
         }
     }
 
     if (index === items.length - 1) {
         return {
-            ...getThemeStyle(theme, 'list').item,
-            ...getThemeStyle(theme, 'list').lastItem,
+            ...getThemeStyle(theme, 'List').item,
+            ...getThemeStyle(theme, 'List').lastItem,
         }
     }
 
-    return getThemeStyle(theme, 'list').item
+    return getThemeStyle(theme, 'List').item
 }
 
 const List = ({ keyProp, titleProp, subtitleProp, items, renderItem, onDisclose }) => (
     <ThemeContext.Consumer>
         {theme => (
-            <div style={getThemeStyle(theme.name, 'list').wrapper}>
+            <div style={getThemeStyle(theme.name, 'List').wrapper}>
                 {items.map((item, index) => (
                     renderItem ? (
                         <div

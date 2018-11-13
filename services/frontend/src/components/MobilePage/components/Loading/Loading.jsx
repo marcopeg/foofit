@@ -7,7 +7,7 @@ import { ThemeContext } from '../../MobilePage'
 const Loading = ({ children, type, size, block, style, ...props }) => (
     <ThemeContext.Consumer>
         {theme => {
-            const styles = getThemeStyle(theme.name, 'loading')
+            const styles = getThemeStyle(theme.name, 'Loading')
             const wrapper = {
                 ...styles.wrapper,
                 ...(block ? styles['wrapper--block'] : {}),

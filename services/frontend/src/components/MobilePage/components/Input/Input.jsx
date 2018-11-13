@@ -4,17 +4,17 @@ import { getThemeStyle } from '../../themes'
 import { ThemeContext } from '../../MobilePage'
 
 const getStyle = (theme, size, block, centered, override) => ({
-    ...getThemeStyle(theme, 'input').input,
-    ...getThemeStyle(theme, 'input')[`input--${size}`],
-    ...(block ? getThemeStyle(theme, 'input')['input--block'] : {}),
-    ...(centered ? getThemeStyle(theme, 'input')['input--centered'] : {}),
+    ...getThemeStyle(theme, 'Input').input,
+    ...getThemeStyle(theme, 'Input')[`input--${size}`],
+    ...(block ? getThemeStyle(theme, 'Input')['input--block'] : {}),
+    ...(centered ? getThemeStyle(theme, 'Input')['input--centered'] : {}),
     ...override,
 })
 
 const getClassName = (theme, centered, className) =>
     [
-        `mbp-theme-${theme}__input`,
-        centered ? `mbp-theme-${theme}__input--centered` : '',
+        `mbp-theme-${theme}__Input`,
+        centered ? `mbp-theme-${theme}__Input--centered` : '',
         className,
     ].join(' ')
 

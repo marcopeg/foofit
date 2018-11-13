@@ -4,7 +4,7 @@ import { getThemeStyle } from '../../themes'
 import { ThemeContext } from '../../MobilePage'
 
 const getStyle = (theme, override = {}) => ({
-    ...getThemeStyle(theme, 'divider'),
+    ...getThemeStyle(theme, 'Divider'),
     ...override,
 })
 

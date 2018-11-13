@@ -7,13 +7,13 @@ import { ThemeContext } from '../../MobilePage'
 
 // eslint-disable-next-line
 const getStyle = (theme, type, size, block, active, style) => {
-    const button = getThemeStyle(theme, 'button')
+    const button = getThemeStyle(theme, 'Button')
     return {
         ...button.wrapper,
-        ...button[`wrapper__${type}`],
-        ...(active ? (button[`wrapper__${type}__active`] || {}) : {}),
-        ...button[`wrapper__${size}`],
-        ...(block ? button.wrapper__block : {}),
+        ...button[`wrapper--${type}`],
+        ...(active ? (button[`wrapper--${type}--active`] || {}) : {}),
+        ...button[`wrapper--${size}`],
+        ...(block ? button['wrapper--block'] : {}),
         ...style,
     }
 }

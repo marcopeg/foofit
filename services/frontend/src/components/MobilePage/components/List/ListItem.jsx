@@ -8,12 +8,12 @@ const ListItem = ({ children, onDisclose }) => (
     <ThemeContext.Consumer>
         {theme => (
             <div
-                style={getThemeStyle(theme.name, 'listItem').wrapper}
+                style={getThemeStyle(theme.name, 'ListItem').wrapper}
                 onClick={onDisclose}
             >
-                <div style={getThemeStyle(theme.name, 'listItem').body}>{children}</div>
+                <div style={getThemeStyle(theme.name, 'ListItem').body}>{children}</div>
                 {onDisclose ? (
-                    <div style={getThemeStyle(theme.name, 'listItem').handler}>
+                    <div style={getThemeStyle(theme.name, 'ListItem').handler}>
                         <Icon name="AngleRight" />
                     </div>
                 ) : null}
