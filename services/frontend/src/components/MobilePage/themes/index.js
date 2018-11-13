@@ -3,9 +3,9 @@ import getStyles from '../lib/get-styles'
 
 // basic components definitions
 import wrapper from '../MobilePage.style'
-import header from '../MobilePageHeader.style'
-import body from '../MobilePageBody.style'
-import footer from '../MobilePageFooter.style'
+import header from '../components/PageHeader/PageHeader.style'
+import footer from '../components/PageFooter/PageFooter.style'
+import body from '../components/PageBody/PageBody.style'
 import title from '../components/Title/Title.style'
 import text from '../components/Text/Text.style'
 import space from '../components/Space/Space.style'

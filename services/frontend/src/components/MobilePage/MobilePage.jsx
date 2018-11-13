@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MobilePageHeader from './MobilePageHeader'
-import MobilePageFooter from './MobilePageFooter'
-import MobilePageBody from './MobilePageBody'
+import PageHeader from './components/PageHeader'
+import PageFooter from './components/PageFooter'
+import PageBody from './components/PageBody'
 import { getThemeStyle, availableThemes } from './themes'
 
 export const ThemeContext = React.createContext('default')
@@ -23,9 +23,9 @@ const MobilePage = ({ children, theme, width, height, withHeader, withFooter, fo
             name: theme,
             width,
             height,
-            hasHeader: withHeader || hasComponent(children, MobilePageHeader),
-            hasFooter: withFooter || hasComponent(children, MobilePageFooter),
-            hasBody: hasComponent(children, MobilePageBody),
+            hasHeader: withHeader || hasComponent(children, PageHeader),
+            hasFooter: withFooter || hasComponent(children, PageFooter),
+            hasBody: hasComponent(children, PageBody),
             footerOnTop,
         }}
     >
@@ -63,8 +63,8 @@ MobilePage.defaultProps = {
     footerOnTop: false,
 }
 
-MobilePage.Header = MobilePageHeader
-MobilePage.Footer = MobilePageFooter
-MobilePage.Body = MobilePageBody
+MobilePage.Header = PageHeader
+MobilePage.Footer = PageFooter
+MobilePage.Body = PageBody
 
 export default MobilePage

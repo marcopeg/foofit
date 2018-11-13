@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ContainerDimension from 'react-container-dimensions'
-import { getThemeStyle, getThemeVar } from './themes'
-import { ThemeContext } from './MobilePage'
+import { getThemeStyle, getThemeVar } from '../../themes'
+import { ThemeContext } from '../../MobilePage'
 
 const getWrapperStyle = (theme, { noScroll, flex }) => {
     const headerHeight = getThemeVar(theme.name, 'headerHeight')

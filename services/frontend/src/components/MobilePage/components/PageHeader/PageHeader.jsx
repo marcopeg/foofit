@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getThemeStyle, getThemeVar } from './themes'
-import { ThemeContext } from './MobilePage'
+import { getThemeStyle, getThemeVar } from '../../themes'
+import { ThemeContext } from '../../MobilePage'
 
 const getWrapperStyle = theme => ({
-    ...getThemeStyle(theme.name, 'footer').wrapper,
-    height: getThemeVar(theme.name, 'footerHeight'),
+    ...getThemeStyle(theme.name, 'header').wrapper,
+    height: getThemeVar(theme.name, 'headerHeight'),
 })
 
-const MobilePageFooter = ({ children }) => (
+const PageHeader = ({ children }) => (
     <ThemeContext.Consumer>
         {theme => (
             <div style={getWrapperStyle(theme)}>
-                <div style={getThemeStyle(theme.name, 'footer').inner}>
+                <div style={getThemeStyle(theme.name, 'header').inner}>
                     {children}
                 </div>
             </div>
@@ -21,10 +21,10 @@ const MobilePageFooter = ({ children }) => (
 )
 
 // necessary to detect the presence inside the MobilePage wrapper
-MobilePageFooter.displayName = 'MobilePageFooter'
+PageHeader.displayName = 'PageHeader'
 
-MobilePageFooter.propTypes = {
+PageHeader.propTypes = {
     children: PropTypes.any, // eslint-disable-line
 }
 
-export default MobilePageFooter
+export default PageHeader

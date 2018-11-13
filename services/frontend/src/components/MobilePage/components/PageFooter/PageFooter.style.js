@@ -1,4 +1,4 @@
-import { getThemeVar } from './themes/variables'
+import { getThemeVar } from '../../themes/variables'
 
 export default {
     wrapper: {
