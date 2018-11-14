@@ -1,0 +1,9 @@
+{
+    "presets": [
+        [ "@babel/preset-env" ]
+    ],
+    "plugins": [
+        [ "module-resolver", { "root": ["./ssr"] } ],
+        "babel-plugin-dynamic-import-node-babel-7"
+    ]
+}
