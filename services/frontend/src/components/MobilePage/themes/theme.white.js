@@ -28,7 +28,7 @@ export default {
     },
     PageFooter: {
         wrapper: {
-            backgroundColor: '#666',
+            backgroundColor: colors.primary,
         },
     },
     Divider: {

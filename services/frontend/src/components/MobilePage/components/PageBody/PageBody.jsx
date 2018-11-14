@@ -40,14 +40,15 @@ const getInnerStyle = (theme, { withPadding, flex }) => {
 
     // apply padding
     if (withPadding) {
-        style.paddingLeft = getThemeVar(theme.name, 'HSpace')
-        style.paddingRight = getThemeVar(theme.name, 'HSpace')
-        style.paddingTop = getThemeVar(theme.name, 'VSpace')
-        style.paddingBottom = getThemeVar(theme.name, 'VSpace')
+        style.marginLeft = getThemeVar(theme.name, 'HSpace')
+        style.marginRight = getThemeVar(theme.name, 'HSpace')
+        style.marginTop = getThemeVar(theme.name, 'VSpace')
+        style.marginBottom = getThemeVar(theme.name, 'VSpace')
     }
 
     // flexbox body
     if (flex) {
+        style.flex = 1
         style.display = 'flex'
     }
 

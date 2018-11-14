@@ -1,3 +1,5 @@
+### KitchenSink
+
 ```js
 const MobilePageComponentWrapper = require('./lib/styleguidist.wrapper1').default
 const mr = { marginRight: 10 }
@@ -20,4 +22,14 @@ const mb = { marginBottom: 10 }
         </MobilePage>
     )}
 </MobilePageComponentWrapper>
+```
+
+### Small Stuff
+
+```js
+<MobilePage theme="dark" width={250} height={300}>
+    <MobilePage.Body withPadding>
+        <p>padded page with theme</p>
+    </MobilePage.Body>
+</MobilePage>
 ```

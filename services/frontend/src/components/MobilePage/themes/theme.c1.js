@@ -20,11 +20,6 @@ export default {
             color: colors.text,
         },
     },
-    PageFooter: {
-        wrapper: {
-            backgroundColor: '#666',
-        },
-    },
     Divider: {
         borderColor: colors.divider,
     },

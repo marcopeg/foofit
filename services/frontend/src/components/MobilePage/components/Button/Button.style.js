@@ -13,6 +13,7 @@ export default {
         outline: 'none',
     },
     'wrapper--block': {
+        display: 'flex',
         width: '100%',
     },
     'wrapper--small': {
