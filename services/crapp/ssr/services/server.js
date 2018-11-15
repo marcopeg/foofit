@@ -3,6 +3,7 @@ import express from 'express'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import helmet from 'helmet'
 import uuid from 'uuid/v1'
 import millisecond from 'millisecond'
 import { logInfo } from 'services/logger'
@@ -10,7 +11,7 @@ import { createAppRouter } from 'routes/index'
 
 const app = express()
 
-export const init = ({ loginDuration }) => {
+export const init = ({ loginDuration, ...settings }) => {
     logInfo('init server')
     const isDev = [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1
 
@@ -62,12 +63,13 @@ export const init = ({ loginDuration }) => {
     })
 
     app.use(compression())
-    app.use(createAppRouter())
+    app.use(helmet())
+    app.use(createAppRouter(settings))
 
     // serve static files
-    app.use(express.static(path.resolve(__dirname, '..', '..', 'public')))
-    app.use(express.static(path.resolve(__dirname, '..', '..', 'build-client')))
-    app.use('*', express.static(path.resolve(__dirname, '..', '..', 'build-client')))
+    // app.use(express.static(path.resolve(__dirname, '..', '..', 'public')))
+    // app.use(express.static(path.resolve(__dirname, '..', '..', 'build-client')))
+    // app.use('*', express.static(path.resolve(__dirname, '..', '..', 'build-client')))
 }
 
 export const start = ({ port }) => {
