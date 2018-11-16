@@ -12,7 +12,12 @@ export const initialState = {
  * Handlers
  */
 
-export const actionHandlers = {}
+export const actionHandlers = {
+    fooVal: (state, { payload }) => ({
+        ...state,
+        value: payload,
+    })
+}
 
 export const reducer = (state = initialState, action) => {
     const handler = actionHandlers[action.type]

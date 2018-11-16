@@ -23,6 +23,38 @@ export const staticRender = (App, url, initialState) => ({
     context: {},
 })
 
+const renderInitialState = ({
+    App,
+    url,
+    store,
+    history,
+    timeout,
+    userAgent,
+}) => new Promise((resolve) => {
+    const { ssr } = store.getState()
+
+    const timer = setTimeout(() => {
+        console.error('SSR TIMEOUT', url) // eslint-disable-line
+        resolve()
+    }, timeout)
+
+    // rendering loop, used to resolve nested componentWillMount
+    // data loading side effects.
+    function tick () {
+        renderToString(<App store={store} history={history} userAgent={userAgent} />)
+        if (!ssr.checkStack()) {
+            clearTimeout(timer)
+            resolve()
+        } else {
+            ssr.once('complete', tick)
+        }
+    }
+
+    history.push(url)
+    renderToString(<App store={store} history={history} userAgent={userAgent} />)
+    ssr.once('complete', tick)
+})
+
 export const createSSRRender = (App, { createState } = {}) => {
     const ssrRender = async (url, initialState, settings) => {
         // ssr for a basic cra app
@@ -31,24 +63,50 @@ export const createSSRRender = (App, { createState } = {}) => {
             return staticRender(App, url, initialState)
         }
 
+        // create the app state with history
         const history = createHistory()
         const state = await createState(initialState, history)
+        const userAgent = settings.userAgent || 'unknown user agent'
+        const timeout = settings.timeout || 3000
 
-        console.log('-- createSSRRender')
-        console.log('url:', url)
-        console.log('initialState:', initialState)
+        // render the initial state of the app
+        // this is when we wait for all the async stuff to complete
+        if (state.store) {
+            await renderInitialState({
+                App,
+                url,
+                store: state.store,
+                history,
+                userAgent,
+                timeout,
+            })
+        } else {
+            history.push(url)
+        }
+
+        // console.log('-- createSSRRender')
+        // console.log('url:', url)
+        // console.log('initialState:', initialState)
         // console.log('settings:', settings)
         // console.log('app state', state)
-        console.log('---')
+        // console.log('---')
+        // history.push(url)
 
-        history.push(url)
+        // react-loadable integration
+        const modules = []
+        // const html = renderToString((
+        //     <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+        //         <StaticApp store={store} url={url} context={context} userAgent={userAgent} />
+        //     </Loadable.Capture>
+        // ))
 
-        console.log('state', state.store.getState())
+        // console.log('state', state.store.getState())
 
         return {
             html: renderToString(React.createElement(App, state)),
             initialState: state.store ? state.store.getState() : initialState,
             context: {},
+            modules,
         }
     }
 

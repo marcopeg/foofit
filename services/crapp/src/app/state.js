@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 
 import { routerMiddleware } from 'react-router-redux'
 import { ReduxEvents } from 'redux-events-middleware'
+import { createSSRContext } from '../lib/create-react-app-ssr/src/create-ssr-context'
 
 import {
     getReducers as getFeaturesReducers,
@@ -19,6 +20,7 @@ const appReducer = (state = {}) => state
 
 export const createState = async (initialState = {}, history) => {
     const events = new ReduxEvents()
+    const ssrContext = createSSRContext(initialState.ssr || {})
 
     const enhancers = []
     const middleware = [
@@ -44,7 +46,9 @@ export const createState = async (initialState = {}, history) => {
     const initialReducers = {
         app: appReducer,
         ...getFeaturesReducers(features),
+        ...ssrContext.reducers,
     }
+
     const combinedReducers = combineReducers(initialReducers)
 
     let store = createReduxStore(
