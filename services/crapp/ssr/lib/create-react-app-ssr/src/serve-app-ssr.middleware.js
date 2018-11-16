@@ -96,9 +96,9 @@ export const serveAppSSR = (settings = {}) => async (req, res, next) => {
                 if (typeof staticRender !== 'function') {
                     throw new Error('ssr static render does not appear to be a function')
                 }
-                // if (staticRender.ssrVersion !== ssrVersion) {
-                //     throw new Error('ssr static render version signature does not appear to match')
-                // }
+                if (staticRender.ssrVersion !== ssrVersion) {
+                    throw new Error('ssr static render version signature does not appear to match')
+                }
             } catch (err) {
                 // fallback on a default static render that will visualize the error
                 staticRender = (() => ({
@@ -114,12 +114,12 @@ export const serveAppSSR = (settings = {}) => async (req, res, next) => {
         const initialState = {
             app: {
                 name: 'server',
-            }
-            // ssr: {
-            //     serverUrl: `http://localhost:${settings.ssrPort}`,
-            //     apiUrl: `http://localhost:${settings.ssrPort}/api`,
-            //     request: req, // proxy express request
-            // },
+            },
+            ssr: {
+                serverUrl: `http://localhost:${settings.ssrPort}`,
+                apiUrl: `http://localhost:${settings.ssrPort}/api`,
+                request: req, // proxy express request
+            },
         }
         const prerender = await staticRender(req.url, initialState, {
             req, res, // proxy express handler

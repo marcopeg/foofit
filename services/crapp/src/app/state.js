@@ -51,9 +51,17 @@ export const createState = async (initialState = {}, history) => {
 
     const combinedReducers = combineReducers(initialReducers)
 
+    // SSR
+    // replace the ssr helper so that can be initialize
+    // on the client with the proper functionalities
+    const ssrInitialState = {
+        ...initialState,
+        ssr: null,
+    }
+
     let store = createReduxStore(
         combinedReducers,
-        initialState,
+        ssrInitialState,
         composedEnhancers,
     )
 
