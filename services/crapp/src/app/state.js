@@ -14,8 +14,8 @@ import {
     decorateStore as decorateStoreWithFeatures,
 } from 'react-redux-feature/lib/decorate-store'
 
+import features from '../features'
 const appReducer = (state = {}) => state
-const features = []
 
 export const createState = async (initialState = {}, history) => {
     const events = new ReduxEvents()

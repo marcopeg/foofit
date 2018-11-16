@@ -11,7 +11,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            {`hello ${this.props.name}`}
+            {`hello ${this.props.name} (${this.props.value})`}
           </p>
           <a
             className="App-link"
@@ -33,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(({ app }) => app)(App));
+export default withRouter(connect(({ app, foo }) => ({ ...app, ...foo }))(App));
