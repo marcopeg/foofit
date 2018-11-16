@@ -1,4 +1,4 @@
-import path from 'path'
+// import path from 'path'
 import express from 'express'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
@@ -8,6 +8,7 @@ import uuid from 'uuid/v1'
 import millisecond from 'millisecond'
 import { logInfo } from 'services/logger'
 import { createAppRouter } from 'routes/index'
+import { createSSRRouter } from 'lib/create-react-app-ssr/src/create-ssr-router'
 
 const app = express()
 
@@ -64,7 +65,9 @@ export const init = ({ loginDuration, ...settings }) => {
 
     app.use(compression())
     app.use(helmet())
-    app.use(createAppRouter(settings))
+
+    app.use(createSSRRouter(settings))
+    app.use(createAppRouter())
 
     // serve static files
     // app.use(express.static(path.resolve(__dirname, '..', '..', 'public')))

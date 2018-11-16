@@ -64,7 +64,8 @@ const prepHTML = (template, {
 
     // remove bundle js (dev, experimental)
     if (ssrDisableJs === 'yes') {
-        data = data.replace(/<script type="text\/javascript" src="\/static\/js\/main.([^\s]*).js"><\/script>/g, '')
+        data = data.replace(/<script src="\/static\/js\/([^\s]*).js"><\/script>/g, '')
+        data = data.replace(/<script.*>.*<\/script>/g, '')
     }
 
     return data

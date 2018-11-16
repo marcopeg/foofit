@@ -37,7 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "-----": "---- // SSR // ----",
-    "build:ssr:src": "NODE_ENV=production BABEL_ENV=node ./node_modules/.bin/babel src --out-dir ./build-src",
+    "build:ssr:src": "NODE_ENV=production BABEL_ENV=node ./node_modules/.bin/babel src --out-dir ./build-src --copy-files",
     "build:ssr:ssr": "NODE_ENV=production BABEL_ENV=node ./node_modules/.bin/babel ssr --out-dir ./build-ssr",
     "build:ssr": "yarn build:ssr:src && yarn build:ssr:ssr",
     "start:api": "NODE_ENV=production node index",
