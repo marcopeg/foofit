@@ -57,6 +57,10 @@ export const createState = async (initialState = {}, history) => {
     // add features capabilities to the store
     store = decorateStoreWithFeatures({ store, history, events, initialReducers })
 
+    // Initialize dynamic stuff
+    await store.registerSyncFeatures(features)
+    await store.startSyncFeatures()
+
     return {
         store,
         history,
