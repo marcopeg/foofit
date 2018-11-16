@@ -1,10 +1,16 @@
 import express from 'express'
+import { createSSRRegisterHook } from './create-ssr-register-hook'
 import { serveAppStatic } from './serve-app-static.middleware'
 import { serveAppSSR } from './serve-app-ssr.middleware'
 import { serveBuild } from './serve-build.middleware'
 
 export const createSSRRouter = (settings) => {
     const router = express.Router()
+
+    // handle require images
+    if (settings.ssrEnabled === 'yes') {
+        createSSRRegisterHook()
+    }
 
     // serve client app
     let serveApp = settings.ssrEnabled === 'yes'

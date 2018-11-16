@@ -10,10 +10,6 @@ import * as testService from 'services/test'
 import models from 'models'
 import features from 'features'
 
-// SSR - Handle Images
-import { createIgnoreStyles } from 'lib/create-react-app-ssr/src/create-ignore-styles'
-createIgnoreStyles()
-
 const boot = async () => {
     await envService.init()
     await loggerService.init()

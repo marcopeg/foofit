@@ -4,7 +4,7 @@ const md5File = require('md5-file')
 const mimeTypes = require('mime-types')
 const register = require('ignore-styles').default
 
-const createIgnoreStyles = (settings = {}) => {
+export const createSSRRegisterHook = (settings = {}) => {
     const importExtensions = settings.ext || [ '.png', '.jpg', 'jpeg', '.gif', 'svg' ]
     const importLimit = settings.limit || 10000
 
@@ -32,8 +32,4 @@ const createIgnoreStyles = (settings = {}) => {
             console.log(err)
         }
     })
-}
-
-module.exports = {
-    createIgnoreStyles,
 }
