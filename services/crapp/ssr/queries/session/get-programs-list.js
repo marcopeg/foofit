@@ -7,7 +7,7 @@ import {
     GraphQLInt,
 } from 'graphql'
 
-import { getPrograms } from 'features/profile'
+import { getPrograms } from 'ssr/features/profile'
 
 export default {
     description: 'Provides the cached lists of programs data for a user',

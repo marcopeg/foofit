@@ -1,14 +1,14 @@
 import path from 'path'
 import * as config from '@marcopeg/utils/lib/config'
-import * as envService from 'services/env'
-import * as loggerService from 'services/logger'
-import * as hashService from 'services/hash'
-import * as jwtService from 'services/jwt'
-import * as postgresService from 'services/postgres'
-import * as serverService from 'services/server'
-import * as testService from 'services/test'
-import models from 'models'
-import features from 'features'
+import * as envService from 'ssr/services/env'
+import * as loggerService from 'ssr/services/logger'
+import * as hashService from 'ssr/services/hash'
+import * as jwtService from 'ssr/services/jwt'
+import * as postgresService from 'ssr/services/postgres'
+import * as serverService from 'ssr/services/server'
+import * as testService from 'ssr/services/test'
+import models from 'ssr/models'
+import features from 'ssr/features'
 
 const boot = async () => {
     await envService.init()

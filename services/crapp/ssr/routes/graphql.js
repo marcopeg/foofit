@@ -4,8 +4,8 @@ import {
     GraphQLObjectType,
 } from 'graphql'
 
-import queries from 'queries/index'
-import mutations from 'mutations/index'
+import queries from 'ssr/queries/index'
+import mutations from 'ssr/mutations/index'
 
 const RootQueryType = new GraphQLObjectType({
     name: 'RootQuery',

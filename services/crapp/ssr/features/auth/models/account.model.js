@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import { encode } from 'services/hash'
+import { encode } from 'ssr/services/hash'
 
 export const name = 'Account'
 

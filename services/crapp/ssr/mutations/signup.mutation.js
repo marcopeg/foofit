@@ -5,7 +5,7 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { signup } from 'features/auth'
+import { signup } from 'ssr/features/auth'
 
 export default {
     description: 'Signup a new user',

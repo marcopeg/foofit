@@ -2,7 +2,7 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { logout } from 'features/auth'
+import { logout } from 'ssr/features/auth'
 
 export default {
     description: 'Destroy the session cookie',

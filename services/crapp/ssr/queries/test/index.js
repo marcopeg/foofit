@@ -5,7 +5,7 @@ import {
     GraphQLBoolean,
 } from 'graphql'
 
-import { validateToken } from 'services/test'
+import { validateToken } from 'ssr/services/test'
 
 // import getProgramsList from './get-programs-list'
 

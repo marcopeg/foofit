@@ -1,5 +1,5 @@
-import jwtService from 'services/jwt'
-import { getModel, registerModel } from 'services/postgres'
+import jwtService from 'ssr/services/jwt'
+import { getModel, registerModel } from 'ssr/services/postgres'
 
 const COOKIE_NAME = 'auth::login'
 const sequelizeError = err => err.detail ? new Error(err.detail) : err

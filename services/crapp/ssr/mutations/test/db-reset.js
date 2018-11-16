@@ -1,5 +1,5 @@
 import { GraphQLBoolean } from 'graphql'
-import { resetModels } from 'services/postgres'
+import { resetModels } from 'ssr/services/postgres'
 
 export default {
     description: 'Drop the public schema of the main db and re-sync the models',

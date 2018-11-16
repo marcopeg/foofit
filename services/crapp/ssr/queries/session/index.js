@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID } from 'graphql'
-import { getSession } from 'features/auth'
+import { getSession } from 'ssr/features/auth'
 import getProgramsList from './get-programs-list'
 
 export default {

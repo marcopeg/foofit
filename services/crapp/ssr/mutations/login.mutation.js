@@ -5,7 +5,7 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { login } from 'features/auth'
+import { login } from 'ssr/features/auth'
 
 export default {
     description: 'Login a user and create a JWT',

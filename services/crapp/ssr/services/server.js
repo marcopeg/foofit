@@ -6,9 +6,9 @@ import cors from 'cors'
 import helmet from 'helmet'
 import uuid from 'uuid/v1'
 import millisecond from 'millisecond'
-import { logInfo } from 'services/logger'
-import { createAppRouter } from 'routes/index'
-import { createSSRRouter } from 'lib/create-react-app-ssr/src/create-ssr-router'
+import { logInfo } from 'ssr/services/logger'
+import { createAppRouter } from 'ssr/routes/index'
+import { createSSRRouter } from 'ssr/lib/create-react-app-ssr/src/create-ssr-router'
 
 const app = express()
 
