@@ -112,7 +112,9 @@ export const serveAppSSR = (settings = {}) => async (req, res, next) => {
         const filePath = path.resolve(path.join(settings.ssrBuild, 'index.html'))
         const htmlTemplate = await readFile(filePath)
         const initialState = {
-            name: 'server',
+            app: {
+                name: 'server',
+            }
             // ssr: {
             //     serverUrl: `http://localhost:${settings.ssrPort}`,
             //     apiUrl: `http://localhost:${settings.ssrPort}/api`,

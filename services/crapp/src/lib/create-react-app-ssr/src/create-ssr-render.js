@@ -27,6 +27,7 @@ export const createSSRRender = (App, { createState } = {}) => {
     const ssrRender = async (url, initialState, settings) => {
         // ssr for a basic cra app
         if (!createState) {
+            console.log('!!! no state')
             return staticRender(App, url, initialState)
         }
 
@@ -42,9 +43,11 @@ export const createSSRRender = (App, { createState } = {}) => {
 
         history.push(url)
 
+        console.log('state', state.store.getState())
+
         return {
             html: renderToString(React.createElement(App, state)),
-            initialState: {},
+            initialState: state.store ? state.store.getState() : initialState,
             context: {},
         }
     }

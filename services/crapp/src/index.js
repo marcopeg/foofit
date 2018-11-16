@@ -8,7 +8,7 @@ import { createState } from './app/state'
 
 const history = createHistory()
 const initialState = window.REDUX_INITIAL_STATE || {
-    name: 'client'
+    app: { name: 'client' }
 }
 
 createState(initialState, history)
