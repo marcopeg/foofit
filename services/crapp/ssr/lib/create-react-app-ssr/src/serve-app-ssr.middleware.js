@@ -112,13 +112,15 @@ export const serveAppSSR = (settings = {}) => async (req, res, next) => {
         const filePath = path.resolve(path.join(settings.ssrBuild, 'index.html'))
         const htmlTemplate = await readFile(filePath)
         const initialState = {
-            ssr: {
-                serverUrl: `http://localhost:${settings.ssrPort}`,
-                apiUrl: `http://localhost:${settings.ssrPort}/api`,
-                request: req, // proxy express request
-            },
+            name: 'server',
+            // ssr: {
+            //     serverUrl: `http://localhost:${settings.ssrPort}`,
+            //     apiUrl: `http://localhost:${settings.ssrPort}/api`,
+            //     request: req, // proxy express request
+            // },
         }
         const prerender = await staticRender(req.url, initialState, {
+            req, res, // proxy express handler
             timeout: settings.ssrTimeout,
             userAgent: req.headers['user-agent'],
         })
@@ -128,7 +130,7 @@ export const serveAppSSR = (settings = {}) => async (req, res, next) => {
         let bundles = []
         try {
             const bundleStats = require(path.join(settings.ssrBuild, 'react-loadable.json'))
-            const bundles = getBundles(bundleStats, prerender.modules)
+            bundles = getBundles(bundleStats, prerender.modules)
                 .filter(bundle => bundle.file.indexOf('.js.map') === -1) // remove sourcemaps
                 .map(bundle => `<script type="text/javascript" src="${bundle.publicPath}"></script>`)
         } catch (err) {}
