@@ -12,7 +12,7 @@ import { createSSRRouter } from 'create-react-app-ssr/lib/create-ssr-router'
 
 const app = express()
 
-export const init = ({ loginDuration, ...settings }) => {
+export const init = async ({ loginDuration, ...settings }) => {
     logInfo('init server')
     const isDev = [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1
 
@@ -66,7 +66,7 @@ export const init = ({ loginDuration, ...settings }) => {
     app.use(compression())
     app.use(helmet())
 
-    app.use(createSSRRouter(settings))
+    app.use(await createSSRRouter(settings))
     app.use(createAppRouter())
 
     // serve static files

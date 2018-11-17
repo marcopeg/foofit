@@ -5,7 +5,8 @@
     ],
     "plugins": [
         [ "module-resolver", { "root": ["."] } ],
-        "babel-plugin-dynamic-import-node-babel-7"
+        "babel-plugin-dynamic-import-node-babel-7",
+        "react-loadable/babel"
     ],
     "env": {
         "node": {

@@ -13,7 +13,11 @@
  *
  */
 
-module.exports = (webpackConfig, env, { paths }) => {
+const { webpackReactLoadable } = require('create-react-app-ssr/lib/webpack-react-loadable')
+
+module.exports = (config, env, { paths }) => {
     // here you can extend your webpackConfig at will
-    return webpackConfig
+    // if (env === 'productio')
+    config = webpackReactLoadable(config)
+    return config
 }

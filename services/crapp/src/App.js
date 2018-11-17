@@ -1,8 +1,15 @@
+import loadable from 'react-loadable'
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
+
 import logo from './logo.svg';
 import './App.css';
+
+const Foo = loadable({
+  loader: () => import('./components/Foo'),
+  loading: () => null,
+})
 
 class App extends Component {
   render() {
@@ -28,6 +35,7 @@ class App extends Component {
           <Route exact path="/" component={() => <div>HOME</div>} />
           <Route exact path="/p1" component={() => <div>PAGE1</div>} />
         </Switch>
+        <Foo />
       </div>
     );
   }
