@@ -34,7 +34,7 @@ const renderInitialState = ({
     const { ssr } = store.getState()
 
     const timer = setTimeout(() => {
-        console.error('SSR TIMEOUT', url) // eslint-disable-line
+        console.error(`[ssr] render timeout - ${url}`) // eslint-disable-line
         resolve()
     }, timeout)
 
@@ -59,7 +59,6 @@ export const createSSRRender = (App, { createState } = {}) => {
     const ssrRender = async (url, initialState, settings) => {
         // ssr for a basic cra app
         if (!createState) {
-            console.log('!!! no state')
             return staticRender(App, url, initialState)
         }
 
@@ -73,9 +72,9 @@ export const createSSRRender = (App, { createState } = {}) => {
         // this is when we wait for all the async stuff to complete
         if (state.store) {
             await renderInitialState({
+                ...state,
                 App,
                 url,
-                store: state.store,
                 history,
                 userAgent,
                 timeout,

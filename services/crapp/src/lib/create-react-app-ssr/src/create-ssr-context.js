@@ -4,6 +4,10 @@ export const createSSRContext = (settings) => {
     const awaitStack = []
     const callbacks = {}
 
+    const rootUrl = settings.rootUrl
+        ? settings.rootUrl
+        : '/'
+    
     const apiUrl = settings.apiUrl
         ? settings.apiUrl
         : '/api'
@@ -73,14 +77,17 @@ export const createSSRContext = (settings) => {
             console.warn('[create-ssr-context] apiUrl is deprecated, please use "getApiUrl()" instead')
             return `${apiUrl}${url}`
         },
+        getRootUrl: url => `${rootUrl}${url}`,
         getApiUrl: url => `${apiUrl}${url}`,
-        getRequest: () => settings.request,
+        getRequestHandler: () => settings.req,
+        getResponsetHandler: () => settings.res,
     }
 
 
     return {
         reducers: {
-            ssr: state => state || reducer,
+            ssr: () => reducer,
+            // ssr: state => state || reducer,
         },
     }
 }

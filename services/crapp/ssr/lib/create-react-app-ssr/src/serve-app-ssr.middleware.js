@@ -116,13 +116,13 @@ export const serveAppSSR = (settings = {}) => async (req, res, next) => {
                 name: 'server',
             },
             ssr: {
-                serverUrl: `http://localhost:${settings.ssrPort}`,
+                req, res, // proxy express handlers
+                rootUrl: `http://localhost:${settings.ssrPort}`,
                 apiUrl: `http://localhost:${settings.ssrPort}/api`,
-                request: req, // proxy express request
             },
         }
         const prerender = await staticRender(req.url, initialState, {
-            req, res, // proxy express handler
+            req, res, // proxy express handlers
             timeout: settings.ssrTimeout,
             userAgent: req.headers['user-agent'],
         })

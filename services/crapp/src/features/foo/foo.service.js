@@ -13,7 +13,7 @@ export const start = () => async (dispatch, getState) => {
             dispatch({ type: '@@THEN'})
             dispatch({ type: 'fooVal', payload: 666 })
             resolve()
-        }, 10)
+        }, 100)
     })
     
     ssr.await(p)

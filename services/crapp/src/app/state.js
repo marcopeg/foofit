@@ -22,13 +22,13 @@ export const createState = async (initialState = {}, history) => {
     const events = new ReduxEvents()
     const ssrContext = createSSRContext(initialState.ssr || {})
 
-    const enhancers = []
-    const middleware = [
+    const middlewares = [
         thunk,
         routerMiddleware(history),
         events.createReduxMiddleware({ history }),
     ]
 
+    const enhancers = []
     // redux dev tools (development & client only)
     if (process.env.NODE_ENV === 'development' && !process.env.SSR) {
         const { devToolsExtension } = window
@@ -39,7 +39,7 @@ export const createState = async (initialState = {}, history) => {
     }
 
     const composedEnhancers = compose(
-        applyMiddleware(...middleware),
+        applyMiddleware(...middlewares),
         ...enhancers,
     )
 
@@ -51,17 +51,10 @@ export const createState = async (initialState = {}, history) => {
 
     const combinedReducers = combineReducers(initialReducers)
 
-    // SSR
-    // replace the ssr helper so that can be initialize
-    // on the client with the proper functionalities
-    const ssrInitialState = {
-        ...initialState,
-        ssr: null,
-    }
-
+    // redux store gets created
     let store = createReduxStore(
         combinedReducers,
-        ssrInitialState,
+        initialState,
         composedEnhancers,
     )
 
@@ -76,5 +69,7 @@ export const createState = async (initialState = {}, history) => {
     return {
         store,
         history,
+        events,
+        ssrContext,
     }
 }
