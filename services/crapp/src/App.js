@@ -7,13 +7,28 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      count: 0
+    }
+  }
+
+  componentDidMount () {
+    this.interval = setInterval(() => this.setState({ count: this.state.count + 1}), 1000)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.interval)
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            {`hello ${this.props.name} (${this.props.value})`}
+            {`hello ${this.props.name} (${this.props.value} - ${this.state.count})`}
           </p>
           <a
             className="App-link"
