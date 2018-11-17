@@ -5,7 +5,7 @@ export const init = () => () => {
 
 export const start = () => async (dispatch, getState) => {
     const { ssr } = getState()
-    console.log(ssr.getApiUrl('/foo'))
+    // console.log(ssr.getApiUrl('/foo'))
     // console.log('start foo')
 
     const p = new Promise((resolve) => {

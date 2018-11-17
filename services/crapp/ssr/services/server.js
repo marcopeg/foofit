@@ -8,7 +8,7 @@ import uuid from 'uuid/v1'
 import millisecond from 'millisecond'
 import { logInfo } from 'ssr/services/logger'
 import { createAppRouter } from 'ssr/routes/index'
-import { createSSRRouter } from 'ssr/lib/create-react-app-ssr/src/create-ssr-router'
+import { createSSRRouter } from 'create-react-app-ssr/lib/create-ssr-router'
 
 const app = express()
 
