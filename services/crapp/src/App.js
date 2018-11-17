@@ -1,15 +1,10 @@
-import loadable from 'react-loadable'
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
-
+import Foo from 'components/Foo'
 import logo from './logo.svg';
 import './App.css';
-
-const Foo = loadable({
-  loader: () => import('./components/Foo'),
-  loading: () => null,
-})
 
 class App extends Component {
   render() {
