@@ -4,7 +4,7 @@
         "@babel/preset-react"
     ],
     "plugins": [
-        [ "module-resolver", { "root": ["src", "."] } ],
+        [ "module-resolver", { "root": ["src", "ssr", "."] } ],
         "babel-plugin-dynamic-import-node-babel-7",
         "react-loadable/babel"
     ],

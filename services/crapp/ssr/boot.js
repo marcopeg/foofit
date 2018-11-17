@@ -30,16 +30,16 @@ const boot = async () => {
             password: config.get('PG_PASSWORD'),
         }),
         serverService.init({
+            nodeEnv: config.get('NODE_ENV'),
             loginDuration: String(config.get('LOGIN_DURATION')),
             ssrEnabled: config.get('SSR_ENABLED'),
             ssrTimeout: Number(config.get('SSR_TIMEOUT')),
             ssrRoot: path.join(__dirname, '..', config.get('SSR_ROOT')),
             ssrBuild: path.join(__dirname, '..', config.get('SSR_BUILD')),
-            ssrPort: config.get('SSR_PORT'),
             ssrDisableJs: config.get('SSR_DISABLE_JS'),
             ssrUseWebpackJs: config.get('SSR_USE_WEBPACK_JS'),
             ssrBlacklist: config.get('SSR_BLACKLIST'),
-            nodeEnv: config.get('NODE_ENV'),
+            ssrPort: config.get('SERVER_PORT'),
         }),
         testService.init({
             isEnabled: [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1,
