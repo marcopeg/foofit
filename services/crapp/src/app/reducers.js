@@ -1,4 +1,7 @@
+export const appInitialState = {
+    backend: 'http://localhost:8080/',
+}
 
 export default {
-    app: (state = {}) => state,
+    app: (state = appInitialState) => state,
 }

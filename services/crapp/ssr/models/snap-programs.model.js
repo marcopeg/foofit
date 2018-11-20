@@ -76,7 +76,7 @@ const getListByProfileId = (conn, Model) => async (profileId, lastUpdate = null)
         raw: true,
     })
 
-    console.log(res)
+    // console.log(res)
 
     return res.map(item => ({
         ...item,

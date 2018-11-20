@@ -8,11 +8,10 @@ import uuid from 'uuid/v1'
 import millisecond from 'millisecond'
 import { logInfo } from 'ssr/services/logger'
 import { createAppRouter } from 'ssr/routes/index'
-import { createSSRRouter } from 'create-react-app-ssr/lib/create-ssr-router'
 
 const app = express()
 
-export const init = async ({ loginDuration, ...settings }) => {
+export const init = ({ loginDuration, ...settings }) => {
     logInfo('init server')
     const isDev = [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1
 
@@ -66,9 +65,8 @@ export const init = async ({ loginDuration, ...settings }) => {
     app.use(compression())
     app.use(helmet())
 
-    app.use(await createSSRRouter(settings))
-    app.use(createAppRouter())
-
+    app.use(createAppRouter(settings))
+    
     // serve static files
     // app.use(express.static(path.resolve(__dirname, '..', '..', 'public')))
     // app.use(express.static(path.resolve(__dirname, '..', '..', 'build-client')))

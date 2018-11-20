@@ -6,13 +6,10 @@ import { Router } from 'react-router-dom'
 
 import App from '../App'
 
-const Root = ({ history, store, ...props }) => (
+export default ({ history, store, ...props }) => (
     <Provider store={store}>
         <Router history={history}>
             <App {...props} />
         </Router>
     </Provider>
 )
-
-
-export default Root

@@ -1,4 +1,5 @@
 import path from 'path'
+import loadable from 'react-loadable'
 import * as config from '@marcopeg/utils/lib/config'
 import * as envService from 'ssr/services/env'
 import * as loggerService from 'ssr/services/logger'
@@ -9,6 +10,9 @@ import * as serverService from 'ssr/services/server'
 import * as testService from 'ssr/services/test'
 import models from 'ssr/models'
 import features from 'ssr/features'
+
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const boot = async () => {
     await envService.init()
