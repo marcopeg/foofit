@@ -1,5 +1,4 @@
 import path from 'path'
-import loadable from 'react-loadable'
 import * as config from '@marcopeg/utils/lib/config'
 import * as envService from 'ssr/services/env'
 import * as loggerService from 'ssr/services/logger'

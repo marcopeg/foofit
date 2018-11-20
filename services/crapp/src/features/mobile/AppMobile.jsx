@@ -1,40 +1,31 @@
-// import loadable from 'lib/custom-loadable'
+import loadable from 'lib/custom-loadable'
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import './AppMobile.css'
 
 import ErrorScreen from 'features/mobile-public/screens/ErrorScreen'
 import Home from 'features/mobile-public/screens/Home'
-import Signup from 'features/mobile-public/screens/Signup'
 import Login from 'features/mobile-public/screens/Login'
-import ProgramsList from 'features/mobile-programs/screens/ProgramsList'
-import ProgramDetails from 'features/mobile-programs/screens/ProgramDetails'
-import TrainingDetails from 'features/mobile-programs/screens/TrainingDetails'
-import TrainingWatch from 'features/mobile-programs/screens/TrainingWatch'
 
-// const Home = loadable({
-//     loader: () => import('features/mobile-public/screens/Home'),
-// })
+const Signup = loadable({
+    loader: () => import(/* webpackChunkName: "MobileSignup" */ 'features/mobile-public/screens/Signup'),
+})
 
-// const Signup = loadable({
-//     loader: () => import('features/mobile-public/screens/Signup'),
-// })
+const ProgramsList = loadable({
+    loader: () => import(/* webpackChunkName: "MobileProgramsList" */ 'features/mobile-programs/screens/ProgramsList'),
+})
 
-// const ProgramsList = loadable({
-//     loader: () => import('features/mobile-programs/screens/ProgramsList'),
-// })
+const ProgramDetails = loadable({
+    loader: () => import(/* webpackChunkName: "MobileProgramDetails" */ 'features/mobile-programs/screens/ProgramDetails'),
+})
 
-// const ProgramDetails = loadable({
-//     loader: () => import('features/mobile-programs/screens/ProgramDetails'),
-// })
+const TrainingDetails = loadable({
+    loader: () => import(/* webpackChunkName: "MobileTrainingDetails" */ 'features/mobile-programs/screens/TrainingDetails'),
+})
 
-// const TrainingDetails = loadable({
-//     loader: () => import('features/mobile-programs/screens/TrainingDetails'),
-// })
-
-// const TrainingWatch = loadable({
-//     loader: () => import('features/mobile-programs/screens/TrainingWatch'),
-// })
+const TrainingWatch = loadable({
+    loader: () => import(/* webpackChunkName: "MobileTrainingWatch" */ 'features/mobile-programs/screens/TrainingWatch'),
+})
 
 const AppMobile = () => (
     <Switch>
