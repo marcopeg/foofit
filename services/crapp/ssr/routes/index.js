@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { createSSRRouter } from 'create-react-app-ssr/lib/create-ssr-router'
+import { createSSRRouter } from 'create-react-app-ssr'
 import { graphQLHandler } from './graphql'
 
 export const createAppRouter = (settings) => {

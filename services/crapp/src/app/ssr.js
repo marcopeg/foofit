@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
-import { createSSRRender } from 'create-react-app-ssr/lib/create-ssr-render'
+import { createSSRRender } from 'create-react-app-ssr'
 import { createState } from './state'
 import App from '../App'
 
