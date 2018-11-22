@@ -1,4 +1,3 @@
-// import path from 'path'
 import express from 'express'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
@@ -64,13 +63,7 @@ export const init = ({ loginDuration, ...settings }) => {
 
     app.use(compression())
     app.use(helmet())
-
     app.use(createAppRouter(settings))
-    
-    // serve static files
-    // app.use(express.static(path.resolve(__dirname, '..', '..', 'public')))
-    // app.use(express.static(path.resolve(__dirname, '..', '..', 'build-client')))
-    // app.use('*', express.static(path.resolve(__dirname, '..', '..', 'build-client')))
 }
 
 export const start = ({ port }) => {

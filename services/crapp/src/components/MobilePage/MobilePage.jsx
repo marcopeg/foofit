@@ -15,7 +15,7 @@ const getWrapperStyle = (theme, width, height) => ({
 
 const hasComponent = (children, cmp) =>
     React.Children.toArray(children)
-        .find(i => i.type.displayName === cmp.name) !== undefined
+        .find(i => i.type.displayName === cmp.displayName) !== undefined
 
 const MobilePage = ({ children, theme, width, height, withHeader, withFooter, footerOnTop }) => (
     <ThemeContext.Provider
