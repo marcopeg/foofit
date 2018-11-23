@@ -12,15 +12,23 @@ export const runQuery = (query = null, variables = {}, options = {}) => async (d
 
     const { ssr } = getState()
     const { debug, ...fetchSettingsOptions } = options
-    // const endpoint = options.endpoint || `${getState().app.backend}api`
     const endpoint = options.endpoint || ssr.getApiUrl('')
-    console.log('endpoint', endpoint)
     let result = null
-
+    
     const fetchSettings = {
         credentials: 'include',
         ...fetchSettingsOptions,
     }
+
+    // SSR: forward cookies and auth headers
+    if (process.env.SSR) {
+        const req = ssr.getRequestHandler()
+        fetchSettings.headers = {
+            ...(fetchSettingsOptions.headers || {}),
+            'Cookie': req.headers.cookie,
+        }
+    }
+
 
     if (debug) {
         console.log('>>>>>>>>>>>> GRAPHQL')
@@ -48,6 +56,9 @@ export const runQuery = (query = null, variables = {}, options = {}) => async (d
         error.graphQLErrors = result.errors
         error.graphQLResponse = result
 
+        // console.log('GraphQL Error')
+        // console.log(result.errors)
+        
         // detect an authorization problem and dispatch an action
         // that should kick out the user
         if (result.errors.find(err => err.message === '403')) {

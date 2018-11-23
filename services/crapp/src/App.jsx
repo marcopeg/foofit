@@ -17,6 +17,3 @@ export default () => (
         <Route path="/app" component={isMobile ? AppMobile : AppDesktop} />
     </Switch>
 )
-// export default () => isMobile
-//     ? <AppMobile />
-//     : <AppDesktop />
