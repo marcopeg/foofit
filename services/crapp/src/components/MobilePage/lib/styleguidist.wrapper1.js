@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react'
-import MobilePage from '../MobilePage'
+import { StaticRouter } from 'react-router-dom'
 
 const wrapperStyle = {
     display: 'flex',
@@ -59,6 +59,14 @@ class MobilePageComponentWrapper extends React.Component {
     }
 
     render () {
+        const children = this.props.children(this.state.theme, this.state.width, this.state.height)
+        const content = this.props.withRouter
+            ? (
+                <StaticRouter context={{}}>
+                    {children}
+                </StaticRouter>
+            )
+            : children
         return (
             <div>
                 <div style={wrapperStyle}>
@@ -90,7 +98,7 @@ class MobilePageComponentWrapper extends React.Component {
                     </div>
                 </div>
                 <div style={{ border: '5px solid #ddd' }}>
-                    {this.props.children(this.state.theme, this.state.width, this.state.height)}
+                    {content}
                 </div>
             </div>
         )

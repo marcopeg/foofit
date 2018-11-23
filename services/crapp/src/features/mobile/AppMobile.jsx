@@ -38,14 +38,14 @@ const TrainingWatch = loadable({
 
 const AppMobile = () => (
     <Switch>
-        <Route exact path={'/app/'} component={Home} />
-        <Route exact path={'/app/error'} component={ErrorScreen} />
-        <Route exact path={'/app/signup'} component={Signup} />
-        <Route exact path={'/app/login'} component={Login} />
-        <Route exact path={'/app/welcome'} component={ProgramsList} />
-        <Route path={'/app/program/:programId/:programSlug/:trainingId/:trainingSlug/play'} component={TrainingWatch} />
-        <Route path={'/app/program/:programId/:programSlug/:trainingId/:trainingSlug'} component={TrainingDetails} />
-        <Route path={'/app/program/:programId/:programSlug'} component={ProgramDetails} />
+        <Route exact path={'/'} component={Home} />
+        <Route exact path={'/error'} component={ErrorScreen} />
+        <Route exact path={'/signup'} component={Signup} />
+        <Route exact path={'/login'} component={Login} />
+        <Route exact path={'/welcome'} component={ProgramsList} />
+        <Route path={'/program/:programId/:programSlug/:trainingId/:trainingSlug/play'} component={TrainingWatch} />
+        <Route path={'/program/:programId/:programSlug/:trainingId/:trainingSlug'} component={TrainingDetails} />
+        <Route path={'/program/:programId/:programSlug'} component={ProgramDetails} />
     </Switch>
 )
 

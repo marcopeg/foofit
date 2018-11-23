@@ -1,5 +1,4 @@
 ```js
-const MobilePageComponentWrapper = require('../../lib/styleguidist.wrapper').default
 const { flexCentered } = require('../../lib/mixins')
 const gridStyle = {
     display: 'flex',
@@ -13,7 +12,7 @@ const loaderStyle = {
     fontSize: 12,
     margin: 25,
 }
-;<MobilePageComponentWrapper>
+;<MobilePageStyleguidist.Component>
     <h3>Loaders</h3>
     <div style={gridStyle}>
         <div style={loaderStyle}>
@@ -73,5 +72,5 @@ const loaderStyle = {
     <div><Button size={'small'}>A Button</Button><Loading size={'small'} /></div>
     <div><Button>A Button</Button><Loading /></div>
     <div><Button size={'big'}>A Button</Button><Loading size={'big'} /></div>
-</MobilePageComponentWrapper>
+</MobilePageStyleguidist.Component>
 ```

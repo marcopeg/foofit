@@ -11,6 +11,7 @@ export default {
         borderRadius: getThemeVar('___', 'borderRadius'),
         backgroundColor: 'transparent',
         outline: 'none',
+        textDecoration: 'none',
     },
     'wrapper--block': {
         display: 'flex',

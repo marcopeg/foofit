@@ -1,10 +1,10 @@
 ### KitchenSink
 
 ```js
-const MobilePageComponentWrapper = require('./lib/styleguidist.wrapper1').default
 const mr = { marginRight: 10 }
 const mb = { marginBottom: 10 }
-;<MobilePageComponentWrapper>
+;
+<MobilePageStyleguidist.Wrapper>
     {(theme, width, height ) => (
         <MobilePage theme={theme} width={width} height={height}>
             <MobilePage.Header>
@@ -21,7 +21,7 @@ const mb = { marginBottom: 10 }
             </MobilePage.Footer>
         </MobilePage>
     )}
-</MobilePageComponentWrapper>
+</MobilePageStyleguidist.Wrapper>
 ```
 
 ### Small Stuff

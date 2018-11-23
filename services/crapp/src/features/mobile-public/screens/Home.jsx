@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import MobilePage, { Button, Space, Divider, Title, Text, mixins } from 'features/mobile/MobilePage'
 
 const styles = {
@@ -15,14 +13,7 @@ const styles = {
     },
 }
 
-const mapState = () => ({})
-
-const mapDispatch = (dispatch, { history }) => ({
-    login: () => history.push('/app/login'),
-    signup: () => history.push('/app/signup'),
-})
-
-const Home = ({ login, signup }) => (
+const Home = () => (
     <MobilePage>
         <MobilePage.Header>Header</MobilePage.Header>
         <MobilePage.Body withPadding flex>
@@ -39,14 +30,14 @@ const Home = ({ login, signup }) => (
                 <Space />
                 <Button
                     block
-                    onClick={signup}
+                    linkTo={'/signup'}
                     children={'JOIN THE COMMUNITY'}
                 />
                 <Space />
                 <Button
                     block
                     type="secondary"
-                    onClick={login}
+                    linkTo={'/login'}
                     children={'login'}
                 />
             </div>
@@ -55,9 +46,4 @@ const Home = ({ login, signup }) => (
     </MobilePage>
 )
 
-Home.propTypes = {
-    login: PropTypes.func.isRequired,
-    signup: PropTypes.func.isRequired,
-}
-
-export default connect(mapState, mapDispatch)(Home)
+export default Home

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react'
+import { StaticRouter } from 'react-router-dom'
 import MobilePage from '../MobilePage'
 
 const wrapperStyle = {
@@ -56,6 +57,24 @@ class MobilePageComponentWrapper extends React.Component {
         this.setState({ theme })
     }
 
+    renderPage () {
+        const page = (
+            <MobilePage theme={this.state.theme}>
+                <MobilePage.Body withPadding>
+                    {this.props.children}
+                </MobilePage.Body>
+            </MobilePage>
+        )
+
+        return this.props.withRouter
+            ? (
+                <StaticRouter context={{}}>
+                    {page}
+                </StaticRouter>
+            )
+            : page
+    }
+
     render () {
         return (
             <div>
@@ -76,11 +95,7 @@ class MobilePageComponentWrapper extends React.Component {
                     </div>
                 </div>
                 <div style={{ border: '5px solid #ddd' }}>
-                    <MobilePage theme={this.state.theme}>
-                        <MobilePage.Body withPadding>
-                            {this.props.children}
-                        </MobilePage.Body>
-                    </MobilePage>
+                    {this.renderPage()}
                 </div>
             </div>
         )

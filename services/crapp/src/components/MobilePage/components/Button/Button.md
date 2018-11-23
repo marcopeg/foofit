@@ -1,8 +1,8 @@
 ```js
-const MobilePageComponentWrapper = require('../../lib/styleguidist.wrapper').default
 const mr = { marginRight: 10 }
 const mb = { marginBottom: 10 }
-;<MobilePageComponentWrapper>
+;
+<MobilePageStyleguidist.Component>
     <h3>Inline button:</h3>
     <Button style={mr}>Primary button</Button>
     <Button type={'secondary'} style={mr}>Secondary button</Button>
@@ -17,5 +17,13 @@ const mb = { marginBottom: 10 }
     <Button style={mr} size={'small'}>Size: small</Button>
     <Button style={mr} size={'normal'}>Size: normal</Button>
     <Button style={mr} size={'big'}>Size: big</Button>
-</MobilePageComponentWrapper>
+</MobilePageStyleguidist.Component>
+```
+
+Link Button
+
+```js
+<MobilePageStyleguidist.Component withRouter>
+    <Button linkTo={'/foo'} />
+</MobilePageStyleguidist.Component>
 ```

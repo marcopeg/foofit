@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom'
 import 'app/reset.css'
 import 'app/base.css'
 
-import { Website } from 'features/website'
 import { AppMobile } from 'features/mobile'
 import { AppDesktop } from 'features/desktop'
 
@@ -13,7 +12,6 @@ const isMobile = true
 
 export default () => (
     <Switch>
-        <Route exact path="/" component={Website} />
-        <Route path="/app" component={isMobile ? AppMobile : AppDesktop} />
+        <Route path="/" component={isMobile ? AppMobile : AppDesktop} />
     </Switch>
 )

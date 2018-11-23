@@ -2,6 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { getThemeStyle } from '../../themes'
 import { ThemeContext } from '../../MobilePage'
 
@@ -39,19 +40,23 @@ class Button extends React.PureComponent {
     }
 
     render () {
-        const { children, type, block, size, className, style, ...props } = this.props
+        const { children, type, block, linkTo, size, className, style, ...props } = this.props
         return (
             <ThemeContext.Consumer>
-                {theme => (
-                    <button
-                        {...props}
-                        className={`mbp-cmp-button ${className}`}
-                        style={getStyle(theme.name, type, size, block, this.state.isClicked, style)}
-                        onClick={this.onClick}
-                    >
-                        {children}
-                    </button>
-                )}
+                {theme => {
+                    const buttonProps = {
+                        ...props,
+                        className: `mbp-cmp-button ${className}`,
+                        style: getStyle(theme.name, type, size, block, this.state.isClicked, style),
+                        onClick: this.onClick,
+                    }
+
+                    const buttonContent = children || linkTo
+
+                    return linkTo
+                        ? <Link {...buttonProps} to={linkTo}>{buttonContent}</Link>
+                        : <button {...buttonProps}>{buttonContent}</button>
+                }}
             </ThemeContext.Consumer>
         )
     }
@@ -62,6 +67,7 @@ Button.propTypes = {
     type: PropTypes.oneOf([ 'primary', 'secondary', 'link' ]),
     size: PropTypes.oneOf([ 'small', 'normal', 'big' ]),
     block: PropTypes.bool,
+    linkTo: PropTypes.string,
     onClick: PropTypes.func,
     className: PropTypes.string,
     style: PropTypes.object,
@@ -71,6 +77,7 @@ Button.defaultProps = {
     type: 'primary',
     size: 'normal',
     block: false,
+    linkTo: null,
     onClick: null,
     className: '',
     style: {},

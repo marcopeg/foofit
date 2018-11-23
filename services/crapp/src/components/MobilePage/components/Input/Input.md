@@ -1,8 +1,7 @@
 ```js
-const MobilePageComponentWrapper = require('../../lib/styleguidist.wrapper').default
 const mr = { marginRight: 10 }
 const mb = { marginBottom: 10 }
-;<MobilePageComponentWrapper>
+;<MobilePageStyleguidist.Component>
     <h3>Basic input:</h3>
     <Input />
 
@@ -14,5 +13,5 @@ const mb = { marginBottom: 10 }
 
     <h3>Block:</h3>
     <Input block placeholder={'write something'} />
-</MobilePageComponentWrapper>
+</MobilePageStyleguidist.Component>
 ```

@@ -58,7 +58,6 @@ export const logout = () => (dispatch) => dispatch(cleanSession())
 
 export const start = () => async (dispatch, getState) => {
     console.log('GET THE STUFF')
-    const { ssr } = getState()
     const res = await dispatch(runQuery(`query foo { session { id } }`))
     console.log(res)
 }

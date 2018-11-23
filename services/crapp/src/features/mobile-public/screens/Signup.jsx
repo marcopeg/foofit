@@ -24,7 +24,7 @@ const mapState = () => ({})
 
 const mapDispatch = (dispatch, { history }) => ({
     signup: (email, passw) => dispatch(signup(email, passw)),
-    confirm: () => history.replace('/app/welcome'),
+    confirm: () => history.replace('/welcome'),
 })
 
 class Signup extends React.Component {
