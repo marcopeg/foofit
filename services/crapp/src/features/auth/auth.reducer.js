@@ -1,5 +1,6 @@
 
 export const initialState = {
+    accessDenied: false,
     hasLogin: false,
     id: null,
 }
@@ -9,6 +10,7 @@ export const initialState = {
  */
 
 export const SET_LOGIN = 'setLogin@programs'
+export const SET_ACCESS_DENIED = '@graphql::403'
 
 export const setLogin = ({ id }) => ({
     type: SET_LOGIN,
@@ -22,6 +24,10 @@ export const setLogin = ({ id }) => ({
 
 export const actionHandlers = {
     '@reset': () => ({ ...initialState }),
+    [SET_ACCESS_DENIED]: (state, { payload }) => ({
+        ...state,
+        accessDenied: true,
+    }),
     [SET_LOGIN]: (state, { payload }) => ({
         ...state,
         hasLogin: true,

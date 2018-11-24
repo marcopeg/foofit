@@ -7,3 +7,5 @@ export const services = [
 export const listeners = [
     require('./auth.listener').default,
 ]
+
+export { default as AuthRedirect } from './AuthRedirect'

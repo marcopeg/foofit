@@ -1,7 +1,7 @@
 
 import { runQuery } from 'lib/graphql'
 import getProgramsList from './queries/get-programs-list'
-import { setIsLoading, setListItems } from './programs.reducer'
+import { setIsLoading, setLoadingError, setListItems } from './programs.reducer'
 
 export const updatePrograms = () => async (dispatch) => {
     try {
@@ -11,7 +11,8 @@ export const updatePrograms = () => async (dispatch) => {
         // console.log('****', res.session.getProgramsList)
         dispatch(setListItems(res.session.getProgramsList))
     } catch (err) {
-        console.log(err)
+        console.log('Fetch Programs Error', err.message)
+        dispatch(setLoadingError(err))
     } finally {
         dispatch(setIsLoading(false))
     }

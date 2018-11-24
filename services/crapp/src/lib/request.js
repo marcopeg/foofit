@@ -30,13 +30,6 @@ export const postJSON = async (url, data = {}, config = {}) => {
             'content-type': 'application/json',
         })
 
-        console.log('******')
-        console.log(url)
-        console.log(JSON.stringify(data))
-        console.log(headers)
-        console.log('******')
-
-
         const options = Object.assign({}, config, {
             method: 'POST',
             headers: headers,

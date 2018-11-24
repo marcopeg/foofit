@@ -8,6 +8,7 @@ import { loadPrograms } from '../programs.service'
 
 const mapState = (state) => ({
     items: state.programs.items,
+    error: state.programs.loadingError,
 })
 
 const mapDispatch = (dispatch, { history }) => {
@@ -19,22 +20,28 @@ const mapDispatch = (dispatch, { history }) => {
 
 class ProgramsList extends React.PureComponent {
     componentWillMount () {
-        console.log('will mount again')
-        this.props.onLoad()
+        if (!this.props.error) {
+            console.log('load stuff', this.props.error)
+            this.props.onLoad()
+        }
     }
 
     render () {
         return (
-            <MobilePage>
+            <MobilePage withAuth>
                 <MobilePage.Header>
                     Programs
                 </MobilePage.Header>
                 <MobilePage.Body withPadding>
-                    <List
-                        items={this.props.items}
-                        onDisclose={this.props.onDisclose}
-                        subtitleProp={'desc'}
-                    />
+                    {this.props.error ? (
+                        <div>there was an error!</div>
+                    ) : (
+                        <List
+                            items={this.props.items}
+                            onDisclose={this.props.onDisclose}
+                            subtitleProp={'desc'}
+                        />
+                    )}
                 </MobilePage.Body>
             </MobilePage>
         )

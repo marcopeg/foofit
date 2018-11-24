@@ -1,11 +1,9 @@
 import { logout } from './auth.service'
+import { SET_ACCESS_DENIED } from './auth.reducer'
 
 export default [
     {
-        type: '@graphql::403',
-        handler: (action, { history }) => (dispatch) => {
-            dispatch(logout())
-            history.replace('/error')
-        },
+        type: SET_ACCESS_DENIED,
+        handler: () => dispatch => dispatch(logout()),
     },
 ]
