@@ -1,6 +1,7 @@
 
 export const initialState = {
     accessDenied: false,
+    redirectOnError: '/error',
     hasLogin: false,
     id: null,
 }

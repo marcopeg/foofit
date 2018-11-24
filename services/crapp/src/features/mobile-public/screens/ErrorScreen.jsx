@@ -1,17 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Title, Text, Space, mixins } from 'features/mobile/MobilePage'
+import MobilePage, { Title, Button, Text, Space, mixins } from 'features/mobile/MobilePage'
 
 const styles = {
     wrapper: {
-        ...mixins.flexCentered,
         flex: 1,
         flexDirection: 'column',
         paddingBottom: '50%',
         paddingLeft: '15%',
         paddingRight: '15%',
-        textAlign: 'center',
+        paddingTop: '20%',
         backgroundColor: '#cc0000',
     },
 }
@@ -28,13 +27,12 @@ const ErrorScreen = ({ login, goHome }) => (
         <MobilePage.Body flex>
             <div style={styles.wrapper}>
                 <Title>Ooooops!</Title>
-                <Text>something went terribly wrong, wouldn't you agree?</Text>
+                <Text>something went terribly wrong,<br />wouldn't you agree?</Text>
                 <Space />
                 <Space />
-                <div style={{ textAlign: 'left' }}>
-                    <Text onClick={login}>-> go to login page</Text>
-                    <Text onClick={goHome}>-> go to home page</Text>
-                </div>
+                <Button block linkTo="/login">Go to Login page</Button>
+                <Space />
+                <Button block linkTo="/home">Go to Home page</Button>
             </div>
         </MobilePage.Body>
     </MobilePage>
