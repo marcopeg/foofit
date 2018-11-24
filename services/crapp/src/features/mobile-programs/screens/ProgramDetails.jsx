@@ -17,7 +17,7 @@ const mapState = (state, { match }) => {
 const mapDispatch = (dispatch, { history, match }) => {
     return {
         loadPrograms: () => dispatch(updatePrograms()),
-        goBack: () => history.push('/welcome'),
+        goBack: () => history.push('/programs'),
         onDisclose: (item) =>
             history.push(`${match.url}/${item.id}/${slugify(item.title)}`),
     }

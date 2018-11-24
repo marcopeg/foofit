@@ -7,6 +7,8 @@ const styles = {
         flex: 1,
         flexDirection: 'column',
         marginBottom: '50%',
+        marginRight: '20%',
+        marginLeft: '20%',
     },
     copy: {
         textAlign: 'center',
@@ -15,7 +17,6 @@ const styles = {
 
 const Home = () => (
     <MobilePage>
-        <MobilePage.Header>Header</MobilePage.Header>
         <MobilePage.Body withPadding flex>
             <div style={styles.wrapper}>
                 <div style={styles.copy}>
@@ -42,7 +43,6 @@ const Home = () => (
                 />
             </div>
         </MobilePage.Body>
-        <MobilePage.Footer>footer</MobilePage.Footer>
     </MobilePage>
 )
 

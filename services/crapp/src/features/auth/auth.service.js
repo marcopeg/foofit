@@ -55,9 +55,3 @@ export const login = (email, passw) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => dispatch(cleanSession())
-
-export const start = () => async (dispatch, getState) => {
-    // console.log('GET THE STUFF')
-    // await dispatch(runQuery(`query foo { session { id } }`))
-    // console.log(res)
-}

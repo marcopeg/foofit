@@ -9,5 +9,5 @@ const Loading = () => 'loading...'
 
 export const AppMobile = loadable({
     loader: () => import(/* webpackChunkName: "AppMobile" */ './AppMobile'),
-    loading: () => Loading,
+    loading: Loading,
 })

@@ -14,7 +14,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch, { history }) => {
     return {
         onLoad: () => dispatch(loadPrograms()),
-        onDisclose: ({ id, title }) => history.push(`/program/${id}/${slugify(title)}`),
+        onDisclose: ({ id, title }) => history.push(`/programs/${id}/${slugify(title)}`),
     }
 }
 
@@ -28,7 +28,7 @@ class ProgramsList extends React.PureComponent {
 
     render () {
         return (
-            <MobilePage withAuth>
+            <MobilePage>
                 <MobilePage.Header>
                     Programs
                 </MobilePage.Header>

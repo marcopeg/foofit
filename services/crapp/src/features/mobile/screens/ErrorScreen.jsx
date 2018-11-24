@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import MobilePage, { Title, Button, Text, Space, mixins } from 'features/mobile/MobilePage'
+import MobilePage, { Title, Button, Text, Space } from 'features/mobile/MobilePage'
 
 const styles = {
     wrapper: {
@@ -32,7 +32,7 @@ const ErrorScreen = ({ login, goHome }) => (
                 <Space />
                 <Button block linkTo="/login">Go to Login page</Button>
                 <Space />
-                <Button block linkTo="/home">Go to Home page</Button>
+                <Button block linkTo="/">Go to Home page</Button>
             </div>
         </MobilePage.Body>
     </MobilePage>
