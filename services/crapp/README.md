@@ -37,6 +37,33 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+### `npm run start:api`
+
+Starts the backend in development mode where [`nodemon`](https://nodemon.io/) is used to
+watch your changes in `./ssr` and restart the node process automatically.
+
+You normally want to run this process along with `npm run start` that only runs the
+Webpack dev server so your client app has someone to talk to.
+
+### `npm run start:ssr`
+
+Starts the backend in development mode with **server side rendering enabled**.
+
+[`nodemon`](https://nodemon.io/) watches both `./ssr` and `./src` for changes.
+Both `./ssr` and `./src` are going to be transpiled on the fly using `@babel/register`
+but you still need to `npm run build` to serve the client bundle.
+
+**NOTE:** This mode is not ideal if you are working mainly with the frontend as every
+change that you will make, even a CSS, will cause the node process to restart. 
+
+### `npm run start:prod`
+
+Builds up all the artifacts and starts the node process in `production` mode.
+
+### `npm run styleguide`
+
+Runs [react-styleguidist](https://react-styleguidist.js.org/).
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

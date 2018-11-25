@@ -20,7 +20,8 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 const mapState = ({ auth }) => ({
-    redirectTo: (!auth.hasLogin || auth.accessDenied)
+    // redirectTo: (!auth.hasLogin || auth.accessDenied)
+    redirectTo: auth.accessDenied
         ? auth.redirectOnError
         : null,
 })

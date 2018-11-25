@@ -21,7 +21,7 @@ export const runQuery = (query = null, variables = {}, options = {}) => async (d
     }
 
     // SSR: forward cookies and auth headers
-    if (process.env.SSR) {
+    if (process.env.REACT_SSR) {
         const req = ssr.getRequestHandler()
         fetchSettings.headers = {
             ...(fetchSettingsOptions.headers || {}),

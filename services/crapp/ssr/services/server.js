@@ -10,7 +10,7 @@ import { createAppRouter } from 'ssr/routes/index'
 
 const app = express()
 
-export const init = ({ loginDuration, ...settings }) => {
+export const init = ({ loginDuration }) => {
     logInfo('init server')
     const isDev = [ 'development', 'test' ].indexOf(process.env.NODE_ENV) !== -1
 
@@ -63,7 +63,7 @@ export const init = ({ loginDuration, ...settings }) => {
 
     app.use(compression())
     app.use(helmet())
-    app.use(createAppRouter(settings))
+    app.use(createAppRouter())
 }
 
 export const start = ({ port }) => {

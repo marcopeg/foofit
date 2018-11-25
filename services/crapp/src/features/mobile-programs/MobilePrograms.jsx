@@ -2,6 +2,7 @@ import React from 'react'
 import loadable from 'react-loadable'
 import { Switch, Route } from 'react-router-dom'
 
+import { AuthRedirect } from 'features/auth'
 import ProgramsList from './screens/ProgramsList'
 
 const ProgramDetails = loadable({
@@ -20,12 +21,14 @@ const TrainingWatch = loadable({
 })
 
 const MobilePrograms = () => (
-    <Switch>
-        <Route exact path={'/programs'} component={ProgramsList} />
-        <Route path={'/programs/:programId/:programSlug/:trainingId/:trainingSlug/play'} component={TrainingWatch} />
-        <Route path={'/programs/:programId/:programSlug/:trainingId/:trainingSlug'} component={TrainingDetails} />
-        <Route path={'/programs/:programId/:programSlug'} component={ProgramDetails} />
-    </Switch>
+    <AuthRedirect>
+        <Switch>
+            <Route exact path={'/programs'} component={ProgramsList} />
+            <Route path={'/programs/:programId/:programSlug/:trainingId/:trainingSlug/play'} component={TrainingWatch} />
+            <Route path={'/programs/:programId/:programSlug/:trainingId/:trainingSlug'} component={TrainingDetails} />
+            <Route path={'/programs/:programId/:programSlug'} component={ProgramDetails} />
+        </Switch>
+    </AuthRedirect>
 )
 
 ProgramDetails.preload()
