@@ -62,4 +62,18 @@ export default [
         createdAt: '2018-11-05 14:48:34.262411+00',
         updatedAt: '2018-11-05 14:48:34.262411+00',
     },
+    // User2
+    {
+        profileId: 2,
+        programId: 1,
+        title: 'BBG',
+        payload: {
+            desc: 'get back into your swimming suit',
+        },
+        trainings: [],
+        exercises: [],
+        workouts: [],
+        createdAt: '2018-11-05 14:48:34.262411+00',
+        updatedAt: '2018-11-05 14:48:34.262411+00',
+    },
 ]

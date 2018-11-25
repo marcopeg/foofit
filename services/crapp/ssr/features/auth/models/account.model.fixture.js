@@ -7,6 +7,6 @@ export default [
     {
         email: 'user2@foof.it',
         passw: 'qqqqqq',
-        status: 0,
+        status: 1,
     },
 ]
