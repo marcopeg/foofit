@@ -30,7 +30,7 @@
     "bcrypt": "^3.0.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
-    "create-react-app-ssr": "^2.0.9",
+    "create-react-app-ssr": "^2.0.10",
     "es6-promise": "^4.2.5",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",

@@ -27,9 +27,12 @@ const mb = { marginBottom: 10 }
 ### Small Stuff
 
 ```js
+const { Button } = require('components/MobilePage')
+;
 <MobilePage theme="dark" width={250} height={300}>
     <MobilePage.Body withPadding>
         <p>padded page with theme</p>
+        <Button>foo</Button>
     </MobilePage.Body>
 </MobilePage>
 ```

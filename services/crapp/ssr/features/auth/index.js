@@ -9,6 +9,15 @@ export const start = () => Promise.all([
     registerModel(require('./models/account.model')),
 ])
 
+// SSR - generates a cache key that is tied up with the session
+export const getCacheKey = async (req, res) => {
+    const session = await getSession(req, res)
+    return {
+        session,
+        value: `${req.url}-${session.id}`,
+    }
+}
+
 export const signup = async (req, res, email, passw) => {
     try {
         const md = await getModel('Account').create({ email, passw })
@@ -45,16 +54,8 @@ export const getSession = async (req, res) => {
 export const logout = async (req, res) => {
     const session = await getSession(req, res)
     res.deleteAppCookie(COOKIE_NAME)
-    invalidateSSRCache(key => key.session.id === session.id)
+
+    // SSR - clean up session related cached contents
+    await invalidateSSRCache(key => key.session.id === session.id)
     return 'ok'
-}
-
-
-// SSR - generates a cache key that is tied up with the session
-export const getCacheKey = async (req, res) => {
-    const session = await getSession(req, res)
-    return {
-        session,
-        value: `${req.url}-${session.id}`,
-    }
 }
